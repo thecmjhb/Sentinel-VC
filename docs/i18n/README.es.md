@@ -2,9 +2,13 @@
 
 # Sentinel-VC — Español
 
-[English](../../README.md) · [中文](../../docs/i18n/README.zh-CN.md) · [हिन्दी](../../docs/i18n/README.hi.md) · [Español](../../docs/i18n/README.es.md) · [العربية](../../docs/i18n/README.ar.md)
+[English](../../README.md) · [বাংলা](../../README.bn.md) · [中文](README.zh-CN.md) · [हिन्दी](README.hi.md) · [Español](README.es.md)
 
-[Français](../../docs/i18n/README.fr.md) · [বাংলা](../../README.bn.md) · [Português](../../docs/i18n/README.pt.md) · [Bahasa Indonesia](../../docs/i18n/README.id.md) · [اردو](../../docs/i18n/README.ur.md)
+[العربية](README.ar.md) · [Français](README.fr.md) · [Português](README.pt.md) · [Bahasa Indonesia](README.id.md) · [اردو](README.ur.md)
+
+[Русский](README.ru.md) · [한국어](README.ko.md) · [日本語](README.ja.md) · [Deutsch](README.de.md) · [Türkçe](README.tr.md)
+
+[Italiano](README.it.md) · [فارسی](README.fa.md) · [Tiếng Việt](README.vi.md) · [தமிழ்](README.ta.md) · [తెలుగు](README.te.md)
 
 Sentinel-VC es un framework de moderación de código abierto para supergrupos de Telegram. Observa los eventos disponibles de entrada/salida y la actividad rápida de mensajes. Un adaptador opcional con una cuenta de usuario administradora añade eventos de participación en llamadas y acciones autorizadas de silencio. Autor: **C. M. Jubayer Hossain Bappy**.
 
@@ -41,4 +45,4 @@ El bot normal no observa UDP bruto, la fecha real de creación de cuentas ni una
 
 ## Comunidad y licencia
 
-Unirse al [canal de novedades](https://t.me/sentinelvc) es opcional. Para obtener ayuda, usa [GitHub Issues](https://github.com/thecmjhb/Sentinel-VC/issues). Código MIT: conserva [licencia](../../LICENSE) y atribución.
+En la versión autoalojada, unirse al [canal de novedades](https://t.me/sentinelvc) es opcional. Para el bot alojado, sigue las instrucciones de /start. Para obtener ayuda, usa [GitHub Issues](https://github.com/thecmjhb/Sentinel-VC/issues). Código MIT: conserva [licencia](../../LICENSE) y atribución.

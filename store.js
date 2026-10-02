@@ -21,11 +21,20 @@ export class Store {
       CREATE INDEX IF NOT EXISTS audit_at ON audit(at);
       CREATE INDEX IF NOT EXISTS audit_chat_at ON audit(chat_id,at);
       CREATE TABLE IF NOT EXISTS updates (id INTEGER PRIMARY KEY, expires INTEGER NOT NULL);
+      CREATE TABLE IF NOT EXISTS preferences (user_id TEXT PRIMARY KEY, language TEXT NOT NULL, updated INTEGER NOT NULL);
       PRAGMA user_version=1;`);
   }
   group(id) {
     const row = this.db.prepare('SELECT settings FROM groups WHERE id=?').get(String(id));
     return row ? JSON.parse(row.settings) : null;
+  }
+  language(userId) {
+    return this.db.prepare('SELECT language FROM preferences WHERE user_id=?').get(String(userId))?.language || null;
+  }
+  setLanguage(userId, language) {
+    if (!Number.isSafeInteger(userId) || userId <= 0 || !/^[a-z]{2}$/.test(language)) throw new Error('Invalid language preference');
+    this.db.prepare('INSERT INTO preferences VALUES(?,?,?) ON CONFLICT(user_id) DO UPDATE SET language=excluded.language, updated=excluded.updated')
+      .run(String(userId), language, Date.now());
   }
   setGroup(id, settings) {
     this.db.prepare('INSERT INTO groups VALUES(?,?) ON CONFLICT(id) DO UPDATE SET settings=excluded.settings')
@@ -75,6 +84,7 @@ export class Store {
     this.db.prepare('DELETE FROM cooldowns WHERE expires<=?').run(now);
     this.db.prepare('DELETE FROM updates WHERE expires<=?').run(now);
     this.db.prepare('DELETE FROM audit WHERE at<?').run(now - retentionDays * 86400000);
+    this.db.prepare('DELETE FROM preferences WHERE updated<?').run(now - 365 * 86400000);
   }
   close() { this.db.close(); }
 }

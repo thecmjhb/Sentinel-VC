@@ -2,9 +2,13 @@
 
 # Sentinel-VC — हिन्दी
 
-[English](../../README.md) · [中文](../../docs/i18n/README.zh-CN.md) · [हिन्दी](../../docs/i18n/README.hi.md) · [Español](../../docs/i18n/README.es.md) · [العربية](../../docs/i18n/README.ar.md)
+[English](../../README.md) · [বাংলা](../../README.bn.md) · [中文](README.zh-CN.md) · [हिन्दी](README.hi.md) · [Español](README.es.md)
 
-[Français](../../docs/i18n/README.fr.md) · [বাংলা](../../README.bn.md) · [Português](../../docs/i18n/README.pt.md) · [Bahasa Indonesia](../../docs/i18n/README.id.md) · [اردو](../../docs/i18n/README.ur.md)
+[العربية](README.ar.md) · [Français](README.fr.md) · [Português](README.pt.md) · [Bahasa Indonesia](README.id.md) · [اردو](README.ur.md)
+
+[Русский](README.ru.md) · [한국어](README.ko.md) · [日本語](README.ja.md) · [Deutsch](README.de.md) · [Türkçe](README.tr.md)
+
+[Italiano](README.it.md) · [فارسی](README.fa.md) · [Tiếng Việt](README.vi.md) · [தமிழ்](README.ta.md) · [తెలుగు](README.te.md)
 
 Sentinel-VC Telegram supergroup के लिए खुला स्रोत moderation bot है। यह उपलब्ध join/leave घटनाओं और तेज संदेश गतिविधि को देखता है। वैकल्पिक user-admin adapter से voice-call की उपलब्ध participant घटनाएँ और अनुमति-आधारित mute जोड़ा जा सकता है। लेखक: **C. M. Jubayer Hossain Bappy**।
 
@@ -41,4 +45,4 @@ Docker के बिना Node.js 24 LTS में `.env.example` को `.env`
 
 ## समुदाय और लाइसेंस
 
-[Updates channel](https://t.me/sentinelvc) में शामिल होना वैकल्पिक है। मदद के लिए [GitHub Issues](https://github.com/thecmjhb/Sentinel-VC/issues) देखें। Code MIT है; [license](../../LICENSE) और attribution बनाए रखें।
+Self-hosted संस्करण में [Updates channel](https://t.me/sentinelvc) में शामिल होना वैकल्पिक है। Hosted bot के लिए /start के निर्देश अपनाएँ। मदद के लिए [GitHub Issues](https://github.com/thecmjhb/Sentinel-VC/issues) देखें। Code MIT है; [license](../../LICENSE) और attribution बनाए रखें।

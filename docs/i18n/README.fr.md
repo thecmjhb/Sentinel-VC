@@ -2,9 +2,13 @@
 
 # Sentinel-VC — Français
 
-[English](../../README.md) · [中文](../../docs/i18n/README.zh-CN.md) · [हिन्दी](../../docs/i18n/README.hi.md) · [Español](../../docs/i18n/README.es.md) · [العربية](../../docs/i18n/README.ar.md)
+[English](../../README.md) · [বাংলা](../../README.bn.md) · [中文](README.zh-CN.md) · [हिन्दी](README.hi.md) · [Español](README.es.md)
 
-[Français](../../docs/i18n/README.fr.md) · [বাংলা](../../README.bn.md) · [Português](../../docs/i18n/README.pt.md) · [Bahasa Indonesia](../../docs/i18n/README.id.md) · [اردو](../../docs/i18n/README.ur.md)
+[العربية](README.ar.md) · [Français](README.fr.md) · [Português](README.pt.md) · [Bahasa Indonesia](README.id.md) · [اردو](README.ur.md)
+
+[Русский](README.ru.md) · [한국어](README.ko.md) · [日本語](README.ja.md) · [Deutsch](README.de.md) · [Türkçe](README.tr.md)
+
+[Italiano](README.it.md) · [فارسی](README.fa.md) · [Tiếng Việt](README.vi.md) · [தமிழ்](README.ta.md) · [తెలుగు](README.te.md)
 
 Sentinel-VC est un framework de modération open source pour les supergroupes Telegram. Il observe les événements disponibles d'arrivée/départ et l'activité rapide des messages. Un adaptateur facultatif utilisant un compte utilisateur administrateur ajoute des événements de participation aux appels et des actions de mise en sourdine autorisées. Auteur : **C. M. Jubayer Hossain Bappy**.
 
@@ -41,4 +45,4 @@ Le bot classique ne voit ni UDP brut, ni la véritable date de création des com
 
 ## Communauté et licence
 
-Rejoindre [le canal d’actualités](https://t.me/sentinelvc) est facultatif. Pour obtenir de l’aide, utilisez [GitHub Issues](https://github.com/thecmjhb/Sentinel-VC/issues). Code MIT : conservez [licence](../../LICENSE) et attribution.
+Pour la version auto-hébergée, rejoindre [le canal d’actualités](https://t.me/sentinelvc) est facultatif. Pour le bot hébergé, suivez les indications de /start. Pour obtenir de l’aide, utilisez [GitHub Issues](https://github.com/thecmjhb/Sentinel-VC/issues). Code MIT : conservez [licence](../../LICENSE) et attribution.

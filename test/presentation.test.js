@@ -5,7 +5,7 @@ import { configureCommandMenus, projectButtons, PROJECT } from '../botPresentati
 test('command menus separate administrator commands and support Bangla discovery', async () => {
   const calls = [];
   await configureCommandMenus({ setMyCommands: async (commands, options) => calls.push({ commands, options }) });
-  assert.equal(calls.length, 6);
+  assert.equal(calls.length, 60);
   for (const call of calls) {
     assert.equal(call.commands.some(x => x.command === 'doctor'), call.options.scope.type === 'all_chat_administrators');
     assert.ok(call.commands.every(x => /^[a-z_]{1,32}$/.test(x.command)));

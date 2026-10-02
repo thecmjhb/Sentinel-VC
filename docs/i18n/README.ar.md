@@ -2,9 +2,13 @@
 
 # Sentinel-VC — العربية
 
-[English](../../README.md) · [中文](../../docs/i18n/README.zh-CN.md) · [हिन्दी](../../docs/i18n/README.hi.md) · [Español](../../docs/i18n/README.es.md) · [العربية](../../docs/i18n/README.ar.md)
+[English](../../README.md) · [বাংলা](../../README.bn.md) · [中文](README.zh-CN.md) · [हिन्दी](README.hi.md) · [Español](README.es.md)
 
-[Français](../../docs/i18n/README.fr.md) · [বাংলা](../../README.bn.md) · [Português](../../docs/i18n/README.pt.md) · [Bahasa Indonesia](../../docs/i18n/README.id.md) · [اردو](../../docs/i18n/README.ur.md)
+[العربية](README.ar.md) · [Français](README.fr.md) · [Português](README.pt.md) · [Bahasa Indonesia](README.id.md) · [اردو](README.ur.md)
+
+[Русский](README.ru.md) · [한국어](README.ko.md) · [日本語](README.ja.md) · [Deutsch](README.de.md) · [Türkçe](README.tr.md)
+
+[Italiano](README.it.md) · [فارسی](README.fa.md) · [Tiếng Việt](README.vi.md) · [தமிழ்](README.ta.md) · [తెలుగు](README.te.md)
 
 Sentinel-VC إطار مفتوح المصدر لإدارة مجموعات Telegram الفائقة. يراقب أحداث الانضمام والمغادرة المتاحة والنشاط السريع للرسائل. يضيف محول اختياري يعمل بحساب مستخدم مشرف أحداث المشاركين في المكالمات الصوتية وإجراءات الكتم المصرح بها. المؤلف: **C. M. Jubayer Hossain Bappy**.
 
@@ -41,4 +45,4 @@ curl --fail "http://$(docker compose port sentinel 8080)/readyz"
 
 ## المجتمع والترخيص
 
-الانضمام إلى [قناة التحديثات](https://t.me/sentinelvc) اختياري. للمساعدة، استخدم [GitHub Issues](https://github.com/thecmjhb/Sentinel-VC/issues). الشفرة برخصة MIT؛ احتفظ بـ[الرخصة](../../LICENSE) ونسبة العمل إلى صاحبه.
+في النسخة المستضافة ذاتيًا، الانضمام إلى [قناة التحديثات](https://t.me/sentinelvc) اختياري. للبوت المستضاف اتبع تعليمات /start. للمساعدة، استخدم [GitHub Issues](https://github.com/thecmjhb/Sentinel-VC/issues). الشفرة برخصة MIT؛ احتفظ بـ[الرخصة](../../LICENSE) ونسبة العمل إلى صاحبه.

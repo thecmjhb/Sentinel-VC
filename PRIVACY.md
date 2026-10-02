@@ -10,6 +10,8 @@ The code does not store message text or audio in its moderation database. It doe
 
 ## Retention and access
 
+Language selection stores your Telegram user ID, chosen language code and last selection time in SQLite. It is used for private onboarding and guides, and expires one year after the last selection. You can change it with `/language`.
+
 `RETENTION_DAYS` defaults to seven days for audit entries. Maintenance prunes old audits and expired challenge/cooldown/update records approximately once per minute while running; downtime delays that task. TTL and capacity bounds govern in-memory evidence. Settings remain until the group is disabled or removed. The source does not impose a separate backup-retention policy; the operator must document one if backups are kept.
 
 `/incidents` is restricted to current administrators of the same group and returns only its recent retained incident records. SQLite files are local to the operator. Metrics require a configured bearer secret and contain aggregate counts/process information. No public dashboard or third-party analytics service is bundled.

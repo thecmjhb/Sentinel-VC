@@ -2,9 +2,13 @@
 
 # Sentinel-VC — Bahasa Indonesia
 
-[English](../../README.md) · [中文](../../docs/i18n/README.zh-CN.md) · [हिन्दी](../../docs/i18n/README.hi.md) · [Español](../../docs/i18n/README.es.md) · [العربية](../../docs/i18n/README.ar.md)
+[English](../../README.md) · [বাংলা](../../README.bn.md) · [中文](README.zh-CN.md) · [हिन्दी](README.hi.md) · [Español](README.es.md)
 
-[Français](../../docs/i18n/README.fr.md) · [বাংলা](../../README.bn.md) · [Português](../../docs/i18n/README.pt.md) · [Bahasa Indonesia](../../docs/i18n/README.id.md) · [اردو](../../docs/i18n/README.ur.md)
+[العربية](README.ar.md) · [Français](README.fr.md) · [Português](README.pt.md) · [Bahasa Indonesia](README.id.md) · [اردو](README.ur.md)
+
+[Русский](README.ru.md) · [한국어](README.ko.md) · [日本語](README.ja.md) · [Deutsch](README.de.md) · [Türkçe](README.tr.md)
+
+[Italiano](README.it.md) · [فارسی](README.fa.md) · [Tiếng Việt](README.vi.md) · [தமிழ்](README.ta.md) · [తెలుగు](README.te.md)
 
 Sentinel-VC adalah kerangka moderasi sumber terbuka untuk supergrup Telegram. Sistem memantau peristiwa masuk/keluar yang tersedia dan aktivitas pesan cepat. Adaptor opsional dengan akun pengguna admin menambahkan peristiwa peserta panggilan yang diterima serta tindakan mute sesuai izin. Penulis: **C. M. Jubayer Hossain Bappy**.
 
@@ -41,4 +45,4 @@ Bot biasa tidak melihat paket UDP mentah, tanggal pembuatan akun yang sebenarnya
 
 ## Komunitas dan lisensi
 
-Bergabung dengan [kanal pembaruan](https://t.me/sentinelvc) bersifat opsional. Untuk bantuan, gunakan [GitHub Issues](https://github.com/thecmjhb/Sentinel-VC/issues). Kode berlisensi MIT; pertahankan [lisensi](../../LICENSE) dan atribusi.
+Untuk versi yang dihosting sendiri, bergabung dengan [kanal pembaruan](https://t.me/sentinelvc) bersifat opsional. Pada bot proyek yang dihosting, ikuti petunjuk /start. Untuk bantuan, gunakan [GitHub Issues](https://github.com/thecmjhb/Sentinel-VC/issues). Kode berlisensi MIT; pertahankan [lisensi](../../LICENSE) dan atribusi.

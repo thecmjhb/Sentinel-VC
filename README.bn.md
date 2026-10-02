@@ -2,9 +2,13 @@
 
 # Sentinel-VC — বাংলা
 
-[English](README.md) · [中文](docs/i18n/README.zh-CN.md) · [हिन्दी](docs/i18n/README.hi.md) · [Español](docs/i18n/README.es.md) · [العربية](docs/i18n/README.ar.md)
+[English](README.md) · [বাংলা](README.bn.md) · [中文](docs/i18n/README.zh-CN.md) · [हिन्दी](docs/i18n/README.hi.md) · [Español](docs/i18n/README.es.md)
 
-[Français](docs/i18n/README.fr.md) · [বাংলা](README.bn.md) · [Português](docs/i18n/README.pt.md) · [Bahasa Indonesia](docs/i18n/README.id.md) · [اردو](docs/i18n/README.ur.md)
+[العربية](docs/i18n/README.ar.md) · [Français](docs/i18n/README.fr.md) · [Português](docs/i18n/README.pt.md) · [Bahasa Indonesia](docs/i18n/README.id.md) · [اردو](docs/i18n/README.ur.md)
+
+[Русский](docs/i18n/README.ru.md) · [한국어](docs/i18n/README.ko.md) · [日本語](docs/i18n/README.ja.md) · [Deutsch](docs/i18n/README.de.md) · [Türkçe](docs/i18n/README.tr.md)
+
+[Italiano](docs/i18n/README.it.md) · [فارسی](docs/i18n/README.fa.md) · [Tiếng Việt](docs/i18n/README.vi.md) · [தமிழ்](docs/i18n/README.ta.md) · [తెలుగు](docs/i18n/README.te.md)
 
 [Bot খুলুন](https://t.me/sentinelvcbot) · [Updates](https://t.me/sentinelvc)
 
@@ -20,7 +24,7 @@ Telegram supergroup-এর জন্য open-source moderation bot। এটি 
 4. Observe mode-এ incident দেখে সন্তুষ্ট হলে `/mode enforce` দিন।
 5. নতুন সদস্যদের verification চাইলে `/gate on` দিন।
 
-এভাবে চালু থাকা project bot ব্যবহার করতে আপনার নিজস্ব VPS লাগবে না। Bot-এর availability hosting-এর ওপর নির্ভর করে। [@sentinelvc](https://t.me/sentinelvc)-তে updates পাবেন; channel join করা বাধ্যতামূলক নয়।
+এভাবে চালু থাকা project bot ব্যবহার করতে আপনার নিজস্ব VPS লাগবে না। Bot-এর availability hosting-এর ওপর নির্ভর করে। [@sentinelvc](https://t.me/sentinelvc)-তে updates পাবেন; Self-hosted code-এ channel join বাধ্যতামূলক নয়। Hosted project bot-এর private /start-এ channel join ও language ধাপ অনুসরণ করুন; restriction recovery-তে subscription লাগে না।
 
 ## কী কী পাবেন
 
@@ -85,6 +89,6 @@ npm start
 
 ## সাহায্য ও license
 
-[GitHub Issues](https://github.com/thecmjhb/Sentinel-VC/issues)-এ সমস্যা জানান; [updates channel](https://t.me/sentinelvc)-এ খবর পাবেন। Bot-এর command menus English ও বাংলা; README guides দশ ভাষায় আছে।
+[GitHub Issues](https://github.com/thecmjhb/Sentinel-VC/issues)-এ সমস্যা জানান; [updates channel](https://t.me/sentinelvc)-এ খবর পাবেন। Bot-এর ভাষা নির্বাচন, onboarding ও guide ২০ ভাষায় আছে; moderation diagnostics English-এ থাকে। /language দিয়ে ভাষা বদলান।
 
 Code [MIT license](LICENSE)-এর অধীনে। Reuse করলে copyright ও license রাখুন। [Privacy](PRIVACY.md), [security reporting](SECURITY.md) এবং [brand asset notice](assets/NOTICE.md) দেখুন।

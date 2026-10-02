@@ -9,7 +9,7 @@
     <a href="https://t.me/sentinelvcbot"><img src="https://img.shields.io/badge/Telegram-Open_bot-229ED9?logo=telegram&logoColor=white" alt="Open @sentinelvcbot"></a>
     <a href="https://t.me/sentinelvc"><img src="https://img.shields.io/badge/Telegram-Join_updates-229ED9?logo=telegram&logoColor=white" alt="Join project updates"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/Code-MIT-22c55e" alt="Code license MIT"></a>
-    <img src="https://img.shields.io/badge/Documentation-10_languages-2563eb" alt="Documentation in 10 languages">
+    <img src="https://img.shields.io/badge/Documentation-20_languages-2563eb" alt="Documentation in 20 languages">
     <img src="https://img.shields.io/badge/Node.js-22.13%2B-339933?logo=nodedotjs&logoColor=white" alt="Node.js 22.13 or newer">
     <img src="https://img.shields.io/badge/Status-Experimental-f59e0b" alt="Experimental implementation">
   </p>
@@ -20,9 +20,15 @@
 
 ## Languages
 
-[English](README.md) · [中文](docs/i18n/README.zh-CN.md) · [हिन्दी](docs/i18n/README.hi.md) · [Español](docs/i18n/README.es.md) · [العربية](docs/i18n/README.ar.md)
+Open the bot privately and use `/language` to choose one of 20 languages. The language picker, onboarding buttons and quick-start guides are translated; moderation diagnostics and detailed operator documentation remain in English. Your selection is saved across restarts.
 
-[Français](docs/i18n/README.fr.md) · [বাংলা](README.bn.md) · [Português](docs/i18n/README.pt.md) · [Bahasa Indonesia](docs/i18n/README.id.md) · [اردو](docs/i18n/README.ur.md)
+[English](README.md) · [বাংলা](README.bn.md) · [中文](docs/i18n/README.zh-CN.md) · [हिन्दी](docs/i18n/README.hi.md) · [Español](docs/i18n/README.es.md)
+
+[العربية](docs/i18n/README.ar.md) · [Français](docs/i18n/README.fr.md) · [Português](docs/i18n/README.pt.md) · [Bahasa Indonesia](docs/i18n/README.id.md) · [اردو](docs/i18n/README.ur.md)
+
+[Русский](docs/i18n/README.ru.md) · [한국어](docs/i18n/README.ko.md) · [日本語](docs/i18n/README.ja.md) · [Deutsch](docs/i18n/README.de.md) · [Türkçe](docs/i18n/README.tr.md)
+
+[Italiano](docs/i18n/README.it.md) · [فارسی](docs/i18n/README.fa.md) · [Tiếng Việt](docs/i18n/README.vi.md) · [தமிழ்](docs/i18n/README.ta.md) · [తెలుగు](docs/i18n/README.te.md)
 
 ## Start here
 
@@ -32,7 +38,7 @@ Sentinel-VC watches supported group events, scores rapid activity, and applies t
 
 ## Use the project bot
 
-Open **[@sentinelvcbot](https://t.me/sentinelvcbot)**. For an available bot instance:
+Open **[@sentinelvcbot](https://t.me/sentinelvcbot)**. In private chat, follow the access prompt and choose your language. For an available bot instance:
 
 1. [Add it to a supergroup](https://t.me/sentinelvcbot?startgroup=setup).
 2. Promote it to administrator and grant **Restrict Members**.
@@ -40,7 +46,7 @@ Open **[@sentinelvcbot](https://t.me/sentinelvcbot)**. For an available bot inst
 4. Observe your community first. Use `/mode enforce` when ready for automatic temporary restrictions.
 5. Optionally use `/gate on` for new-member arithmetic verification.
 
-Join **[t.me/sentinelvc](https://t.me/sentinelvc)** for updates. Channel membership is optional and never required to solve a challenge. Adding the bot alone does not enable direct live-call control.
+Join **[t.me/sentinelvc](https://t.me/sentinelvc)** for updates. The self-hosted source has no mandatory channel subscription. The hosted project bot displays its own channel-join step before menu access; challenge recovery remains available without subscription. Adding the bot alone does not enable direct live-call control.
 
 ## Why Sentinel-VC
 

@@ -2,9 +2,13 @@
 
 # Sentinel-VC — Português
 
-[English](../../README.md) · [中文](../../docs/i18n/README.zh-CN.md) · [हिन्दी](../../docs/i18n/README.hi.md) · [Español](../../docs/i18n/README.es.md) · [العربية](../../docs/i18n/README.ar.md)
+[English](../../README.md) · [বাংলা](../../README.bn.md) · [中文](README.zh-CN.md) · [हिन्दी](README.hi.md) · [Español](README.es.md)
 
-[Français](../../docs/i18n/README.fr.md) · [বাংলা](../../README.bn.md) · [Português](../../docs/i18n/README.pt.md) · [Bahasa Indonesia](../../docs/i18n/README.id.md) · [اردو](../../docs/i18n/README.ur.md)
+[العربية](README.ar.md) · [Français](README.fr.md) · [Português](README.pt.md) · [Bahasa Indonesia](README.id.md) · [اردو](README.ur.md)
+
+[Русский](README.ru.md) · [한국어](README.ko.md) · [日本語](README.ja.md) · [Deutsch](README.de.md) · [Türkçe](README.tr.md)
+
+[Italiano](README.it.md) · [فارسی](README.fa.md) · [Tiếng Việt](README.vi.md) · [தமிழ்](README.ta.md) · [తెలుగు](README.te.md)
 
 Sentinel-VC é um framework de moderação de código aberto para supergrupos do Telegram. Ele analisa entradas, saídas, mensagens e interações rápidas com botões para aplicar restrições temporárias e verificação aritmética. Um adaptador opcional com uma conta de usuário administradora permite observar eventos de participação em chamadas e solicitar ações autorizadas. Autor e mantenedor: **C. M. Jubayer Hossain Bappy**.
 
@@ -18,7 +22,7 @@ Sentinel-VC é um framework de moderação de código aberto para supergrupos do
 4. Analise `/incidents` em modo de observação. Use `/mode enforce` quando estiver pronto para aplicar ações.
 5. Ative `/gate on` se desejar verificar novos membros.
 
-Para usar uma instância disponível do bot do projeto, você não precisa de VPS próprio. A disponibilidade depende da hospedagem. O [canal de atualizações](https://t.me/sentinelvc) é opcional e não é exigido para resolver desafios. Adicionar apenas o bot não ativa o controle direto de chamadas.
+Para usar uma instância disponível do bot do projeto, você não precisa de VPS próprio. A disponibilidade depende da hospedagem. A versão auto-hospedada não exige inscrição no [canal de atualizações](https://t.me/sentinelvc). O bot hospedado apresenta sua própria etapa de adesão antes do menu; a recuperação de desafios permanece disponível. Adicionar apenas o bot não ativa o controle direto de chamadas.
 
 ## Recursos
 
@@ -89,4 +93,4 @@ Um administrador restaura manualmente o silenciamento e a entrada silenciada. Re
 
 [Atualizações](https://t.me/sentinelvc) · [GitHub Issues](https://github.com/thecmjhb/Sentinel-VC/issues) · [Privacidade](../../PRIVACY.md) · [Relatos de segurança](../../SECURITY.md)
 
-Código sob a [licença MIT](../../LICENSE): preserve o aviso de direitos autorais e a licença. Consulte o [aviso dos recursos visuais](../../assets/NOTICE.md). O README está disponível em dez idiomas; os menus de comandos do bot estão disponíveis em inglês e bengali.
+Código sob a [licença MIT](../../LICENSE): preserve o aviso de direitos autorais e a licença. Consulte o [aviso dos recursos visuais](../../assets/NOTICE.md). O README e os guias iniciais do bot estão disponíveis em 20 idiomas. Use /language para mudar; os diagnósticos de moderação continuam em inglês.

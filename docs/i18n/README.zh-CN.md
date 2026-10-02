@@ -2,9 +2,13 @@
 
 # Sentinel-VC — 简体中文
 
-[English](../../README.md) · [中文](../../docs/i18n/README.zh-CN.md) · [हिन्दी](../../docs/i18n/README.hi.md) · [Español](../../docs/i18n/README.es.md) · [العربية](../../docs/i18n/README.ar.md)
+[English](../../README.md) · [বাংলা](../../README.bn.md) · [中文](README.zh-CN.md) · [हिन्दी](README.hi.md) · [Español](README.es.md)
 
-[Français](../../docs/i18n/README.fr.md) · [বাংলা](../../README.bn.md) · [Português](../../docs/i18n/README.pt.md) · [Bahasa Indonesia](../../docs/i18n/README.id.md) · [اردو](../../docs/i18n/README.ur.md)
+[العربية](README.ar.md) · [Français](README.fr.md) · [Português](README.pt.md) · [Bahasa Indonesia](README.id.md) · [اردو](README.ur.md)
+
+[Русский](README.ru.md) · [한국어](README.ko.md) · [日本語](README.ja.md) · [Deutsch](README.de.md) · [Türkçe](README.tr.md)
+
+[Italiano](README.it.md) · [فارسی](README.fa.md) · [Tiếng Việt](README.vi.md) · [தமிழ்](README.ta.md) · [తెలుగు](README.te.md)
 
 Sentinel-VC 是面向 Telegram 超级群组的开源管理框架。它根据可见的入群、退群、消息和按钮操作识别过快的活动，并提供临时限制与算术验证。可选的用户管理员适配器支持接收到的实时通话参与状态事件和授权静音操作。作者与维护者：**C. M. Jubayer Hossain Bappy**。
 
@@ -89,4 +93,4 @@ npm start
 
 [项目更新](https://t.me/sentinelvc) · [问题反馈](https://github.com/thecmjhb/Sentinel-VC/issues) · [隐私说明](../../PRIVACY.md) · [安全报告](../../SECURITY.md)
 
-代码采用 [MIT 许可证](../../LICENSE)，复用时保留版权与许可证。品牌素材另见[素材说明](../../assets/NOTICE.md)。README 提供十种语言；机器人的命令菜单目前提供英语和孟加拉语。
+代码采用 [MIT 许可证](../../LICENSE)，复用时保留版权与许可证。品牌素材另见[素材说明](../../assets/NOTICE.md)。README 和机器人入门指南支持 20 种语言。使用 /language 切换；管理诊断仍使用英语。

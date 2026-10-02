@@ -1,3 +1,5 @@
+import { LANGUAGES } from './languages.js';
+
 export const PROJECT = Object.freeze({
   bot: 'https://t.me/sentinelvcbot',
   updates: 'https://t.me/sentinelvc',
@@ -21,6 +23,7 @@ const entries = [
   ['verify', 'Recover your chat challenge', 'নিজের verification খুলুন'],
   ['updates', 'Project links and updates', 'প্রজেক্ট ও আপডেট'],
   ['privacy', 'See moderation data handling', 'Moderation data-এর ব্যবহার'],
+  ['language', 'Choose your language', 'ভাষা নির্বাচন করুন'],
   ['setup', 'Enroll this supergroup', 'গ্রুপে protection চালু করুন'],
   ['doctor', 'Check setup and permissions', 'Setup ও permission পরীক্ষা'],
   ['status', 'Show protection settings', 'Protection-এর অবস্থা'],
@@ -34,10 +37,12 @@ const entries = [
 
 // Menus improve discovery; every command still checks actual authority at execution.
 export async function configureCommandMenus(api) {
-  for (const language_code of ['', 'bn']) {
-    const all = entries.map(([command, en, bn]) => ({ command, description: language_code ? bn : en }));
+  for (const t of Object.values(LANGUAGES)) {
+    const language_code = t.code === 'en' ? '' : t.code;
+    const labels = { start: t.help, help: t.help, language: t.language, updates: t.updates };
+    const all = entries.map(([command, en, bn]) => ({ command, description: labels[command] || (t.code === 'bn' ? bn : en) }));
     for (const type of ['default', 'all_private_chats', 'all_chat_administrators']) {
-      await api.setMyCommands(type === 'all_chat_administrators' ? all : all.slice(0, 5),
+      await api.setMyCommands(type === 'all_chat_administrators' ? all : all.slice(0, 6),
         { scope: { type }, language_code });
     }
   }

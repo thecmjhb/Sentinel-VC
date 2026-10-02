@@ -6,6 +6,7 @@ import { PROJECT, projectButtons, configureCommandMenus } from './botPresentatio
 import { createHttpServer } from './httpServer.js';
 import { SerialQueue, log, logError } from './runtime.js';
 import { pathToFileURL } from 'node:url';
+import { installOnboarding } from './onboarding.js';
 
 export function createApplication(config, dependencies = {}) {
   const store = dependencies.store || new Store(config.dataDir);
@@ -38,25 +39,15 @@ export function createApplication(config, dependencies = {}) {
       username: ctx.from.username ?? '', isBot: ctx.from.is_bot, kind: 'callback' });
     return next();
   });
+  // Operator extensions are installed only by an explicit deployment entrypoint.
+  dependencies.installAccess?.({ bot, store, engine });
+  installOnboarding({ bot, store, engine });
   const admin = async ctx => {
     if (ctx.chat?.type !== 'supergroup' || !ctx.from || ctx.message?.sender_chat) return false;
     // Durable user + chat limits protect expensive fresh permission checks.
     if (!store.claim(`command:${ctx.chat.id}:${ctx.from.id}`, 2000)) return false;
     return engine.administrator(ctx.chat.id, ctx.from.id);
   };
-  bot.command('start', ctx => {
-    const bangla = ctx.from?.language_code === 'bn';
-    return reply(ctx, bangla ?
-      'Sentinel-VC-তে স্বাগতম।\n১. নিজের supergroup-এ bot-কে admin করুন; Restrict Members দিন।\n' +
-      '২. গ্রুপে /setup দিন, তারপর /doctor দিয়ে পরীক্ষা করুন।\n৩. প্রথমে observe mode-এ ব্যবহার করুন; প্রস্তুত হলে /mode enforce দিন।\n' +
-      'সরাসরি VC features-এর জন্য optional user-admin adapter লাগে। /help-এ কমান্ড পাবেন।' :
-      'Welcome to Sentinel-VC.\n1. Add this bot to your supergroup as an admin with Restrict Members.\n' +
-      '2. Send /setup in the group, then /doctor to check it.\n3. Begin in observe mode; use /mode enforce when ready.\n' +
-      'Direct VC features need the optional user-admin adapter. Use /help for commands.',
-    { reply_markup: projectButtons(bot.botInfo.username, bangla), link_preview_options: { is_disabled: true } });
-  });
-  bot.command('help', ctx => reply(ctx, '/setup · /doctor · /status · /incidents · /mode observe|enforce · /gate on|off · /vc on|off · /vclock on|off · /verify · /updates · /privacy · /disable\n' +
-    'Admins configure protection. /verify reopens your chat challenge. In a private chat, append the group ID from the challenge. Account age and UDP are unavailable.'));
   bot.command('updates', ctx => reply(ctx, `Sentinel-VC project\nUpdates: ${PROJECT.updates}\nSource: ${PROJECT.source}\n` +
     'The channel is optional; no channel membership is required for verification.',
     { reply_markup: projectButtons(bot.botInfo.username, ctx.from?.language_code === 'bn'), link_preview_options: { is_disabled: true } }));
@@ -178,11 +169,11 @@ export function createApplication(config, dependencies = {}) {
   return { config, store, bot, engine, queue, status, server };
 }
 
-export async function main() {
+export async function main(dependencies = {}) {
   let config;
   try { config = loadConfig(); }
   catch (error) { console.error(`Configuration: ${error.message}`); throw error; }
-  const { store, bot, engine, queue, status, server } = createApplication(config);
+  const { store, bot, engine, queue, status, server } = createApplication(config, dependencies);
 
   let sweep;
   let stopping = false;
@@ -205,6 +196,7 @@ export async function main() {
   process.once('SIGTERM', requestStop);
   try {
     await bot.init();
+    await dependencies.preflight?.(bot.api, bot.botInfo);
     if (stopping) return;
     const webhook = await bot.api.getWebhookInfo();
     if (stopping) return;
