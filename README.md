@@ -20,15 +20,14 @@
 
 ## Languages
 
-Open the bot privately and use `/language` to choose one of 20 languages. The language picker, onboarding buttons and quick-start guides are translated; moderation diagnostics and detailed operator documentation remain in English. Your selection is saved across restarts.
+Choose a README language below. In Telegram, use `/language` for translated onboarding and guides. Moderation diagnostics and detailed operator docs remain in English.
 
-[English](README.md) · [বাংলা](README.bn.md) · [中文](docs/i18n/README.zh-CN.md) · [हिन्दी](docs/i18n/README.hi.md) · [Español](docs/i18n/README.es.md)
-
-[العربية](docs/i18n/README.ar.md) · [Français](docs/i18n/README.fr.md) · [Português](docs/i18n/README.pt.md) · [Bahasa Indonesia](docs/i18n/README.id.md) · [اردو](docs/i18n/README.ur.md)
-
-[Русский](docs/i18n/README.ru.md) · [한국어](docs/i18n/README.ko.md) · [日本語](docs/i18n/README.ja.md) · [Deutsch](docs/i18n/README.de.md) · [Türkçe](docs/i18n/README.tr.md)
-
-[Italiano](docs/i18n/README.it.md) · [فارسی](docs/i18n/README.fa.md) · [Tiếng Việt](docs/i18n/README.vi.md) · [தமிழ்](docs/i18n/README.ta.md) · [తెలుగు](docs/i18n/README.te.md)
+<!-- languages:start -->
+<p align="center" dir="ltr">
+<a href="README.md" title="English"><img src="assets/languages/en.svg" width="64" height="28" alt="English"></a><a href="README.bn.md" title="বাংলা"><img src="assets/languages/bn.svg" width="64" height="28" alt="বাংলা"></a><a href="docs/i18n/README.zh-CN.md" title="中文"><img src="assets/languages/zh.svg" width="64" height="28" alt="中文"></a><a href="docs/i18n/README.hi.md" title="हिन्दी"><img src="assets/languages/hi.svg" width="64" height="28" alt="हिन्दी"></a><a href="docs/i18n/README.es.md" title="Español"><img src="assets/languages/es.svg" width="64" height="28" alt="Español"></a><a href="docs/i18n/README.ar.md" title="العربية"><img src="assets/languages/ar.svg" width="64" height="28" alt="العربية"></a><a href="docs/i18n/README.fr.md" title="Français"><img src="assets/languages/fr.svg" width="64" height="28" alt="Français"></a><a href="docs/i18n/README.pt.md" title="Português"><img src="assets/languages/pt.svg" width="64" height="28" alt="Português"></a><a href="docs/i18n/README.id.md" title="Bahasa Indonesia"><img src="assets/languages/id.svg" width="64" height="28" alt="Bahasa Indonesia"></a><a href="docs/i18n/README.ur.md" title="اردو"><img src="assets/languages/ur.svg" width="64" height="28" alt="اردو"></a><br>
+<a href="docs/i18n/README.ru.md" title="Русский"><img src="assets/languages/ru.svg" width="64" height="28" alt="Русский"></a><a href="docs/i18n/README.ko.md" title="한국어"><img src="assets/languages/ko.svg" width="64" height="28" alt="한국어"></a><a href="docs/i18n/README.ja.md" title="日本語"><img src="assets/languages/ja.svg" width="64" height="28" alt="日本語"></a><a href="docs/i18n/README.de.md" title="Deutsch"><img src="assets/languages/de.svg" width="64" height="28" alt="Deutsch"></a><a href="docs/i18n/README.tr.md" title="Türkçe"><img src="assets/languages/tr.svg" width="64" height="28" alt="Türkçe"></a><a href="docs/i18n/README.it.md" title="Italiano"><img src="assets/languages/it.svg" width="64" height="28" alt="Italiano"></a><a href="docs/i18n/README.fa.md" title="فارسی"><img src="assets/languages/fa.svg" width="64" height="28" alt="فارسی"></a><a href="docs/i18n/README.vi.md" title="Tiếng Việt"><img src="assets/languages/vi.svg" width="64" height="28" alt="Tiếng Việt"></a><a href="docs/i18n/README.ta.md" title="தமிழ்"><img src="assets/languages/ta.svg" width="64" height="28" alt="தமிழ்"></a><a href="docs/i18n/README.te.md" title="తెలుగు"><img src="assets/languages/te.svg" width="64" height="28" alt="తెలుగు"></a>
+</p>
+<!-- languages:end -->
 
 ## Start here
 
@@ -57,7 +56,7 @@ Join **[t.me/sentinelvc](https://t.me/sentinelvc)** for updates. The self-hosted
 | Recoverable moderation | Native restriction expiry, user-bound buttons and private challenge recovery |
 | Permission preservation | Fresh authority checks, admin immunity, preservation of existing restrictions |
 | Optional voice adapter | Consenting user-admin, allowlist, participant transitions, mute and opt-in join-muted |
-| Easy operation | Hidden-token setup helper, English/Bangla command menus, `/doctor` and `/incidents` |
+| Easy operation | Hidden-token setup helper, 20-language onboarding, `/doctor` and `/incidents` |
 | Bounded runtime | Limited queue, TTL/entry limits, API budgets, graceful stop and SQLite persistence |
 | Offline benchmarks | Seeded event replay, policy baselines and JSON/CSV output |
 
@@ -123,7 +122,7 @@ Do not upload sessions. Live-call mutes/join-muted settings require manual admin
 
 | Command | Access | Purpose |
 |---|---|---|
-| `/start`, `/help`, `/updates`, `/privacy` | Anyone | Setup, commands, project links and data handling |
+| `/start`, `/help`, `/language`, `/updates`, `/privacy` | Anyone | Setup, language selection, project links and data handling |
 | `/setup` | Current supergroup admin | Enroll the group and check restriction rights |
 | `/doctor` | Current supergroup admin | Check setup, permissions and adapter coverage |
 | `/status` | Current supergroup admin | Show group ID and settings |
