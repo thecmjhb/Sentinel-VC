@@ -1,0 +1,23 @@
+{
+  "name": "sentinel-vc",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Capability-aware Telegram community and voice-call state moderation",
+  "type": "module",
+  "engines": { "node": ">=22.13.0" },
+  "scripts": {
+    "start": "node index.js",
+    "test": "node --test",
+    "check": "node scripts/check.js",
+    "benchmark": "node benchmarks/benchmark.js",
+    "benchmark:queue": "node benchmarks/queue-simulation.js",
+    "benchmark:sensitivity": "node benchmarks/sensitivity.js",
+    "mtproto:login": "node scripts/mtproto-login.js"
+  },
+  "dependencies": {
+    "big-integer": "1.6.52",
+    "dotenv": "18.0.5",
+    "grammy": "1.46.0",
+    "teleproto": "1.229.1"
+  }
+}

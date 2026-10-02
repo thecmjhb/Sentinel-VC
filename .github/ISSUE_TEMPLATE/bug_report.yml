@@ -1,0 +1,27 @@
+name: Bug report
+description: Report unexpected behavior without credentials or private data.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: "For security vulnerabilities use private reporting. Do not paste tokens, account sessions, phone codes or private group/user details."
+  - type: input
+    id: version
+    attributes:
+      label: Version and environment
+      description: Release/commit, Node version and Docker or npm deployment.
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction in a private staging group
+      description: Minimal steps; use consenting testers and redact private identifiers.
+    validations:
+      required: true

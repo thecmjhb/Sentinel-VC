@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use Sentinel-VC in your work, please cite this software."
+title: "Sentinel-VC: Capability-Aware Telegram Moderation"
+type: software
+authors:
+  - family-names: "Hossain Bappy"
+    given-names: "C. M. Jubayer"
+version: "0.1.0"
+license: MIT
+repository-code: "https://github.com/thecmjhb/Sentinel-VC"
+url: "https://t.me/sentinelvc"
+keywords:
+  - Telegram
+  - moderation
+  - voice-call state
+  - reproducible research
