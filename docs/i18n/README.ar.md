@@ -22,11 +22,13 @@ cd Sentinel-VC
 bash scripts/setup.sh
 ```
 
+يمكنك اختيار منفذ فحص الحالة على VPS أثناء الإعداد؛ القيمة الافتراضية للتثبيت الجديد هي **18765**. اضغط Enter للاحتفاظ بالمنفذ المعروض. لتغييره لاحقًا شغّل `bash scripts/setup.sh --port 19234`؛ تبقى إعدادات `.env` الأخرى محفوظة. عند استخدام npm اضبط `HTTP_PORT` في `.env`.
+
 يطلب المساعد الرمز دون إظهاره ويحافظ على ملف `.env` الموجود. لا تنشر الرمز في المحادثات أو الصور أو GitHub. افحص التشغيل:
 
 ```bash
 docker compose logs --tail=50 sentinel
-curl --fail http://127.0.0.1:8080/readyz
+curl --fail "http://$(docker compose port sentinel 8080)/readyz"
 ```
 
 بدون Docker، استخدم Node.js 24 LTS وانسخ `.env.example` إلى `.env` وأدخل `BOT_TOKEN` ثم شغّل `npm ci --ignore-scripts` و`npm start`. راجع [دليل التشغيل](../SELF_HOSTING.md) للخدمة المستمرة والنسخ الاحتياطي.

@@ -12,7 +12,11 @@ cd Sentinel-VC
 bash scripts/setup.sh
 ```
 
-The helper asks for your token privately, creates `.env` if absent and starts the service. Existing configuration is preserved. Use your own BotFather token; keep `.env` and account sessions out of GitHub.
+The helper asks for your token privately, creates `.env` if absent, then lets you choose a VPS health-check port. New installations suggest **18765**; press Enter to keep the displayed port. Existing settings are preserved unless you choose another port. Use your own BotFather token; keep `.env` and account sessions out of GitHub.
+
+To change the port later, run `bash scripts/setup.sh --port 19234` (replace 19234 with your chosen available port). This updates only `HTTP_PORT` in `.env` and recreates the container. On Ubuntu, the helper checks for listening TCP sockets and asks again if the port is busy; Docker's final bind remains authoritative because availability can change. No port number is guaranteed to be unused. A running container from this same Compose project can keep its current port. Non-interactive runs preserve the configured port unless `--port` is provided.
+
+`HTTP_PORT` selects the **VPS port** in Docker and the listener port with `npm start`. The container uses port 8080 internally, isolated from other containers and host services. The helper uses `.env` rather than a shell `HTTP_PORT` override; when using Compose manually, shell environment values take precedence ([Docker documentation](https://docs.docker.com/compose/how-tos/environment-variables/variable-interpolation/)).
 
 For manual setup:
 
@@ -30,7 +34,7 @@ Check that it started:
 ```bash
 docker compose ps
 docker compose logs --tail=50 sentinel
-curl --fail http://127.0.0.1:8080/readyz
+curl --fail "http://$(docker compose port sentinel 8080)/readyz"
 ```
 
 The bundled HTTP port is bound to host loopback. Readiness confirms polling started; use `/doctor` and `/status` to check group configuration and optional VC coverage.
@@ -56,7 +60,7 @@ npm ci --ignore-scripts
 npm start
 ```
 
-On Windows, use `Copy-Item .env.example .env` and edit it with a text editor. Set `BOT_TOKEN` before starting. `npm start` stays attached to the terminal.
+On Windows, use `Copy-Item .env.example .env` and edit it with a text editor. Set `BOT_TOKEN` and an available `HTTP_PORT` before starting (default 18765). Check readiness at `http://127.0.0.1:YOUR_PORT/readyz`, replacing YOUR_PORT with that number. If Node reports EADDRINUSE, select another port in `.env` and restart. `npm start` stays attached to the terminal.
 
 ## Keep it running
 
@@ -143,6 +147,7 @@ For npm, run `npm ci --ignore-scripts` after updating code and restart your serv
 | Problem | What to check |
 |---|---|
 | Bot cannot start | Token, `.env` values, outbound network access and logs |
+| Port already allocated / EADDRINUSE | Docker: run `bash scripts/setup.sh --port 19234` with an available port. npm: edit `HTTP_PORT` in `.env` and restart. Do not stop unrelated services. |
 | Polling conflict | Another process is using the same token |
 | `/setup` fails | Supergroup, current human admin, bot's Restrict Members permission |
 | No automatic action | Observe mode, admin immunity, cooldowns, thresholds and API budgets |

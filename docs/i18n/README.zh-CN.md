@@ -61,11 +61,13 @@ cd Sentinel-VC
 bash scripts/setup.sh
 ```
 
+安装时可选择 VPS 健康检查端口，新安装默认 **18765**；按 Enter 保留显示的端口。以后可运行 `bash scripts/setup.sh --port 19234` 修改，其他 `.env` 设置会保留。直接使用 npm 时，在 `.env` 中设置 `HTTP_PORT`。
+
 助手会隐藏 token 输入，创建 `.env` 并启动容器；已有 `.env` 不会被修改。请勿公开 token、`.env` 或账号会话文件。
 
 ```bash
 docker compose logs --tail=50 sentinel
-curl --fail http://127.0.0.1:8080/readyz
+curl --fail "http://$(docker compose port sentinel 8080)/readyz"
 ```
 
 不使用 Docker 时，安装 Node.js 24 LTS，将 `.env.example` 复制为 `.env`，填写 `BOT_TOKEN`，然后运行：

@@ -22,11 +22,13 @@ cd Sentinel-VC
 bash scripts/setup.sh
 ```
 
+Elige el puerto de comprobación de estado del VPS durante la instalación; el valor inicial es **18765**. Pulsa Enter para conservar el puerto mostrado. Para cambiarlo después: `bash scripts/setup.sh --port 19234`. Se conservan los demás ajustes de `.env`. Con npm, configura `HTTP_PORT` en `.env`.
+
 El asistente pide el token sin mostrarlo y conserva un `.env` existente. No publiques tokens en chats, capturas o GitHub. Comprueba el arranque:
 
 ```bash
 docker compose logs --tail=50 sentinel
-curl --fail http://127.0.0.1:8080/readyz
+curl --fail "http://$(docker compose port sentinel 8080)/readyz"
 ```
 
 Sin Docker, usa Node.js 24 LTS: copia `.env.example` a `.env`, configura `BOT_TOKEN` y ejecuta `npm ci --ignore-scripts` y `npm start`. Consulta [operación y copias de seguridad](../SELF_HOSTING.md) para un servicio persistente.

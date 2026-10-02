@@ -81,13 +81,15 @@ cd Sentinel-VC
 bash scripts/setup.sh
 ```
 
-The setup helper asks for the token **without showing it**, creates a private `.env` if absent, preserves existing configuration, and starts the container. Keep the token private.
+The helper lets you choose the VPS health-check port (new default: **18765**). Press Enter to keep the displayed port. To change it later: `bash scripts/setup.sh --port 19234`. Other `.env` settings are preserved. For npm, set `HTTP_PORT` in `.env`.
+
+The setup helper asks for the token **without showing it**, creates a private `.env` if absent, preserves other existing configuration, and starts the container. Keep the token private.
 
 Check startup:
 
 ```bash
 docker compose logs --tail=50 sentinel
-curl --fail http://127.0.0.1:8080/readyz
+curl --fail "http://$(docker compose port sentinel 8080)/readyz"
 ```
 
 Then configure the bot in Telegram. Polling needs no domain or public web port. See [self-hosting](docs/SELF_HOSTING.md) for manual setup and troubleshooting.

@@ -22,11 +22,13 @@ cd Sentinel-VC
 bash scripts/setup.sh
 ```
 
+Pilih port pemeriksaan kesehatan VPS saat penyiapan; nilai awalnya **18765**. Tekan Enter untuk mempertahankan port yang ditampilkan. Untuk mengubahnya nanti: `bash scripts/setup.sh --port 19234`. Pengaturan `.env` lainnya tetap tersimpan. Untuk npm, atur `HTTP_PORT` di `.env`.
+
 Asisten meminta token tanpa menampilkannya dan tidak mengubah `.env` yang sudah ada. Jangan kirim token melalui chat, tangkapan layar, atau GitHub. Periksa proses awal:
 
 ```bash
 docker compose logs --tail=50 sentinel
-curl --fail http://127.0.0.1:8080/readyz
+curl --fail "http://$(docker compose port sentinel 8080)/readyz"
 ```
 
 Tanpa Docker, gunakan Node.js 24 LTS: salin `.env.example` menjadi `.env`, isi `BOT_TOKEN`, lalu jalankan `npm ci --ignore-scripts` dan `npm start`. Lihat [panduan operasional](../SELF_HOSTING.md) untuk layanan permanen dan pencadangan.

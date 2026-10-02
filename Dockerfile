@@ -1,5 +1,6 @@
 FROM node:24-bookworm-slim
 ENV NODE_ENV=production
+ENV HTTP_PORT=8080
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev --ignore-scripts && npm cache clean --force

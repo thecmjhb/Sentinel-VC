@@ -62,7 +62,9 @@ cd Sentinel-VC
 bash scripts/setup.sh
 ```
 
-Helper token গোপনে চাইবে, নতুন `.env` তৈরি করবে এবং container চালাবে। আগের configuration থাকলে সেটি বদলাবে না। Token, `.env` ও account session private রাখুন।
+Setup-এ VPS-এর health-check port বেছে নিতে পারবেন; নতুন default **18765**। Enter দিলে দেখানো port থাকবে। পরে বদলাতে `bash scripts/setup.sh --port 19234` দিন; অন্য `.env` settings অক্ষত থাকবে। npm দিয়ে চালালে `.env`-এর `HTTP_PORT` বদলান।
+
+Helper token গোপনে চাইবে, নতুন `.env` তৈরি করবে এবং container চালাবে। বেছে নেওয়া port ছাড়া আগের configuration বদলাবে না। Token, `.env` ও account session private রাখুন।
 
 Docker ছাড়া Node.js 24 LTS-এ:
 

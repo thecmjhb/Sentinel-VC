@@ -40,7 +40,7 @@ export function loadConfig(env = process.env, { requireToken = true } = {}) {
     captchaSeconds: integer('CAPTCHA_SECONDS', 180, 60, 3600),
     retentionDays: integer('RETENTION_DAYS', 7, 1, 90),
     httpHost: env.HTTP_HOST || '127.0.0.1',
-    httpPort: integer('HTTP_PORT', 8080, 1, 65535), metricsToken,
+    httpPort: integer('HTTP_PORT', 18765, 1, 65535), metricsToken,
     mtEnabled, mtApiId: integer('MT_API_ID', 0, mtEnabled ? 1 : 0, 2147483647),
     mtApiHash: env.MT_API_HASH || '',
     mtSessionFile: path.resolve(env.MT_SESSION_FILE || './.secrets/mtproto.session'),
