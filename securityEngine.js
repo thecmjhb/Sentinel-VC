@@ -1,4 +1,5 @@
-import { randomBytes, randomInt } from 'node:crypto';
+import { randomBytes } from 'node:crypto';
+import { createChallenge } from './challenges.js';
 import { AntiFlood } from './antiFlood.js';
 import { ActionBudget, counters, logError } from './runtime.js';
 
@@ -25,10 +26,32 @@ export class SecurityEngine {
     catch (error) { this.budget.pause(error); throw error; }
   }
   async reply(chatId, text, options = {}) {
+    if (!Number.isSafeInteger(chatId) || chatId <= 0) throw new Error('Messages are private-only');
     return this.call('sendMessage', chatId, chatId, text, options);
   }
   async administrator(chatId, userId) {
     return isAdmin(await this.call('getChatMember', chatId, chatId, userId));
+  }
+  async notifyVoiceRestriction(chatId, userId) {
+    try {
+      await this.reply(userId, `Live-call mute / লাইভ কলে মিউট\nCommunity ID: ${chatId}\n` +
+        'An administrator must review your speaking permission in Telegram. Chat CAPTCHA does not unmute a live call.\n' +
+        'কথা বলার permission খুলতে community admin-এর review লাগবে।');
+    } catch (error) {
+      this.store.audit(chatId, userId, 'voice-dm-unavailable');
+      logError('voice_dm_unavailable', error);
+    }
+  }
+  async notifyVoiceIncident(chatId, burst, mode) {
+    // Notify only administrators who explicitly registered this community, with fresh authority.
+    for (const id of this.store.communityAdministrators(chatId, 3)) {
+      try {
+        if (!await this.administrator(chatId, Number(id))) { this.store.unlinkCommunity(chatId, id); continue; }
+        await this.reply(Number(id), `Voice join burst / কলে হঠাৎ যোগদান\nCommunity ID: ${chatId}\n` +
+          `${burst.uniqueJoins} distinct user joins in ${burst.windowSeconds}s; threshold ${burst.threshold}. Mode: ${mode}.\n` +
+          'This is a call-state anomaly, not proof of malicious users or UDP loss. Open /communities → Incidents to review admission action results.');
+      } catch (error) { logError('voice_alert_unavailable', error); }
+    }
   }
   async enroll(chatId, userId, botId) {
     if (!await this.administrator(chatId, userId)) return false;
@@ -42,6 +65,8 @@ export class SecurityEngine {
   async process(event) {
     const settings = this.store.group(event.chatId);
     if (!settings || event.isBot) return null;
+    // Broadcast subscriber/post activity cannot use supergroup restriction semantics.
+    if (settings.chatType === 'channel' && !event.kind.startsWith('vc_')) return null;
     if (event.kind.startsWith('vc_') && !settings.vc) return null;
     counters.events++;
     const detection = this.flood.observe(event);
@@ -70,15 +95,12 @@ export class SecurityEngine {
     return detection;
   }
   async gate(chatId, userId, reason, seconds = this.config.captchaSeconds) {
+    if (this.store.group(chatId)?.chatType === 'channel') return false;
     if (this.store.gate(chatId, userId)) return false;
     // Do not overwrite another moderator's existing restriction or administrator rights.
     const member = await this.call('getChatMember', chatId, chatId, userId);
     if (member.status !== 'member' || member.user?.is_bot) return false;
-    const a = randomInt(2, 20), b = randomInt(2, 20), answer = a + b;
-    const options = [answer, answer + randomInt(1, 6), answer - randomInt(1, 6)];
-    // Fisher-Yates, not an unstable sort comparator.
-    for (let i = options.length - 1; i > 0; i--) { const j = randomInt(i + 1); [options[i], options[j]] = [options[j], options[i]]; }
-    const gate = { token: randomBytes(12).toString('hex'), answer, question: `${a} + ${b}`, options,
+    const gate = { token: randomBytes(12).toString('hex'), ...createChallenge(),
       attempts: 0, until: Math.floor(Date.now() / 1000) + seconds, phase: 'pending', reason,
       verifyAfter: reason === 'flood' ? Date.now() + 60000 : 0 };
     // Persist intent first. A process crash cannot strand an untracked permanent mute.
@@ -90,7 +112,9 @@ export class SecurityEngine {
       this.store.setGate(chatId, userId, gate);
       counters.restrictions++;
       this.store.audit(chatId, userId, 'restricted', { until: gate.until, reason });
-      await this.showGate(chatId, userId, gate);
+      // Failed DM delivery does not undo a successful bounded restriction or post publicly.
+      try { await this.showGate(chatId, userId, gate); }
+      catch (error) { this.store.audit(chatId, userId, 'verification-dm-unavailable'); logError('verification_dm_unavailable', error); }
       return true;
     } catch (error) {
       // A request may succeed before its acknowledgement is lost. Preserve pending intent
@@ -99,12 +123,16 @@ export class SecurityEngine {
       return false;
     }
   }
-  async showGate(chatId, userId, gate = this.store.gate(chatId, userId), destinationChatId = chatId) {
+  async showGate(chatId, userId, gate = this.store.gate(chatId, userId), destinationChatId = userId) {
     if (!gate || gate.until * 1000 <= Date.now()) return false;
-    const keyboard = { inline_keyboard: [gate.options.map(value => ({ text: String(value),
-      callback_data: `sv:${chatId}:${gate.token}:${value}` }))] };
-    await this.reply(destinationChatId, `Member ${userId} in chat ${chatId}: solve ${gate.question} to restore chat permissions. ` +
-      `Only you can answer. Restrictions expire automatically; this does not unmute a live call.`, { reply_markup: keyboard });
+    if (destinationChatId !== userId || userId <= 0) throw new Error('Challenge delivery must be private and user-bound');
+    // Numeric options from schema-v1 gates remain recoverable after upgrade.
+    const buttons = gate.options.map(option => ({ text: String(option?.label ?? option),
+      callback_data: `sv:${chatId}:${gate.token}:${option?.id ?? option}` }));
+    const keyboard = { inline_keyboard: [buttons.slice(0, 2), buttons.slice(2)].filter(row => row.length) };
+    await this.reply(userId, `Verification / যাচাই\nCommunity ID: ${chatId}\n${gate.question}\n` +
+      `Select an answer to restore chat permissions. Only you can answer; three wrong answers exhaust this challenge. ` +
+      `Restrictions expire automatically. This does not unmute a live call.`, { reply_markup: keyboard });
     return true;
   }
   async verify(chatId, userId, token, answer) {
@@ -112,7 +140,7 @@ export class SecurityEngine {
     if (!gate || gate.token !== token || gate.until * 1000 <= Date.now()) return 'Challenge expired.';
     if (Date.now() < (gate.verifyAfter || 0)) return 'Flood cooldown active. Try again after one minute.';
     if (gate.attempts >= 3) return 'Attempt limit reached. Wait for expiry or ask an administrator.';
-    if (gate.answer !== Number(answer)) {
+    if (String(gate.answer) !== String(answer)) {
       gate.attempts++;
       this.store.setGate(chatId, userId, gate);
       return 'Incorrect answer.';

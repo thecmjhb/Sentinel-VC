@@ -9,85 +9,42 @@
 </p>
 <!-- languages:end -->
 
-[Bot খুলুন](https://t.me/sentinelvcbot) · [Updates](https://t.me/sentinelvc)
+## ব্যবহারের গাইড
 
-Telegram supergroup-এর জন্য open-source moderation bot। এটি group join/leave, দ্রুত message ও button activity দেখে সাময়িক restriction দিতে পারে। নতুন সদস্যদের জন্য arithmetic verification এবং optional live-call state adapter আছে। Maintainer: **C. M. Jubayer Hossain Bappy**।
+[@sentinelvcbot](https://t.me/sentinelvcbot) · [আপডেট](https://t.me/sentinelvc)
 
-**অবস্থা:** experimental release। স্থানীয় automated tests হয়েছে; live Telegram ও Docker deployment validation বাকি। প্রথমে observe mode-এ আপনার group-এর স্বাভাবিক activity দেখে নিন।
+/start → /language → বাংলা → /communities
 
-## নিজের VPS ছাড়াই bot ব্যবহার
+Bot-কে group/channel admin করুন; supergroup-এ Restrict Members দিন। এখানে /communities খুলে নিজের community বেছে সেটআপ করুন। সব control এই private chat-এর button দিয়ে করুন। Private community-ও selector বা numeric ID দিয়ে যুক্ত হবে। সদস্য নিজের chat challenge পাবে /verify দিয়ে।
 
-1. [@sentinelvcbot-কে supergroup-এ যোগ করুন](https://t.me/sentinelvcbot?startgroup=setup)।
-2. Bot-কে admin করুন এবং **Restrict Members** permission দিন।
-3. নিজের personal admin account থেকে `/setup`, তারপর কয়েক সেকেন্ড বিরতি দিয়ে `/doctor` ও `/status` পাঠান।
-4. Observe mode-এ incident দেখে সন্তুষ্ট হলে `/mode enforce` দিন।
-5. নতুন সদস্যদের verification চাইলে `/gate on` দিন।
+## আমার কমিউনিটি
 
-এভাবে চালু থাকা project bot ব্যবহার করতে আপনার নিজস্ব VPS লাগবে না। Bot-এর availability hosting-এর ওপর নির্ভর করে। [@sentinelvc](https://t.me/sentinelvc)-তে updates পাবেন; Self-hosted code-এ channel join বাধ্যতামূলক নয়। Hosted project bot-এর private /start-এ channel join ও language ধাপ অনুসরণ করুন; restriction recovery-তে subscription লাগে না।
+**কমিউনিটি বাছুন → গ্রুপ / চ্যানেল → সেটআপ করুন → পর্যবেক্ষণ**
 
-## কী কী পাবেন
+Public/private দুটোই: selector ব্যবহার করুন, অথবা /community -1001234567890 এর মতো numeric ID দিন। Public username-ও চলে।
 
-- Cost-weighted token buckets এবং দ্রুত activity-র threat scoring।
-- Group অনুযায়ী আলাদা settings, challenges, cooldowns ও audit records।
-- মেয়াদযুক্ত restrictions এবং restricted user-এর private verification recovery।
-- বর্তমান admin permissions যাচাই, admin immunity ও আগের restriction সংরক্ষণ।
-- Optional user-admin adapter দিয়ে delivered live-call join/leave events ও অনুমোদিত mute actions।
-- Docker setup helper, SQLite persistence, bounded queues ও health checks।
+Chat verification: private-এ /verify। Live-call mute admin review করে খুলবে। Bot প্রথমে নিজে থেকে inbox খুলতে পারে না।
 
-## প্রয়োজনীয় commands
+**Voice account যুক্ত করুন → Login QR scan করুন → ভয়েস নিয়ন্ত্রণ → কলে join-burst প্রতিরক্ষা / প্রতি কলে আগাম মিউট**
 
-| Command | কাজ |
-|---|---|
-| `/help`, `/updates`, `/privacy` | সাহায্য, project links ও data handling |
-| `/setup`, `/doctor`, `/status` | Group enrollment, permissions ও settings |
-| `/incidents` | বর্তমান group-এর সাম্প্রতিক incident records |
-| `/mode observe` / `/mode enforce` | Audit-only / automatic moderation |
-| `/gate on` / `/gate off` | নতুন member-এর verification |
-| `/disable` | Group-এর protection settings বন্ধ |
-| `/verify` | নিজের challenge আবার খুলুন |
-| `/vc on`, `/vc off` | Configured voice adapter চালু/বন্ধ |
+নতুনদের muted entry করুন · Speaking admission খুলুন · সবার জন্য call শেষ করুন
 
-Configuration commands শুধু group-এর বর্তমান human admin ব্যবহার করতে পারবেন। Anonymous admin দিয়ে setup করা যায় না। [সম্পূর্ণ command list](README.md#commands) দেখুন।
+Login QR scan করুন চাপলে এখান থেকেই নিজের account যুক্ত হবে। QR অন্য screen-এ দেখিয়ে Telegram → Settings → Devices → Link Desktop Device দিয়ে scan/accept করুন। Bot আপনার chat-এর ID-এর সঙ্গে login account ID ও বর্তমান admin/Manage Call permission মিলিয়ে যাচাই করবে। VPS operator এই user session দিয়ে account-access পেতে পারে; trusted operator/account ব্যবহার করুন। OTP/password chat-এ দেওয়া লাগে না। Telegram 2FA চাইলে নিজের VPS-এ local login লাগবে; 2FA বন্ধ করবেন না। QR account বিচ্ছিন্ন করতে /disconnectvoice। Account যুক্ত হলেই network attack বন্ধ হয় না।
 
-## Verification কীভাবে করবেন
+[Private dashboard guide (English)](docs/PRIVATE_CONTROL.md)
 
-Restricted হয়ে group-এ message দিতে না পারলে bot-এর private chat খুলুন এবং `/verify GROUP_ID` পাঠান। Challenge-এ দেওয়া negative group ID ব্যবহার করুন। নিজের account-এর challenge-ই পাওয়া যাবে।
+## গ্রুপে যোগ করুন / চ্যানেল
 
-তিনবার ভুল উত্তর দিলে challenge শেষ হয়। Flood restriction-এর প্রথম এক মিনিটে verification দিয়ে মুক্ত হওয়া যায় না। Restriction-এর মেয়াদ শেষ হলে তা নিজে উঠে যায়; প্রয়োজন হলে group admin-এর সাহায্য নিন। Arithmetic challenge automation-ও solve করতে পারে।
+[গ্রুপে যোগ করুন](https://t.me/sentinelvcbot?startgroup=setup) · [চ্যানেল](https://t.me/sentinelvcbot?startchannel&admin=manage_chat)
 
-## নিজের bot self-host করুন
+## VPS / Docker
 
-নিজের BotFather token এবং Docker Engine/Compose-সহ Ubuntu VPS থাকলে:
+[Self-hosting guide (English)](docs/SELF_HOSTING.md) · [Voice setup (English)](docs/VC_SETUP.md)
 
-```bash
-git clone https://github.com/thecmjhb/Sentinel-VC.git
-cd Sentinel-VC
-bash scripts/setup.sh
-```
+Use your own BotFather token for self-hosting. The public source does not require membership in @sentinelvc. Detailed diagnostics and operator documentation remain in English.
 
-Setup-এ VPS-এর health-check port বেছে নিতে পারবেন; নতুন default **18765**। Enter দিলে দেখানো port থাকবে। পরে বদলাতে `bash scripts/setup.sh --port 19234` দিন; অন্য `.env` settings অক্ষত থাকবে। npm দিয়ে চালালে `.env`-এর `HTTP_PORT` বদলান।
+Experimental: local tests only; live Telegram validation is pending. Voice controls require the optional user-admin adapter. No raw UDP filtering, account-age detection or proven crash prevention.
 
-Helper token গোপনে চাইবে, নতুন `.env` তৈরি করবে এবং container চালাবে। বেছে নেওয়া port ছাড়া আগের configuration বদলাবে না। Token, `.env` ও account session private রাখুন।
+[সোর্স কোড](https://github.com/thecmjhb/Sentinel-VC) · [MIT](LICENSE) · [Privacy (English)](PRIVACY.md)
 
-Docker ছাড়া Node.js 24 LTS-এ:
-
-```bash
-cp .env.example .env
-nano .env
-npm ci --ignore-scripts
-npm start
-```
-
-`.env`-এ `BOT_TOKEN` বসান। Windows-এ প্রথম command-এর বদলে `Copy-Item .env.example .env` ব্যবহার করুন। [Self-hosting guide](docs/SELF_HOSTING.md)-এ service, backup, update ও troubleshooting আছে।
-
-## Voice-call controls ও সীমা
-
-সাধারণ bot token দিয়ে raw UDP দেখা/বন্ধ করা, account-এর আসল creation date জানা বা সরাসরি live-call participant feed পাওয়া যায় না। Username না থাকা একা কাউকে punish করার কারণ নয়।
-
-[Optional VC adapter](docs/VC_SETUP.md)-এর জন্য consenting user-admin account, private session ও explicit group allowlist দরকার। Call mute বা join-muted action group admin manually ফিরিয়ে দেবেন। Chat verification solve করলে live VC unmute হয় না। Packet flood blocking বা client crash prevention এই implementation প্রমাণ করেনি।
-
-## সাহায্য ও license
-
-[GitHub Issues](https://github.com/thecmjhb/Sentinel-VC/issues)-এ সমস্যা জানান; [updates channel](https://t.me/sentinelvc)-এ খবর পাবেন। Bot-এর ভাষা নির্বাচন, onboarding ও guide ২০ ভাষায় আছে; moderation diagnostics English-এ থাকে। /language দিয়ে ভাষা বদলান।
-
-Code [MIT license](LICENSE)-এর অধীনে। Reuse করলে copyright ও license রাখুন। [Privacy](PRIVACY.md), [security reporting](SECURITY.md) এবং [brand asset notice](assets/NOTICE.md) দেখুন।
+C. M. Jubayer Hossain Bappy

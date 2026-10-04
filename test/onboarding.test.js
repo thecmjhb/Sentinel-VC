@@ -31,3 +31,14 @@ test('invalid selections cannot overwrite saved preferences; locale variants res
   assert.equal(languageCode('pt_BR'), 'pt');
   assert.equal(languageCode('__proto__'), 'en');
 });
+
+test('self-hosted group and channel buttons use the actual bot identity and expose private channel help', async t => {
+  const f = uiFixture(t); f.bot.botInfo.username = 'another_custom_bot';
+  await f.update('/help');
+  const buttons = f.calls.at(-1).payload.reply_markup.inline_keyboard.flat();
+  assert.ok(buttons.some(b => b.url === 'https://t.me/another_custom_bot?startgroup=setup'));
+  assert.ok(buttons.some(b => b.url === 'https://t.me/another_custom_bot?startchannel&admin=manage_chat'));
+  await f.update(undefined, 'ui:channel');
+  assert.match(f.lastText(), /\/community NEGATIVE_ID/);
+  assert.equal(f.calls.filter(c => c.method === 'getChatMember').length, 0);
+});

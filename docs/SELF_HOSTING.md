@@ -12,6 +12,8 @@ cd Sentinel-VC
 bash scripts/setup.sh
 ```
 
+**Use your own bot:** create one with @BotFather and use its token. @sentinelvcbot is the optional hosted service, not a required identity or credential. Self-hosted menus use the bot identity returned by Telegram.
+
 The helper asks for your token privately, creates `.env` if absent, then lets you choose a VPS health-check port. New installations suggest **18765**; press Enter to keep the displayed port. Existing settings are preserved unless you choose another port. Use your own BotFather token; keep `.env` and account sessions out of GitHub.
 
 To change the port later, run `bash scripts/setup.sh --port 19234` (replace 19234 with your chosen available port). This updates only `HTTP_PORT` in `.env` and recreates the container. On Ubuntu, the helper checks for listening TCP sockets and asks again if the port is busy; Docker's final bind remains authoritative because availability can change. No port number is guaranteed to be unused. A running container from this same Compose project can keep its current port. Non-interactive runs preserve the configured port unless `--port` is provided.
@@ -37,14 +39,14 @@ docker compose logs --tail=50 sentinel
 curl --fail "http://$(docker compose port sentinel 8080)/readyz"
 ```
 
-The bundled HTTP port is bound to host loopback. Readiness confirms polling started; use `/doctor` and `/status` to check group configuration and optional VC coverage.
+The bundled HTTP port is bound to host loopback. Readiness confirms polling started; open `/communities` privately to check configuration and optional VC coverage.
 
 ## Set up your group
 
 1. Add your bot to a Telegram **supergroup** and promote it to admin with **Restrict Members**.
-2. From your personal administrator account, send `/setup`, then `/doctor` and `/status`, allowing a few seconds between commands.
-3. Begin in observe mode. Review `/incidents` for legitimate activity before using `/mode enforce`.
-4. Use `/gate on` if you want arithmetic verification for new members.
+2. Open `/communities` privately. Choose your community and press **Set up**; use **Select community** if missing. Private numeric IDs are supported.
+3. Begin in **Observe** mode. Review **Incidents** before enabling **Enforce**.
+4. Enable **Verification** for new supergroup members. All commands and challenges stay private. See [private control](PRIVATE_CONTROL.md).
 
 The optional [voice-call adapter](VC_SETUP.md) needs a separate consenting user-admin account. A bot token alone does not enable direct call monitoring or muting.
 
@@ -133,6 +135,8 @@ docker compose start sentinel
 
 For npm, stop the service and copy the entire `data/` directory, including WAL/SHM files if present. Test restoration before relying on backups.
 
+This private-dashboard release migrates database schema 1 to 2 while preserving old settings and active challenges. Keep the stopped pre-upgrade snapshot: an older release requires both its matching code and the old database. Do not attempt an in-place schema downgrade.
+
 After backup, review release changes and update a Git checkout:
 
 ```bash
@@ -149,9 +153,9 @@ For npm, run `npm ci --ignore-scripts` after updating code and restart your serv
 | Bot cannot start | Token, `.env` values, outbound network access and logs |
 | Port already allocated / EADDRINUSE | Docker: run `bash scripts/setup.sh --port 19234` with an available port. npm: edit `HTTP_PORT` in `.env` and restart. Do not stop unrelated services. |
 | Polling conflict | Another process is using the same token |
-| `/setup` fails | Supergroup, current human admin, bot's Restrict Members permission |
+| Setup fails | Open the bot privately; check current admin rights and Restrict Members for supergroups |
 | No automatic action | Observe mode, admin immunity, cooldowns, thresholds and API budgets |
-| Member cannot answer in the group | Open the bot privately and send `/verify GROUP_ID` using the challenge's group ID |
+| Verification not received | Open the bot privately and send `/verify`; bots cannot initiate an inbox conversation |
 | VC account unavailable | Session ownership, consent, allowlist, Manage Video Chats permission and `/vc on` |
 
 For Docker, the optional session must be readable by container UID 1000; preserve file mode 600 and directory mode 700. For systemd, give the `sentinel` account equivalent private access. See [VC setup](VC_SETUP.md) for the full adapter procedure and manual restoration of call actions.

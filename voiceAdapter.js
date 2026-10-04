@@ -4,6 +4,7 @@ import { Api, TelegramClient } from 'teleproto';
 import { StringSession } from 'teleproto/sessions';
 import { Raw } from 'teleproto/events';
 import { ActionBudget, counters, log, logError } from './runtime.js';
+import { VoiceBurstDetector } from './voiceShield.js';
 
 // Only join/leave transitions are attributed. Mute/volume changes can originate
 // from administrators and must not be charged to the participant as abuse.
@@ -45,6 +46,7 @@ export class VoiceAdapter {
     Object.assign(this, { config, store, engine, queue, client });
     this.calls = new Map(); this.states = new Map(); this.entities = new Map();
     this.normalizer = new ParticipantNormalizer(config.maxUsers);
+    this.shield = new VoiceBurstDetector(config);
     this.budget = new ActionBudget();
     this.stopped = false; this.refreshPending = false; this.lastRefresh = 0;
   }
@@ -73,7 +75,8 @@ export class VoiceAdapter {
     const me = await this.client.getMe();
     if (me.bot) throw new Error('Direct VC moderation requires a USER session');
     this.meId = String(me.id);
-    // Warm the entity cache, without storing or reading chat messages.
+    // Warm entity cache; getDialogs may deliver last-message data transiently,
+    // but the moderation pipeline neither uses nor persists those contents.
     await this.client.getDialogs({ limit: Math.min(this.config.mtAllowedChats.size * 2 + 20, 1000) });
     this.raw = new Raw({ types: [Api.UpdateGroupCallParticipants, Api.UpdateGroupCall] });
     this.handler = update => {
@@ -89,7 +92,12 @@ export class VoiceAdapter {
     log('vc_adapter_connected');
   }
   requestRefresh() {
-    if (this.stopped || this.refreshPending || Date.now() - this.lastRefresh < 5000) return;
+    if (this.stopped || this.refreshPending) return;
+    const remaining=5000-(Date.now()-this.lastRefresh);
+    if (remaining>0) {
+      if (!this.refreshLater) this.refreshLater=setTimeout(()=>{ this.refreshLater=null; this.requestRefresh(); },remaining);
+      this.refreshLater?.unref(); return;
+    }
     this.refreshPending = true;
     void this.queue.run(async () => {
       try { await this.refresh(); } finally { this.refreshPending = false; }
@@ -98,7 +106,7 @@ export class VoiceAdapter {
   async channel(chatId) {
     if (this.entities.has(String(chatId))) return this.entities.get(String(chatId));
     const peer = await this.client.getInputEntity(bigInt(String(chatId)));
-    if (!(peer instanceof Api.InputPeerChannel)) throw new Error('Only supergroups are supported');
+    if (!(peer instanceof Api.InputPeerChannel)) throw new Error('Only supergroups and broadcast channels are supported');
     const channel = new Api.InputChannel({ channelId: peer.channelId, accessHash: peer.accessHash });
     this.entities.set(String(chatId), channel);
     return channel;
@@ -123,9 +131,15 @@ export class VoiceAdapter {
         if (!inputCall) { this.dropChat(group.id); this.states.set(group.id, 'no active call'); continue; }
         const previous = this.calls.get(String(inputCall.id));
         if (previous && Date.now() - previous.synchronizedAt < 120000) {
-          previous.checkedAt = Date.now(); this.states.set(group.id, 'call-state monitoring'); continue;
+          previous.checkedAt = Date.now(); this.states.set(group.id, previous.coverage || 'call-state monitoring');
+          if (group.vcGuard && group.mode === 'enforce' && (!previous.joinMuted || (group.vcRotateInvites && !previous.guardRotated)))
+            await this.setAdmission(group.id, true, group, 'preemptive');
+          continue;
         }
         await this.synchronize(group.id, inputCall);
+        const active = this.entry(group.id);
+        if (active && group.vcGuard && group.mode === 'enforce' && (!active.joinMuted || (group.vcRotateInvites && !active.guardRotated)))
+          await this.setAdmission(group.id, true, group, 'preemptive');
       } catch (error) {
         this.dropChat(group.id); this.states.set(group.id, 'unavailable; review credentials/rights');
         logError('vc_chat_unavailable', error);
@@ -135,9 +149,11 @@ export class VoiceAdapter {
   dropChat(chatId) {
     for (const [key, entry] of this.calls) if (entry.chatId === String(chatId)) {
       this.calls.delete(key); this.normalizer.versions.delete(key);
+      this.shield.forget(key);
     }
   }
   async synchronize(chatId, inputCall) {
+    const previous=this.entry(chatId);
     // Invalidate the old snapshot before an RPC that can fail or time out.
     this.dropChat(chatId);
     this.states.set(String(chatId), 'resynchronizing; current updates suppressed');
@@ -147,10 +163,12 @@ export class VoiceAdapter {
     if (!(result.call instanceof Api.GroupCall) || result.call.rtmpStream || result.call.conference || result.call.scheduleDate) {
       this.states.set(String(chatId), 'unsupported or scheduled call'); return;
     }
+    const coverage = result.call.listenersHidden ? 'partial call-state monitoring; listeners hidden' : 'call-state monitoring';
     this.calls.set(String(inputCall.id), { chatId: String(chatId), call: inputCall,
-      checkedAt: Date.now(), synchronizedAt: Date.now() });
+      checkedAt: Date.now(), synchronizedAt: Date.now(), coverage, joinMuted: Boolean(result.call.joinMuted),
+      guardRotated: String(previous?.call?.id) === String(inputCall.id) && previous?.guardRotated === true });
     this.normalizer.reset(inputCall.id, result.call.version);
-    this.states.set(String(chatId), 'call-state monitoring');
+    this.states.set(String(chatId), coverage);
   }
   async handle(update) {
     if (update instanceof Api.UpdateGroupCall) {
@@ -158,7 +176,16 @@ export class VoiceAdapter {
       if (entry && update.call instanceof Api.GroupCallDiscarded) {
         this.dropChat(entry.chatId); this.states.set(entry.chatId, 'no active call');
       }
-      else if (entry && this.normalizer.applyCall(update.call).gap) await this.synchronize(entry.chatId, entry.call);
+      else if (entry) {
+        if (update.call.rtmpStream || update.call.conference || update.call.scheduleDate) {
+          this.dropChat(entry.chatId); this.states.set(entry.chatId, 'unsupported or scheduled call');
+        } else {
+          entry.coverage = update.call.listenersHidden ? 'partial call-state monitoring; listeners hidden' : 'call-state monitoring';
+          entry.joinMuted = Boolean(update.call.joinMuted);
+          this.states.set(entry.chatId, entry.coverage);
+          if (this.normalizer.applyCall(update.call).gap) await this.synchronize(entry.chatId, entry.call);
+        }
+      }
       this.requestRefresh(); return;
     }
     const entry = this.calls.get(String(update.call.id));
@@ -173,8 +200,59 @@ export class VoiceAdapter {
       if (event.userId === this.meId) continue;
       const id = Number(event.userId);
       if (!Number.isSafeInteger(id)) continue;
+      const settings = this.store.group(entry.chatId);
+      if (settings?.vcShield) {
+        const burst = this.shield.observe(entry.call.id, event);
+        if (burst?.suspicious && this.store.claim(`vc-raid:${entry.call.id}:${settings.mode}`, 60000)) {
+          this.store.audit(entry.chatId, null, 'vc-raid-observed', burst);
+          if (settings.mode === 'enforce') {
+            try { await this.setAdmission(entry.chatId, true, settings, 'raid'); }
+            catch (error) {
+              this.store.audit(entry.chatId, null, 'vc-shield-failed', { type: error.name });
+              logError('vc_shield_failed', error);
+            }
+          }
+          await this.engine.notifyVoiceIncident?.(Number(entry.chatId), burst, settings.mode);
+        }
+      }
       await this.engine.process({ chatId: Number(entry.chatId), userId: id, kind: event.kind });
     }
+  }
+  entry(chatId) { return [...this.calls.values()].find(x => x.chatId === String(chatId)); }
+  async endCall(chatId, settings, expectedCallId) {
+    if (!settings?.vc || !this.config.mtAllowedChats.has(String(chatId))) throw new Error('Voice opt-in and allowlist required');
+    const entry = this.entry(chatId);
+    if (!entry || String(entry.call.id) !== String(expectedCallId) || Date.now()-entry.checkedAt>120000 || !this.client?.connected)
+      throw new Error('Confirmed call is no longer current');
+    if (!await this.rights(chatId)) throw new Error('Current manage-call rights required');
+    // Confirm against Telegram as well as the snapshot, so a replacement call cannot be ended.
+    const full = await this.rpc(chatId, new Api.channels.GetFullChannel({channel:await this.channel(chatId)}));
+    if (String(full.fullChat.call?.id) !== String(expectedCallId)) throw new Error('Call changed since confirmation');
+    this.store.audit(chatId,null,'vc-end-intent',{callId:String(entry.call.id)});
+    await this.rpc(chatId,new Api.phone.DiscardGroupCall({call:entry.call}));
+    this.store.audit(chatId,null,'vc-end-acknowledged',{callId:String(entry.call.id)});
+    this.dropChat(chatId);this.states.set(String(chatId),'no active call');
+    return true;
+  }
+  async setAdmission(chatId, muted, settings, reason = 'manual') {
+    if (!settings?.vc || !this.config.mtAllowedChats.has(String(chatId))) throw new Error('Voice opt-in and allowlist required');
+    if (reason !== 'manual' && settings.mode !== 'enforce') return false;
+    const entry = this.entry(chatId);
+    if (!entry || Date.now() - entry.checkedAt > 120000 || !this.client?.connected) throw new Error('No fresh supported active call');
+    if (!await this.rights(chatId)) throw new Error('Current user-account manage-call rights required');
+    const rotate = muted && settings.vcRotateInvites === true;
+    this.store.audit(chatId, null, 'vc-admission-intent', { callId: String(entry.call.id), muted, rotate, reason });
+    try {
+      await this.rpc(chatId, new Api.phone.ToggleGroupCallSettings({ call: entry.call, joinMuted: muted,
+        ...(rotate ? { resetInviteHash: true } : {}) }));
+    } catch (error) {
+      // A no-change response is success only for the idempotent non-rotation operation.
+      if (rotate || error?.errorMessage !== 'GROUPCALL_NOT_MODIFIED') throw error;
+    }
+    entry.joinMuted = muted;
+    if (rotate) entry.guardRotated=true;
+    this.store.audit(chatId, null, 'vc-admission-acknowledged', { callId: String(entry.call.id), muted, rotate, reason });
+    return true;
   }
   async mitigate(chatId, userId, settings) {
     if (!settings.vc || settings.mode !== 'enforce' || !this.config.mtAllowedChats.has(String(chatId))) return false;
@@ -192,6 +270,7 @@ export class VoiceAdapter {
       await this.rpc(chatId, new Api.phone.EditGroupCallParticipant({ call: entry.call, participant: peer, muted: true }));
       counters.vcMutes++;
       this.store.audit(chatId, userId, 'vc-mute-acknowledged', { callId: String(entry.call.id) });
+      await this.engine.notifyVoiceRestriction?.(chatId, userId);
     }
     if (settings.vcLock && this.store.claim(`vclock:${entry.call.id}`, 60000)) {
       this.store.audit(chatId, null, 'vc-join-muted-intent', { callId: String(entry.call.id) });
@@ -201,7 +280,7 @@ export class VoiceAdapter {
     return true;
   }
   async stop() {
-    this.stopped = true; clearInterval(this.timer);
+    this.stopped = true; clearInterval(this.timer); clearTimeout(this.refreshLater);
     if (this.handler) this.client.removeEventHandler(this.handler, this.raw);
     if (this.client) await this.client.disconnect();
   }

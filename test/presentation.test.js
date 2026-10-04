@@ -7,10 +7,10 @@ test('command menus separate administrator commands and support Bangla discovery
   await configureCommandMenus({ setMyCommands: async (commands, options) => calls.push({ commands, options }) });
   assert.equal(calls.length, 60);
   for (const call of calls) {
-    assert.equal(call.commands.some(x => x.command === 'doctor'), call.options.scope.type === 'all_chat_administrators');
+    assert.equal(call.commands.some(x => x.command === 'communities'), call.options.scope.type === 'all_private_chats');
     assert.ok(call.commands.every(x => /^[a-z_]{1,32}$/.test(x.command)));
   }
-  assert.ok(calls.filter(x => x.options.language_code === 'bn').every(x => /[\u0980-\u09ff]/.test(x.commands[0].description)));
+  assert.ok(calls.filter(x => x.options.language_code === 'bn' && x.commands.length).every(x => /[\u0980-\u09ff]/.test(x.commands[0].description)));
 });
 
 test('add-to-group button uses the actual deployed bot and does not require channel subscription', () => {

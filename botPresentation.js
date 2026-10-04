@@ -18,32 +18,18 @@ export function projectButtons(username, bangla = false) {
   return { inline_keyboard: rows };
 }
 
-const entries = [
-  ['start', 'Get started', 'শুরু করুন'], ['help', 'Show commands', 'কমান্ড দেখুন'],
-  ['verify', 'Recover your chat challenge', 'নিজের verification খুলুন'],
-  ['updates', 'Project links and updates', 'প্রজেক্ট ও আপডেট'],
-  ['privacy', 'See moderation data handling', 'Moderation data-এর ব্যবহার'],
-  ['language', 'Choose your language', 'ভাষা নির্বাচন করুন'],
-  ['setup', 'Enroll this supergroup', 'গ্রুপে protection চালু করুন'],
-  ['doctor', 'Check setup and permissions', 'Setup ও permission পরীক্ষা'],
-  ['status', 'Show protection settings', 'Protection-এর অবস্থা'],
-  ['incidents', 'Show recent group incidents', 'সাম্প্রতিক ঘটনা দেখুন'],
-  ['mode', 'Set observe or enforce mode', 'observe বা enforce mode'],
-  ['gate', 'Toggle the new-member chat gate', 'নতুন member verification'],
-  ['vc', 'Toggle the optional voice adapter', 'Optional VC adapter'],
-  ['vclock', 'Toggle join-muted incident policy', 'VC join-muted policy'],
-  ['disable', 'Disable protection in this group', 'গ্রুপের protection বন্ধ করুন']
-];
-
-// Menus improve discovery; every command still checks actual authority at execution.
+// Clear old group menus; control is private even if an old client caches commands.
 export async function configureCommandMenus(api) {
   for (const t of Object.values(LANGUAGES)) {
     const language_code = t.code === 'en' ? '' : t.code;
-    const labels = { start: t.help, help: t.help, language: t.language, updates: t.updates };
-    const all = entries.map(([command, en, bn]) => ({ command, description: labels[command] || (t.code === 'bn' ? bn : en) }));
-    for (const type of ['default', 'all_private_chats', 'all_chat_administrators']) {
-      await api.setMyCommands(type === 'all_chat_administrators' ? all : all.slice(0, 6),
-        { scope: { type }, language_code });
-    }
+    const commands = [
+      { command: 'start', description: t.help }, { command: 'communities', description: t.dashboard.title },
+      { command: 'help', description: t.help }, { command: 'language', description: t.language },
+      { command: 'verify', description: t.dashboard.gate }, { command: 'updates', description: t.updates },
+      { command: 'disconnectvoice', description: t.code === 'bn' ? 'নিজের QR voice account বিচ্ছিন্ন করুন' : 'Disconnect your QR voice account' },
+      { command: 'privacy', description: t.code === 'bn' ? 'তথ্য ব্যবহারের নিয়ম' : 'Data handling' }
+    ];
+    for (const type of ['default', 'all_private_chats', 'all_chat_administrators'])
+      await api.setMyCommands(type === 'all_private_chats' ? commands : [], { scope: { type }, language_code });
   }
 }

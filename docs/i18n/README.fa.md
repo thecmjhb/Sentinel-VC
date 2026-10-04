@@ -13,38 +13,37 @@
 
 [@sentinelvcbot](https://t.me/sentinelvcbot) · [تازه‌ها](https://t.me/sentinelvc)
 
-/start → /language → فارسی
+/start → /language → فارسی → /communities
 
-1. ربات را با دسترسی محدود کردن اعضا، مدیر سوپرگروه کنید.
+ربات را مدیر گروه یا کانال کنید؛ در سوپرگروه دسترسی محدود کردن اعضا بدهید. در خصوصی /communities را باز کنید، انجمن را انتخاب و با دکمه‌ها تنظیم کنید. انجمن خصوصی با انتخابگر یا شناسه عددی اضافه می‌شود. اعضا تأیید چت خود را با /verify باز می‌کنند.
 
-2. در گروه /setup، سپس /doctor و /status را با چند ثانیه فاصله بفرستید.
+## انجمن‌های من
 
-3. در حالت مشاهده /incidents را بررسی کنید؛ سپس /mode enforce را فعال کنید. /gate on تأیید اعضای جدید را روشن می‌کند.
+**انتخاب انجمن → گروه / کانال → راه‌اندازی → مشاهده**
 
-4. هنگام محدودیت، با شناسه گروه در پیام تأیید، /verify GROUP_ID را در خصوصی بفرستید.
+Private/public: use the selector, or /community NEGATIVE_ID (for example /community -1001234567890). Public usernames also work.
 
-کنترل صوتی به آداپتور اختیاری جداگانه نیاز دارد. UDP خام و تاریخ ایجاد حساب در دسترس نیست.
+Chat verification: /verify privately. Live-call mutes require administrator review. Bots cannot initiate private chats.
 
-## افزودن به گروه
+**اتصال حساب صوتی → اسکن QR ورود → کنترل صوتی → حفاظت موج ورود / حفاظت هر تماس**
 
-[Telegram](https://t.me/sentinelvcbot?startgroup=setup)
+بی‌صدا کردن تازه‌واردان · باز کردن پذیرش · پایان تماس برای همه
+
+Press Scan login QR to connect YOUR account directly here. Telegram Settings → Devices → Link Desktop Device scans and accepts the QR; show it on another screen. We automatically match the logged-in ID to your bot-chat ID and verify current admin/Manage Call rights. A user session grants account access to this VPS operator; use an account/operator you trust. OTP and passwords are never collected in this chat. If Telegram requires 2FA, use local VPS login instead; do not disable 2FA. Disconnect your QR account with /disconnectvoice. No account connection proves network protection.
+
+[Private dashboard guide (English)](../PRIVATE_CONTROL.md)
+
+## افزودن به گروه / کانال
+
+[افزودن به گروه](https://t.me/sentinelvcbot?startgroup=setup) · [کانال](https://t.me/sentinelvcbot?startchannel&admin=manage_chat)
 
 ## VPS / Docker
 
 [Self-hosting guide (English)](../SELF_HOSTING.md) · [Voice setup (English)](../VC_SETUP.md)
 
-```bash
-git clone https://github.com/thecmjhb/Sentinel-VC.git
-cd Sentinel-VC
-bash scripts/setup.sh
-```
+Use your own BotFather token for self-hosting. The public source does not require membership in @sentinelvc. Detailed diagnostics and operator documentation remain in English.
 
-HTTP_PORT: 18765 → `bash scripts/setup.sh --port 19234`
-
-```bash
-docker compose logs --tail=50 sentinel
-curl --fail "http://$(docker compose port sentinel 8080)/readyz"
-```
+Experimental: local tests only; live Telegram validation is pending. Voice controls require the optional user-admin adapter. No raw UDP filtering, account-age detection or proven crash prevention.
 
 [کد منبع](https://github.com/thecmjhb/Sentinel-VC) · [MIT](../../LICENSE) · [Privacy (English)](../../PRIVACY.md)
 

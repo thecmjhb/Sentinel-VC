@@ -4,7 +4,9 @@
   "private": true,
   "description": "Capability-aware Telegram community and voice-call state moderation",
   "type": "module",
-  "engines": { "node": ">=22.13.0" },
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "scripts": {
     "start": "node index.js",
     "test": "node --test",
@@ -12,12 +14,15 @@
     "benchmark": "node benchmarks/benchmark.js",
     "benchmark:queue": "node benchmarks/queue-simulation.js",
     "benchmark:sensitivity": "node benchmarks/sensitivity.js",
-    "mtproto:login": "node scripts/mtproto-login.js"
+    "mtproto:login": "node scripts/mtproto-login.js",
+    "voice:setup": "node scripts/voice-setup.mjs",
+    "benchmark:voice": "node benchmarks/voice-shield.js"
   },
   "dependencies": {
     "big-integer": "1.6.52",
     "dotenv": "18.0.5",
     "grammy": "1.46.0",
+    "qrcode": "1.5.4",
     "teleproto": "1.229.1"
   }
 }

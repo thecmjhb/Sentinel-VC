@@ -13,38 +13,37 @@
 
 [@sentinelvcbot](https://t.me/sentinelvcbot) · [Cập nhật](https://t.me/sentinelvc)
 
-/start → /language → Tiếng Việt
+/start → /language → Tiếng Việt → /communities
 
-1. Thêm bot vào siêu nhóm làm quản trị viên có quyền hạn chế thành viên.
+Thêm bot làm quản trị viên nhóm hoặc kênh; siêu nhóm cần quyền hạn chế thành viên. Mở /communities trong chat riêng, chọn cộng đồng và thiết lập bằng nút. Cộng đồng riêng hỗ trợ bộ chọn hoặc ID số. Thành viên mở xác minh chat của mình bằng /verify.
 
-2. Gửi /setup, /doctor và /status trong nhóm, cách nhau vài giây.
+## Cộng đồng của tôi
 
-3. Xem /incidents ở chế độ quan sát; dùng /mode enforce khi sẵn sàng. /gate on bật xác minh thành viên mới.
+**Chọn cộng đồng → Nhóm / Kênh → Thiết lập → Quan sát**
 
-4. Nếu bị hạn chế, gửi riêng /verify GROUP_ID bằng ID nhóm trong thử thách.
+Private/public: use the selector, or /community NEGATIVE_ID (for example /community -1001234567890). Public usernames also work.
 
-Điều khiển thoại cần bộ điều hợp tùy chọn riêng. Không có dữ liệu UDP thô hay ngày tạo tài khoản.
+Chat verification: /verify privately. Live-call mutes require administrator review. Bots cannot initiate private chats.
 
-## Thêm vào nhóm
+**Kết nối tài khoản thoại → Quét QR đăng nhập → Điều khiển thoại → Chống lượt vào dồn dập / Bảo vệ mọi cuộc gọi**
 
-[Telegram](https://t.me/sentinelvcbot?startgroup=setup)
+Tắt mic người mới vào · Mở quyền tham gia nói · Kết thúc cuộc gọi cho mọi người
+
+Press Scan login QR to connect YOUR account directly here. Telegram Settings → Devices → Link Desktop Device scans and accepts the QR; show it on another screen. We automatically match the logged-in ID to your bot-chat ID and verify current admin/Manage Call rights. A user session grants account access to this VPS operator; use an account/operator you trust. OTP and passwords are never collected in this chat. If Telegram requires 2FA, use local VPS login instead; do not disable 2FA. Disconnect your QR account with /disconnectvoice. No account connection proves network protection.
+
+[Private dashboard guide (English)](../PRIVATE_CONTROL.md)
+
+## Thêm vào nhóm / Kênh
+
+[Thêm vào nhóm](https://t.me/sentinelvcbot?startgroup=setup) · [Kênh](https://t.me/sentinelvcbot?startchannel&admin=manage_chat)
 
 ## VPS / Docker
 
 [Self-hosting guide (English)](../SELF_HOSTING.md) · [Voice setup (English)](../VC_SETUP.md)
 
-```bash
-git clone https://github.com/thecmjhb/Sentinel-VC.git
-cd Sentinel-VC
-bash scripts/setup.sh
-```
+Use your own BotFather token for self-hosting. The public source does not require membership in @sentinelvc. Detailed diagnostics and operator documentation remain in English.
 
-HTTP_PORT: 18765 → `bash scripts/setup.sh --port 19234`
-
-```bash
-docker compose logs --tail=50 sentinel
-curl --fail "http://$(docker compose port sentinel 8080)/readyz"
-```
+Experimental: local tests only; live Telegram validation is pending. Voice controls require the optional user-admin adapter. No raw UDP filtering, account-age detection or proven crash prevention.
 
 [Mã nguồn](https://github.com/thecmjhb/Sentinel-VC) · [MIT](../../LICENSE) · [Privacy (English)](../../PRIVACY.md)
 

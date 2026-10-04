@@ -9,39 +9,42 @@
 </p>
 <!-- languages:end -->
 
-Sentinel-VC adalah kerangka moderasi sumber terbuka untuk supergrup Telegram. Sistem memantau peristiwa masuk/keluar yang tersedia dan aktivitas pesan cepat. Adaptor opsional dengan akun pengguna admin menambahkan peristiwa peserta panggilan yang diterima serta tindakan mute sesuai izin. Penulis: **C. M. Jubayer Hossain Bappy**.
+## Panduan pengguna
 
-## Menggunakan bot proyek
+[@sentinelvcbot](https://t.me/sentinelvcbot) · [Pembaruan](https://t.me/sentinelvc)
 
-Setelah pemilik menjalankan layanan, tambahkan [@sentinelvcbot](https://t.me/sentinelvcbot) ke supergrup Anda. Jadikan bot admin dengan izin **Restrict Members**. Melalui akun admin pribadi, kirim `/setup`, tunggu beberapa detik, lalu gunakan `/doctor` dan `/status`. Mulai dengan mode observe; gunakan `/mode enforce` setelah meninjau aktivitas. `/gate on` mengaktifkan pembatasan chat sementara dan soal aritmetika untuk anggota baru.
+/start → /language → Bahasa Indonesia → /communities
 
-## Menjalankan di VPS sendiri
+Jadikan bot admin grup atau kanal; supergrup memerlukan izin membatasi anggota. Buka /communities di chat pribadi, pilih komunitas lalu atur dengan tombol. Komunitas privat dapat dipilih lewat pemilih atau ID numerik. Anggota membuka verifikasi chat sendiri lewat /verify.
 
-Pasang [Docker dan Compose pada Ubuntu](https://docs.docker.com/engine/install/ubuntu/). Setelah repositori diterbitkan:
+## Komunitas saya
 
-```bash
-git clone https://github.com/thecmjhb/Sentinel-VC.git
-cd Sentinel-VC
-bash scripts/setup.sh
-```
+**Pilih komunitas → Grup / Kanal → Siapkan → Pantau**
 
-Pilih port pemeriksaan kesehatan VPS saat penyiapan; nilai awalnya **18765**. Tekan Enter untuk mempertahankan port yang ditampilkan. Untuk mengubahnya nanti: `bash scripts/setup.sh --port 19234`. Pengaturan `.env` lainnya tetap tersimpan. Untuk npm, atur `HTTP_PORT` di `.env`.
+Private/public: use the selector, or /community NEGATIVE_ID (for example /community -1001234567890). Public usernames also work.
 
-Asisten meminta token tanpa menampilkannya dan tidak mengubah `.env` yang sudah ada. Jangan kirim token melalui chat, tangkapan layar, atau GitHub. Periksa proses awal:
+Chat verification: /verify privately. Live-call mutes require administrator review. Bots cannot initiate private chats.
 
-```bash
-docker compose logs --tail=50 sentinel
-curl --fail "http://$(docker compose port sentinel 8080)/readyz"
-```
+**Hubungkan akun suara → Pindai QR masuk → Kontrol suara → Perisai lonjakan masuk / Lindungi setiap panggilan**
 
-Tanpa Docker, gunakan Node.js 24 LTS: salin `.env.example` menjadi `.env`, isi `BOT_TOKEN`, lalu jalankan `npm ci --ignore-scripts` dan `npm start`. Lihat [panduan operasional](../SELF_HOSTING.md) untuk layanan permanen dan pencadangan.
+Bisukan peserta baru · Buka penerimaan · Akhiri panggilan untuk semua
 
-## Perintah dan batasan
+Press Scan login QR to connect YOUR account directly here. Telegram Settings → Devices → Link Desktop Device scans and accepts the QR; show it on another screen. We automatically match the logged-in ID to your bot-chat ID and verify current admin/Manage Call rights. A user session grants account access to this VPS operator; use an account/operator you trust. OTP and passwords are never collected in this chat. If Telegram requires 2FA, use local VPS login instead; do not disable 2FA. Disconnect your QR account with /disconnectvoice. No account connection proves network protection.
 
-`/incidents` hanya menampilkan catatan terbaru grup saat ini kepada admin. `/mode observe` menghentikan tindakan moderasi baru. Anggota yang dibatasi dapat membuka chat pribadi bot dan mengirim `/verify` diikuti ID grup yang tercantum pada tantangan. Tiga jawaban salah menghabiskan kesempatan; pembatasan flood tidak bisa dicabut pada menit pertama.
+[Private dashboard guide (English)](../PRIVATE_CONTROL.md)
 
-Bot biasa tidak melihat paket UDP mentah, tanggal pembuatan akun yang sebenarnya, atau seluruh peserta panggilan secara langsung. Membatasi pesan suara bukan mute panggilan. [Adaptor VC](../VC_SETUP.md) membutuhkan akun pengguna admin yang menyetujui, sesi pribadi, dan daftar grup yang diizinkan. Admin mengembalikan pengaturan panggilan secara manual.
+## Tambahkan ke grup / Kanal
 
-## Komunitas dan lisensi
+[Tambahkan ke grup](https://t.me/sentinelvcbot?startgroup=setup) · [Kanal](https://t.me/sentinelvcbot?startchannel&admin=manage_chat)
 
-Untuk versi yang dihosting sendiri, bergabung dengan [kanal pembaruan](https://t.me/sentinelvc) bersifat opsional. Pada bot proyek yang dihosting, ikuti petunjuk /start. Untuk bantuan, gunakan [GitHub Issues](https://github.com/thecmjhb/Sentinel-VC/issues). Kode berlisensi MIT; pertahankan [lisensi](../../LICENSE) dan atribusi.
+## VPS / Docker
+
+[Self-hosting guide (English)](../SELF_HOSTING.md) · [Voice setup (English)](../VC_SETUP.md)
+
+Use your own BotFather token for self-hosting. The public source does not require membership in @sentinelvc. Detailed diagnostics and operator documentation remain in English.
+
+Experimental: local tests only; live Telegram validation is pending. Voice controls require the optional user-admin adapter. No raw UDP filtering, account-age detection or proven crash prevention.
+
+[Kode sumber](https://github.com/thecmjhb/Sentinel-VC) · [MIT](../../LICENSE) · [Privacy (English)](../../PRIVACY.md)
+
+C. M. Jubayer Hossain Bappy

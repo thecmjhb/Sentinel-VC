@@ -9,39 +9,42 @@
 </p>
 <!-- languages:end -->
 
-Sentinel-VC إطار مفتوح المصدر لإدارة مجموعات Telegram الفائقة. يراقب أحداث الانضمام والمغادرة المتاحة والنشاط السريع للرسائل. يضيف محول اختياري يعمل بحساب مستخدم مشرف أحداث المشاركين في المكالمات الصوتية وإجراءات الكتم المصرح بها. المؤلف: **C. M. Jubayer Hossain Bappy**.
+## دليل الاستخدام
 
-## استخدام البوت
+[@sentinelvcbot](https://t.me/sentinelvcbot) · [التحديثات](https://t.me/sentinelvc)
 
-بعد تشغيل الخدمة بواسطة المالك، أضف [@sentinelvcbot](https://t.me/sentinelvcbot) إلى مجموعتك الفائقة. اجعله مشرفًا وامنحه صلاحية **Restrict Members**. من حسابك الشخصي المشرف، أرسل `/setup` ثم انتظر بضع ثوانٍ وأرسل `/doctor` و`/status`. راقب نشاط المجموعة أولًا في وضع observe، ثم استخدم `/mode enforce` عندما تكون مستعدًا. يفعّل `/gate on` تقييد الدردشة المؤقت وسؤالًا حسابيًا للأعضاء الجدد.
+/start → /language → العربية → /communities
 
-## الاستضافة على VPS
+اجعل البوت مشرفًا للمجموعة أو القناة، مع صلاحية تقييد الأعضاء للمجموعات الفائقة. افتح /communities في الخاص واختر المجتمع وأعدّه بالأزرار. المجتمعات الخاصة تدعم أداة الاختيار أو المعرّف الرقمي. يسترجع العضو تحدي الدردشة الخاص به عبر /verify.
 
-ثبّت [Docker وCompose على Ubuntu](https://docs.docker.com/engine/install/ubuntu/). بعد نشر المستودع على GitHub:
+## مجتمعاتي
 
-```bash
-git clone https://github.com/thecmjhb/Sentinel-VC.git
-cd Sentinel-VC
-bash scripts/setup.sh
-```
+**اختيار مجتمع → مجموعة / قناة → إعداد → مراقبة**
 
-يمكنك اختيار منفذ فحص الحالة على VPS أثناء الإعداد؛ القيمة الافتراضية للتثبيت الجديد هي **18765**. اضغط Enter للاحتفاظ بالمنفذ المعروض. لتغييره لاحقًا شغّل `bash scripts/setup.sh --port 19234`؛ تبقى إعدادات `.env` الأخرى محفوظة. عند استخدام npm اضبط `HTTP_PORT` في `.env`.
+Private/public: use the selector, or /community NEGATIVE_ID (for example /community -1001234567890). Public usernames also work.
 
-يطلب المساعد الرمز دون إظهاره ويحافظ على ملف `.env` الموجود. لا تنشر الرمز في المحادثات أو الصور أو GitHub. افحص التشغيل:
+Chat verification: /verify privately. Live-call mutes require administrator review. Bots cannot initiate private chats.
 
-```bash
-docker compose logs --tail=50 sentinel
-curl --fail "http://$(docker compose port sentinel 8080)/readyz"
-```
+**ربط حساب صوتي → مسح رمز تسجيل الدخول → التحكم الصوتي → حماية اندفاع الانضمام / حماية كل مكالمة**
 
-بدون Docker، استخدم Node.js 24 LTS وانسخ `.env.example` إلى `.env` وأدخل `BOT_TOKEN` ثم شغّل `npm ci --ignore-scripts` و`npm start`. راجع [دليل التشغيل](../SELF_HOSTING.md) للخدمة المستمرة والنسخ الاحتياطي.
+كتم المنضمين الجدد · فتح قبول المتحدثين · إنهاء المكالمة للجميع
 
-## الأوامر والحدود
+Press Scan login QR to connect YOUR account directly here. Telegram Settings → Devices → Link Desktop Device scans and accepts the QR; show it on another screen. We automatically match the logged-in ID to your bot-chat ID and verify current admin/Manage Call rights. A user session grants account access to this VPS operator; use an account/operator you trust. OTP and passwords are never collected in this chat. If Telegram requires 2FA, use local VPS login instead; do not disable 2FA. Disconnect your QR account with /disconnectvoice. No account connection proves network protection.
 
-يعرض `/incidents` للمشرف الأحداث الأخيرة الخاصة بهذه المجموعة فقط. يوقف `/mode observe` إجراءات الإدارة الجديدة. يستطيع العضو المقيد فتح محادثة خاصة مع البوت وإرسال `/verify` متبوعًا بمعرّف المجموعة الظاهر في التحدي. ثلاثة أجوبة خاطئة تستنفد المحاولات؛ ولا يرفع التحقق تقييد الإغراق خلال الدقيقة الأولى.
+[Private dashboard guide (English)](../PRIVATE_CONTROL.md)
 
-البوت العادي لا يرى حزم UDP الخام أو تاريخ إنشاء الحساب الحقيقي أو المشاركين مباشرة في المكالمات. تقييد الرسائل الصوتية يختلف عن كتم المكالمة. يتطلب [محول VC الاختياري](../VC_SETUP.md) حساب مستخدم مشرف موافقًا وجلسة خاصة وقائمة مجموعات مسموحة. يستعيد المشرف إعدادات المكالمة يدويًا.
+## إضافة إلى مجموعة / قناة
 
-## المجتمع والترخيص
+[إضافة إلى مجموعة](https://t.me/sentinelvcbot?startgroup=setup) · [قناة](https://t.me/sentinelvcbot?startchannel&admin=manage_chat)
 
-في النسخة المستضافة ذاتيًا، الانضمام إلى [قناة التحديثات](https://t.me/sentinelvc) اختياري. للبوت المستضاف اتبع تعليمات /start. للمساعدة، استخدم [GitHub Issues](https://github.com/thecmjhb/Sentinel-VC/issues). الشفرة برخصة MIT؛ احتفظ بـ[الرخصة](../../LICENSE) ونسبة العمل إلى صاحبه.
+## VPS / Docker
+
+[Self-hosting guide (English)](../SELF_HOSTING.md) · [Voice setup (English)](../VC_SETUP.md)
+
+Use your own BotFather token for self-hosting. The public source does not require membership in @sentinelvc. Detailed diagnostics and operator documentation remain in English.
+
+Experimental: local tests only; live Telegram validation is pending. Voice controls require the optional user-admin adapter. No raw UDP filtering, account-age detection or proven crash prevention.
+
+[الكود المصدري](https://github.com/thecmjhb/Sentinel-VC) · [MIT](../../LICENSE) · [Privacy (English)](../../PRIVACY.md)
+
+C. M. Jubayer Hossain Bappy

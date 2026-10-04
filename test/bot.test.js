@@ -17,6 +17,7 @@ function fixture(t) {
   bot.api.config.use(async (previous, method, payload) => {
     calls.push({ method, payload });
     let result = true;
+    if (method === 'getChat') result = chat;
     if (method === 'getChatMember') result = members.get(payload.user_id) || { status: 'member', user: user(payload.user_id) };
     if (method === 'sendMessage') result = { message_id: calls.length, date: Math.floor(Date.now() / 1000), chat, text: payload.text };
     if (method === 'restrictChatMember') members.set(payload.user_id, payload.permissions.can_send_messages ?
@@ -28,8 +29,9 @@ function fixture(t) {
   t.after(async () => { await app.queue.drain(); store.close(); });
   let nextId = 1;
   const command = async (text, id = 1, options = {}) => {
-    store.db.prepare("DELETE FROM cooldowns WHERE key LIKE 'command:%'").run();
-    const message = { message_id: nextId, date: Math.floor(Date.now() / 1000), chat, from: user(id), text,
+    if (!text.startsWith('/verify')) { const [name, ...args] = text.split(' '); text = [name, String(chat.id), ...args].join(' '); }
+    store.db.prepare("DELETE FROM cooldowns").run();
+    const message = { message_id: nextId, date: Math.floor(Date.now() / 1000), chat: { id, type: 'private' }, from: user(id), text,
       entities: [{ type: 'bot_command', offset: 0, length: text.split(' ')[0].length }], ...options };
     await bot.handleUpdate({ update_id: nextId++, message });
   };
@@ -95,15 +97,15 @@ test('setup gives a recoverable explanation when the bot lacks restriction right
 test('doctor works before enrollment and incidents are admin-only and tenant-scoped', async t => {
   const f = fixture(t);
   await f.command('/doctor');
-  assert.match(f.calls.at(-1).payload.text, /NO - run \/setup/);
+  assert.match(f.calls.at(-1).payload.text, /Not configured/);
   f.store.setGroup(chat.id, { mode: 'observe', gate: false, vc: false });
   f.store.audit(chat.id, 2, 'detect');
   f.store.audit(-1009999, 777, 'detect');
   f.calls.length = 0;
   await f.command('/incidents', 2);
-  assert.equal(f.calls.filter(x => x.method === 'sendMessage').length, 0);
+  assert.doesNotMatch(f.calls.at(-1).payload.text, /detect/);
   await f.command('/incidents');
-  assert.match(f.calls.at(-1).payload.text, /user 2/);
+  assert.match(f.calls.at(-1).payload.text, /detect \| 2/);
   assert.doesNotMatch(f.calls.at(-1).payload.text, /777/);
   assert.throws(() => f.store.incidents(chat.id, 1000), RangeError);
 });

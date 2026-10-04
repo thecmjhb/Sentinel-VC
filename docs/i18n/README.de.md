@@ -13,38 +13,37 @@
 
 [@sentinelvcbot](https://t.me/sentinelvcbot) · [Neuigkeiten](https://t.me/sentinelvc)
 
-/start → /language → Deutsch
+/start → /language → Deutsch → /communities
 
-1. Füge den Bot als Administrator mit dem Recht zum Einschränken von Mitgliedern zur Supergruppe hinzu.
+Füge den Bot als Gruppen- oder Kanaladministrator hinzu; Supergruppen benötigen das Recht zum Einschränken von Mitgliedern. Öffne privat /communities, wähle die Community und richte sie mit den Schaltflächen ein. Private Communitys unterstützen die Auswahl oder eine numerische ID. Mitglieder öffnen ihre Chat-Verifizierung mit /verify.
 
-2. Sende /setup, /doctor und /status in der Gruppe mit einigen Sekunden Abstand.
+## Meine Communitys
 
-3. Prüfe /incidents im Beobachtungsmodus; aktiviere danach /mode enforce. /gate on prüft neue Mitglieder.
+**Community auswählen → Gruppe / Kanal → Einrichten → Beobachten**
 
-4. Sende bei einer Einschränkung privat /verify GROUP_ID mit der ID aus der Aufgabe.
+Private/public: use the selector, or /community NEGATIVE_ID (for example /community -1001234567890). Public usernames also work.
 
-Sprachsteuerung benötigt einen separaten optionalen Adapter. Rohe UDP-Pakete und Kontoerstellungsdaten sind nicht verfügbar.
+Chat verification: /verify privately. Live-call mutes require administrator review. Bots cannot initiate private chats.
 
-## Zur Gruppe hinzufügen
+**Sprachkonto verbinden → Anmelde-QR scannen → Sprachsteuerung → Schutz vor Beitrittswelle / Jeden Anruf schützen**
 
-[Telegram](https://t.me/sentinelvcbot?startgroup=setup)
+Neue Teilnehmer stumm schalten · Zulassung öffnen · Anruf für alle beenden
+
+Press Scan login QR to connect YOUR account directly here. Telegram Settings → Devices → Link Desktop Device scans and accepts the QR; show it on another screen. We automatically match the logged-in ID to your bot-chat ID and verify current admin/Manage Call rights. A user session grants account access to this VPS operator; use an account/operator you trust. OTP and passwords are never collected in this chat. If Telegram requires 2FA, use local VPS login instead; do not disable 2FA. Disconnect your QR account with /disconnectvoice. No account connection proves network protection.
+
+[Private dashboard guide (English)](../PRIVATE_CONTROL.md)
+
+## Zur Gruppe hinzufügen / Kanal
+
+[Zur Gruppe hinzufügen](https://t.me/sentinelvcbot?startgroup=setup) · [Kanal](https://t.me/sentinelvcbot?startchannel&admin=manage_chat)
 
 ## VPS / Docker
 
 [Self-hosting guide (English)](../SELF_HOSTING.md) · [Voice setup (English)](../VC_SETUP.md)
 
-```bash
-git clone https://github.com/thecmjhb/Sentinel-VC.git
-cd Sentinel-VC
-bash scripts/setup.sh
-```
+Use your own BotFather token for self-hosting. The public source does not require membership in @sentinelvc. Detailed diagnostics and operator documentation remain in English.
 
-HTTP_PORT: 18765 → `bash scripts/setup.sh --port 19234`
-
-```bash
-docker compose logs --tail=50 sentinel
-curl --fail "http://$(docker compose port sentinel 8080)/readyz"
-```
+Experimental: local tests only; live Telegram validation is pending. Voice controls require the optional user-admin adapter. No raw UDP filtering, account-age detection or proven crash prevention.
 
 [Quellcode](https://github.com/thecmjhb/Sentinel-VC) · [MIT](../../LICENSE) · [Privacy (English)](../../PRIVACY.md)
 

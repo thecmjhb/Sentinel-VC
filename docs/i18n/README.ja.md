@@ -13,38 +13,37 @@
 
 [@sentinelvcbot](https://t.me/sentinelvcbot) · [更新情報](https://t.me/sentinelvc)
 
-/start → /language → 日本語
+/start → /language → 日本語 → /communities
 
-1. ボットをスーパーグループの管理者にし、メンバー制限の権限を与えてください。
+ボットをグループやチャンネルの管理者にし、スーパーグループではメンバー制限を許可してください。個別チャットで /communities を開き、コミュニティを選びボタンで設定します。非公開コミュニティも選択機能や数値 ID で追加できます。メンバーは /verify で自分のチャット確認を開きます。
 
-2. グループで /setup、/doctor、/status を数秒ずつ間隔を空けて送信します。
+## 自分のコミュニティ
 
-3. 監視モードで /incidents を確認し、準備ができたら /mode enforce を使います。/gate on で新規メンバーの確認を有効にします。
+**コミュニティを選択 → グループ / チャンネル → 設定 → 監視**
 
-4. 制限された場合は、確認メッセージのグループ ID を使い、個別チャットで /verify GROUP_ID を送ります。
+Private/public: use the selector, or /community NEGATIVE_ID (for example /community -1001234567890). Public usernames also work.
 
-音声制御には別途オプションのアダプターが必要です。生の UDP パケットやアカウント作成日は取得できません。
+Chat verification: /verify privately. Live-call mutes require administrator review. Bots cannot initiate private chats.
 
-## グループに追加
+**音声アカウント接続 → ログインQRをスキャン → 音声制御 → 参加急増の防御 / 各通話を保護**
 
-[Telegram](https://t.me/sentinelvcbot?startgroup=setup)
+新規参加者をミュート · 発言参加を許可 · 全員の通話を終了
+
+Press Scan login QR to connect YOUR account directly here. Telegram Settings → Devices → Link Desktop Device scans and accepts the QR; show it on another screen. We automatically match the logged-in ID to your bot-chat ID and verify current admin/Manage Call rights. A user session grants account access to this VPS operator; use an account/operator you trust. OTP and passwords are never collected in this chat. If Telegram requires 2FA, use local VPS login instead; do not disable 2FA. Disconnect your QR account with /disconnectvoice. No account connection proves network protection.
+
+[Private dashboard guide (English)](../PRIVATE_CONTROL.md)
+
+## グループに追加 / チャンネル
+
+[グループに追加](https://t.me/sentinelvcbot?startgroup=setup) · [チャンネル](https://t.me/sentinelvcbot?startchannel&admin=manage_chat)
 
 ## VPS / Docker
 
 [Self-hosting guide (English)](../SELF_HOSTING.md) · [Voice setup (English)](../VC_SETUP.md)
 
-```bash
-git clone https://github.com/thecmjhb/Sentinel-VC.git
-cd Sentinel-VC
-bash scripts/setup.sh
-```
+Use your own BotFather token for self-hosting. The public source does not require membership in @sentinelvc. Detailed diagnostics and operator documentation remain in English.
 
-HTTP_PORT: 18765 → `bash scripts/setup.sh --port 19234`
-
-```bash
-docker compose logs --tail=50 sentinel
-curl --fail "http://$(docker compose port sentinel 8080)/readyz"
-```
+Experimental: local tests only; live Telegram validation is pending. Voice controls require the optional user-admin adapter. No raw UDP filtering, account-age detection or proven crash prevention.
 
 [ソースコード](https://github.com/thecmjhb/Sentinel-VC) · [MIT](../../LICENSE) · [Privacy (English)](../../PRIVACY.md)
 

@@ -6,3 +6,8 @@
 *.yml text eol=lf
 *.tex text eol=lf
 *.png binary
+
+# Frozen artifact bytes must remain identical for SHA-256 verification.
+benchmarks/artifacts/synthetic-v1/** -text
+
+benchmarks/artifacts/voice-shield-v1/** -text

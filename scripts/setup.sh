@@ -30,7 +30,8 @@ if [[ ! -f .env ]]; then
     printf '%s\n' 'Open an interactive terminal, or create .env from .env.example and set BOT_TOKEN privately.'
     exit 1
   fi
-  read -r -s -p 'Paste your BotFather token (hidden): ' sentinel_token
+  printf '%s\n' 'Self-hosting: create your OWN bot with @BotFather. The public @sentinelvcbot token is not required.'
+  read -r -s -p 'Paste YOUR OWN BotFather token (hidden): ' sentinel_token
   printf '\n'
   if [[ ! "$sentinel_token" =~ ^[0-9]+:[A-Za-z0-9_-]{20,}$ ]]; then
     unset sentinel_token
@@ -106,6 +107,6 @@ docker compose ps
 printf '%s\n' '' 'Container started; allow startup time and check:' \
   "curl --fail http://127.0.0.1:$sentinel_port/readyz" \
   'docker compose logs --tail=50 sentinel' '' \
-  'In Telegram: promote the bot with Restrict Members, then send /setup and /doctor.' \
-  'Start in observe mode. Use /mode enforce after reviewing your group activity.' \
+  'In Telegram: make the bot a community admin (Restrict Members for supergroups).' \
+  'Open /communities privately, select your community and press Set up. Start in Observe.' \
   'Updates: https://t.me/sentinelvc'

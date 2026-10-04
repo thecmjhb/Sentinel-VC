@@ -1,0 +1,65 @@
+{
+  "evidence": "Deterministic synthetic event replay only; no Telegram API, media packets, audio quality or actual mitigation measurement.",
+  "generator": "30 events; specified fixed intervals and identity pattern; fresh state per scenario",
+  "config": {
+    "windowSeconds": 10,
+    "uniqueJoinFloor": 12,
+    "baselineMultiplier": 3
+  },
+  "rows": [
+    {
+      "scenario": "spaced-benign-joins",
+      "label": "benign",
+      "events": 30,
+      "individualFlag": false,
+      "collectiveFlag": false,
+      "firstIndividualVirtualMs": null,
+      "firstCollectiveVirtualMs": null
+    },
+    {
+      "scenario": "distributed-join-burst",
+      "label": "synthetic-attack",
+      "events": 30,
+      "individualFlag": false,
+      "collectiveFlag": true,
+      "firstIndividualVirtualMs": null,
+      "firstCollectiveVirtualMs": 1650
+    },
+    {
+      "scenario": "legitimate-audience-surge",
+      "label": "benign",
+      "events": 30,
+      "individualFlag": false,
+      "collectiveFlag": true,
+      "firstIndividualVirtualMs": null,
+      "firstCollectiveVirtualMs": 1650
+    },
+    {
+      "scenario": "slow-distributed-joins",
+      "label": "synthetic-attack",
+      "events": 30,
+      "individualFlag": false,
+      "collectiveFlag": false,
+      "firstIndividualVirtualMs": null,
+      "firstCollectiveVirtualMs": null
+    },
+    {
+      "scenario": "single-user-call-churn",
+      "label": "synthetic-attack",
+      "events": 30,
+      "individualFlag": true,
+      "collectiveFlag": false,
+      "firstIndividualVirtualMs": 800,
+      "firstCollectiveVirtualMs": null
+    },
+    {
+      "scenario": "hidden-media-with-spaced-joins",
+      "label": "synthetic-attack",
+      "events": 30,
+      "individualFlag": false,
+      "collectiveFlag": false,
+      "firstIndividualVirtualMs": null,
+      "firstCollectiveVirtualMs": null
+    }
+  ]
+}

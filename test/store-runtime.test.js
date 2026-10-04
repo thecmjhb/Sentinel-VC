@@ -9,6 +9,23 @@ import { ActionBudget, SerialQueue } from '../runtime.js';
 import { loadConfig } from '../config.js';
 import { createHttpServer, equalSecret } from '../httpServer.js';
 
+test('schema-v1 migration preserves enrolled tenants and old numeric challenges across restart', () => {
+  const dir = mkdtempSync(path.join(os.tmpdir(), 'sentinel-test-migration-'));
+  try {
+    const db = new DatabaseSync(path.join(dir, 'sentinel.db'));
+    db.exec('CREATE TABLE groups(id TEXT PRIMARY KEY, settings TEXT NOT NULL); CREATE TABLE gates(chat_id TEXT,user_id TEXT,data TEXT NOT NULL,expires INTEGER NOT NULL,PRIMARY KEY(chat_id,user_id)); PRAGMA user_version=1;');
+    db.prepare('INSERT INTO groups VALUES(?,?)').run('-1001', JSON.stringify({mode:'observe'}));
+    const gate = {token:'a'.repeat(24), question:'2 + 3', answer:5, options:[4,5,6,7],until:9999999999};
+    db.prepare('INSERT INTO gates VALUES(?,?,?,?)').run('-1001','2',JSON.stringify(gate),gate.until*1000); db.close();
+    let store = new Store(dir);
+    assert.equal(store.db.prepare('PRAGMA user_version').get().user_version,2);
+    assert.equal(store.group(-1001).mode,'observe'); assert.deepEqual(store.gate(-1001,2),gate);
+    store.rememberCommunity({id:-1001,type:'supergroup',title:'Private'},1); store.close();
+    store = new Store(dir); assert.equal(store.communitiesFor(1)[0].title,'Private');
+    assert.deepEqual(store.userGates(2).map(g=>g.chat_id),['-1001']); store.close();
+  } finally { rmSync(dir, {recursive:true,force:true}); }
+});
+
 test('settings, challenge ownership, and cooldowns survive restart', () => {
   const dir = mkdtempSync(path.join(os.tmpdir(), 'sentinel-test-'));
   try {
@@ -56,10 +73,10 @@ test('opening a newer database refuses downgrade and preserves its version', () 
   const dir = mkdtempSync(path.join(os.tmpdir(), 'sentinel-test-schema-'));
   try {
     let db = new DatabaseSync(path.join(dir, 'sentinel.db'));
-    db.exec('PRAGMA user_version=2'); db.close();
-    assert.throws(() => new Store(dir), /Unsupported database schema version 2/);
+    db.exec('PRAGMA user_version=3'); db.close();
+    assert.throws(() => new Store(dir), /Unsupported database schema version 3/);
     db = new DatabaseSync(path.join(dir, 'sentinel.db'));
-    assert.equal(db.prepare('PRAGMA user_version').get().user_version, 2); db.close();
+    assert.equal(db.prepare('PRAGMA user_version').get().user_version, 3); db.close();
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });
 

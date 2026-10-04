@@ -12,6 +12,7 @@ export function uiFixture(t, dependencies = {}) {
   bot.api.config.use(async (_prev, method, payload) => {
     calls.push({ method, payload });
     let result = true;
+    if (method === 'getChat') result = { id: Number(payload.chat_id) || -100111, type: 'supergroup', title: 'Fixture' };
     if (method === 'getChatMember') {
       if (payload.chat_id === '@sentinelvc' && state.channelError) return { ok: false, error_code: 503, description: 'Unavailable' };
       result = { user: { id: payload.user_id, is_bot: false, first_name: 'Fixture' },

@@ -9,39 +9,42 @@
 </p>
 <!-- languages:end -->
 
-Sentinel-VC Telegram supergroup के लिए खुला स्रोत moderation bot है। यह उपलब्ध join/leave घटनाओं और तेज संदेश गतिविधि को देखता है। वैकल्पिक user-admin adapter से voice-call की उपलब्ध participant घटनाएँ और अनुमति-आधारित mute जोड़ा जा सकता है। लेखक: **C. M. Jubayer Hossain Bappy**।
+## उपयोग गाइड
 
-## तैयार bot का उपयोग
+[@sentinelvcbot](https://t.me/sentinelvcbot) · [अपडेट](https://t.me/sentinelvc)
 
-मालिक द्वारा सेवा चालू करने के बाद [@sentinelvcbot](https://t.me/sentinelvcbot) अपने supergroup में जोड़ें। उसे admin बनाकर **Restrict Members** अनुमति दें। अपने व्यक्तिगत admin खाते से `/setup`, कुछ सेकंड बाद `/doctor`, फिर `/status` भेजें। पहले observe mode में व्यवहार देखें; तैयार होने पर `/mode enforce` चलाएँ। `/gate on` नए सदस्यों के लिए अस्थायी chat restriction और गणित का प्रश्न सक्षम करता है।
+/start → /language → हिन्दी → /communities
 
-## अपने VPS पर
+बॉट को ग्रुप या चैनल admin बनाएँ; supergroup में Restrict Members दें। निजी चैट में /communities खोलें, समुदाय चुनकर सेटअप करें और बटन से नियंत्रण करें। निजी समुदाय selector या numeric ID से जोड़ें। सदस्य अपना chat challenge /verify से खोलें।
 
-Ubuntu VPS में [Docker और Compose](https://docs.docker.com/engine/install/ubuntu/) स्थापित करें। GitHub पर repository प्रकाशित होने के बाद:
+## मेरे समुदाय
 
-```bash
-git clone https://github.com/thecmjhb/Sentinel-VC.git
-cd Sentinel-VC
-bash scripts/setup.sh
-```
+**समुदाय चुनें → ग्रुप / चैनल → सेटअप → निरीक्षण**
 
-सेटअप में VPS का health-check पोर्ट चुनें; नए इंस्टॉलेशन का डिफ़ॉल्ट **18765** है। दिखाया गया पोर्ट रखने के लिए Enter दबाएँ। बाद में `bash scripts/setup.sh --port 19234` चलाकर बदलें; बाकी `.env` सेटिंग सुरक्षित रहेंगी। npm के लिए `.env` में `HTTP_PORT` सेट करें।
+Private/public: use the selector, or /community NEGATIVE_ID (for example /community -1001234567890). Public usernames also work.
 
-Helper token छिपाकर पूछता है और मौजूदा `.env` को नहीं बदलता। Token chat, screenshot या GitHub पर साझा न करें। स्थिति जाँचें:
+Chat verification: /verify privately. Live-call mutes require administrator review. Bots cannot initiate private chats.
 
-```bash
-docker compose logs --tail=50 sentinel
-curl --fail "http://$(docker compose port sentinel 8080)/readyz"
-```
+**वॉइस खाता जोड़ें → लॉगिन QR स्कैन करें → वॉइस नियंत्रण → जॉइन बर्स्ट सुरक्षा / हर कॉल सुरक्षा**
 
-Docker के बिना Node.js 24 LTS में `.env.example` को `.env` में कॉपी करें, `BOT_TOKEN` भरें, फिर `npm ci --ignore-scripts` और `npm start` चलाएँ। Reboot के बाद सेवा चलाने के निर्देश [यहाँ](../SELF_HOSTING.md) हैं।
+नए प्रतिभागियों को म्यूट रखें · बोलने का प्रवेश खोलें · सभी के लिए कॉल समाप्त करें
 
-## उपयोगी कमांड और सीमाएँ
+Press Scan login QR to connect YOUR account directly here. Telegram Settings → Devices → Link Desktop Device scans and accepts the QR; show it on another screen. We automatically match the logged-in ID to your bot-chat ID and verify current admin/Manage Call rights. A user session grants account access to this VPS operator; use an account/operator you trust. OTP and passwords are never collected in this chat. If Telegram requires 2FA, use local VPS login instead; do not disable 2FA. Disconnect your QR account with /disconnectvoice. No account connection proves network protection.
 
-`/incidents` admin को इसी group के हाल के रिकॉर्ड दिखाता है। `/mode observe` नए moderation actions रोकता है। Restricted सदस्य bot के private chat में `/verify` के बाद challenge में दिया group ID लिख सकते हैं। तीन गलत उत्तरों के बाद expiry तक प्रतीक्षा करें। Flood restriction के पहले मिनट में सत्यापन से छूट नहीं मिलती।
+[Private dashboard guide (English)](../PRIVATE_CONTROL.md)
 
-सामान्य bot raw UDP, वास्तविक account creation date या live-call participant feed नहीं देखता। Voice note restriction और live-call mute अलग हैं। [Optional VC guide](../VC_SETUP.md) के लिए अलग सहमत user-admin account और allowlist चाहिए; call actions को admin स्वयं वापस बदलता है।
+## ग्रुप में जोड़ें / चैनल
 
-## समुदाय और लाइसेंस
+[ग्रुप में जोड़ें](https://t.me/sentinelvcbot?startgroup=setup) · [चैनल](https://t.me/sentinelvcbot?startchannel&admin=manage_chat)
 
-Self-hosted संस्करण में [Updates channel](https://t.me/sentinelvc) में शामिल होना वैकल्पिक है। Hosted bot के लिए /start के निर्देश अपनाएँ। मदद के लिए [GitHub Issues](https://github.com/thecmjhb/Sentinel-VC/issues) देखें। Code MIT है; [license](../../LICENSE) और attribution बनाए रखें।
+## VPS / Docker
+
+[Self-hosting guide (English)](../SELF_HOSTING.md) · [Voice setup (English)](../VC_SETUP.md)
+
+Use your own BotFather token for self-hosting. The public source does not require membership in @sentinelvc. Detailed diagnostics and operator documentation remain in English.
+
+Experimental: local tests only; live Telegram validation is pending. Voice controls require the optional user-admin adapter. No raw UDP filtering, account-age detection or proven crash prevention.
+
+[सोर्स कोड](https://github.com/thecmjhb/Sentinel-VC) · [MIT](../../LICENSE) · [Privacy (English)](../../PRIVACY.md)
+
+C. M. Jubayer Hossain Bappy

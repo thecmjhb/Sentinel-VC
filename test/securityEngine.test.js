@@ -24,6 +24,15 @@ function fixture(t, mode = 'enforce') {
   return { engine, store, api, calls, setMember: value => { member = value; } };
 }
 const burst = async engine => { for (let i = 0; i < 30; i++) await engine.process({ chatId: -1001, userId: 1, kind: 'message' }); };
+
+test('pre-upgrade numeric-answer gates still restore only the matching owned restriction', async t => {
+  const f = fixture(t); const until = Math.floor(Date.now()/1000)+120;
+  f.store.setGate(-1001,1,{token:'a'.repeat(24),question:'2 + 3 = ?',answer:5,options:[4,5,6,7],attempts:0,until});
+  f.setMember({status:'restricted',is_member:true,until_date:until,...permissionSet(false)});
+  assert.equal(await f.engine.showGate(-1001,1),true);
+  assert.match(await f.engine.verify(-1001,1,'a'.repeat(24),'5'), /restored/);
+  assert.equal(f.store.gate(-1001,1),null);
+});
 test('observe mode records detections without any mutation', async t => {
   const { engine, calls } = fixture(t, 'observe'); await burst(engine); assert.equal(calls.length, 0);
 });

@@ -13,38 +13,37 @@
 
 [@sentinelvcbot](https://t.me/sentinelvcbot) · [Güncellemeler](https://t.me/sentinelvc)
 
-/start → /language → Türkçe
+/start → /language → Türkçe → /communities
 
-1. Botu süpergruba üye kısıtlama yetkisi olan yönetici olarak ekleyin.
+Botu grup veya kanal yöneticisi yapın; süpergrupta üye kısıtlama izni verin. Özel sohbette /communities açın, topluluğu seçip düğmelerle kurun. Özel topluluklar seçici veya sayısal kimlikle eklenebilir. Üyeler kendi sohbet doğrulamalarını /verify ile açar.
 
-2. Grupta birkaç saniye arayla /setup, /doctor ve /status gönderin.
+## Topluluklarım
 
-3. Gözlem modunda /incidents kayıtlarını inceleyin; hazır olduğunuzda /mode enforce kullanın. /gate on yeni üyeleri doğrular.
+**Topluluk seç → Grup / Kanal → Kurulum → İzle**
 
-4. Kısıtlanırsanız görevdeki grup kimliğiyle özel sohbette /verify GROUP_ID gönderin.
+Private/public: use the selector, or /community NEGATIVE_ID (for example /community -1001234567890). Public usernames also work.
 
-Ses kontrolü ayrı bir isteğe bağlı adaptör gerektirir. Ham UDP ve hesap oluşturma tarihleri kullanılamaz.
+Chat verification: /verify privately. Live-call mutes require administrator review. Bots cannot initiate private chats.
 
-## Gruba ekle
+**Ses hesabı bağla → Giriş QR kodunu tara → Ses kontrolü → Katılım dalgası koruması / Her aramayı koru**
 
-[Telegram](https://t.me/sentinelvcbot?startgroup=setup)
+Yeni katılımcıları sessize al · Kabulü aç · Aramayı herkes için bitir
+
+Press Scan login QR to connect YOUR account directly here. Telegram Settings → Devices → Link Desktop Device scans and accepts the QR; show it on another screen. We automatically match the logged-in ID to your bot-chat ID and verify current admin/Manage Call rights. A user session grants account access to this VPS operator; use an account/operator you trust. OTP and passwords are never collected in this chat. If Telegram requires 2FA, use local VPS login instead; do not disable 2FA. Disconnect your QR account with /disconnectvoice. No account connection proves network protection.
+
+[Private dashboard guide (English)](../PRIVATE_CONTROL.md)
+
+## Gruba ekle / Kanal
+
+[Gruba ekle](https://t.me/sentinelvcbot?startgroup=setup) · [Kanal](https://t.me/sentinelvcbot?startchannel&admin=manage_chat)
 
 ## VPS / Docker
 
 [Self-hosting guide (English)](../SELF_HOSTING.md) · [Voice setup (English)](../VC_SETUP.md)
 
-```bash
-git clone https://github.com/thecmjhb/Sentinel-VC.git
-cd Sentinel-VC
-bash scripts/setup.sh
-```
+Use your own BotFather token for self-hosting. The public source does not require membership in @sentinelvc. Detailed diagnostics and operator documentation remain in English.
 
-HTTP_PORT: 18765 → `bash scripts/setup.sh --port 19234`
-
-```bash
-docker compose logs --tail=50 sentinel
-curl --fail "http://$(docker compose port sentinel 8080)/readyz"
-```
+Experimental: local tests only; live Telegram validation is pending. Voice controls require the optional user-admin adapter. No raw UDP filtering, account-age detection or proven crash prevention.
 
 [Kaynak kodu](https://github.com/thecmjhb/Sentinel-VC) · [MIT](../../LICENSE) · [Privacy (English)](../../PRIVACY.md)
 

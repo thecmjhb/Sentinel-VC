@@ -7,3 +7,5 @@ Include affected version, observable behavior, impact and a minimal reproduction
 The code defaults to observe mode. Master-bot operators must verify permission handling and rollback/recovery in staging. Bot-token and MTProto session leaks require revocation through BotFather and Telegram's active-session controls respectively; changing `.env` alone does not revoke an exposed credential.
 
 Current security-relevant limitations are documented in `docs/ARCHITECTURE.md`: provider-dependent update delivery, no remote permission CAS, in-memory evidence reset on restart, weak arithmetic gate, bounded queue shedding, manual call restoration, and no network-level UDP filter. These are explicit scope limits, not asserted protections.
+
+QR sessions are encrypted at rest but grant broad account access to the hosting operator. Privately retain the deployment key with encrypted backups; never publish either. Keep 2FA enabled and never submit OTP/password/session material in bot chat. Reapplying mute-on-entry does not establish protection against client/media exhaustion. Manual call termination disconnects everyone and is not evidence of exploit prevention.

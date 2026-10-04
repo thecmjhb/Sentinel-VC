@@ -1,0 +1,45 @@
+{
+  "evidence": "ILLUSTRATIVE_FLUID_QUEUE_MODEL_NOT_OBSERVED_TELEGRAM_UPTIME_OR_PACKET_LOSS",
+  "parameters": {
+    "dt": 0.01,
+    "duration": 30,
+    "attackStart": 5,
+    "attackEnd": 20,
+    "capacity": 200,
+    "serviceRate": 200,
+    "benignRate": 100,
+    "hostileRate": 2000
+  },
+  "results": [
+    {
+      "policy": "none",
+      "modeledAvailabilityPercent": 50,
+      "modeledLossPercent": 85.76363636363637,
+      "modeledPostOnsetLossPercentAt8to20Seconds": 90.47619047619048,
+      "virtualDetectionLatencyMs": null,
+      "assumedAcknowledgementLatencyMs": null
+    },
+    {
+      "policy": "sentinel_cooperative_source",
+      "modeledAvailabilityPercent": 93.33333333333333,
+      "modeledLossPercent": 41.71328671328671,
+      "modeledPostOnsetLossPercentAt8to20Seconds": 0,
+      "virtualDetectionLatencyMs": 1210,
+      "assumedAcknowledgementLatencyMs": 1360.0000000000002
+    },
+    {
+      "policy": "sentinel_unresponsive_udp_source",
+      "modeledAvailabilityPercent": 50,
+      "modeledLossPercent": 85.76363636363637,
+      "modeledPostOnsetLossPercentAt8to20Seconds": 90.47619047619048,
+      "virtualDetectionLatencyMs": 1210,
+      "assumedAcknowledgementLatencyMs": 1360.0000000000002
+    }
+  ],
+  "assumptions": [
+    "A cooperative media source obeys a modeled mute after an assumed 150 ms delivery/action delay.",
+    "An unresponsive UDP source ignores admission/mute and continues transmitting.",
+    "Availability means a modeled one-second window with at most 1% modeled packet loss.",
+    "Queues are fluid quantities, not captured UDP packets. This is not a model calibrated to Telegram."
+  ]
+}

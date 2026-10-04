@@ -1,0 +1,5442 @@
+{
+  "evidence": "MEASURED_LOCAL_SYNTHETIC_EVENT_REPLAY_NOT_TELEGRAM_OR_UDP",
+  "platform": "win32",
+  "release": "10.0.26300",
+  "cpu": "AMD Ryzen 5 5600X 6-Core Processor             ",
+  "logicalCpus": 12,
+  "node": "v22.14.0",
+  "generatedAt": "2026-10-01T09:54:27.194Z",
+  "seeds": 30,
+  "episodesPerSeedPerScenario": 100,
+  "datasetSha256": "8afcf45907de6ece6a6de35abb0bb60e5426219cb9adb1c12bacef47ffa39e51",
+  "configuration": {
+    "userCapacity": 20,
+    "userRefill": 1,
+    "vcCapacity": 24,
+    "vcRefill": 4,
+    "chatCapacity": 80,
+    "chatRefill": 10,
+    "threshold": 65
+  },
+  "rows": [
+    {
+      "scenario": "ordinary_messages",
+      "malicious": false,
+      "model": "static_window",
+      "episodes": 3000,
+      "hits": 0,
+      "detectionRate": 0,
+      "wilson95": [
+        0,
+        0.0012788487454749536
+      ],
+      "detectedEpisodeOnsetMedianMs": null,
+      "detectedEpisodeOnsetP95Ms": null,
+      "misses": 3000
+    },
+    {
+      "scenario": "ordinary_messages",
+      "malicious": false,
+      "model": "token_bucket",
+      "episodes": 3000,
+      "hits": 0,
+      "detectionRate": 0,
+      "wilson95": [
+        0,
+        0.0012788487454749536
+      ],
+      "detectedEpisodeOnsetMedianMs": null,
+      "detectedEpisodeOnsetP95Ms": null,
+      "misses": 3000
+    },
+    {
+      "scenario": "ordinary_messages",
+      "malicious": false,
+      "model": "sentinel",
+      "episodes": 3000,
+      "hits": 0,
+      "detectionRate": 0,
+      "wilson95": [
+        0,
+        0.0012788487454749536
+      ],
+      "detectedEpisodeOnsetMedianMs": null,
+      "detectedEpisodeOnsetP95Ms": null,
+      "misses": 3000
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "malicious": false,
+      "model": "static_window",
+      "episodes": 3000,
+      "hits": 2999,
+      "detectionRate": 0.9996666666666667,
+      "wilson95": [
+        0.9981141810949103,
+        0.9999411560587781
+      ],
+      "detectedEpisodeOnsetMedianMs": 703.7731296615675,
+      "detectedEpisodeOnsetP95Ms": 852.5274046463892,
+      "misses": 1
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "malicious": false,
+      "model": "token_bucket",
+      "episodes": 3000,
+      "hits": 0,
+      "detectionRate": 0,
+      "wilson95": [
+        0,
+        0.0012788487454749536
+      ],
+      "detectedEpisodeOnsetMedianMs": null,
+      "detectedEpisodeOnsetP95Ms": null,
+      "misses": 3000
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "malicious": false,
+      "model": "sentinel",
+      "episodes": 3000,
+      "hits": 0,
+      "detectionRate": 0,
+      "wilson95": [
+        0,
+        0.0012788487454749536
+      ],
+      "detectedEpisodeOnsetMedianMs": null,
+      "detectedEpisodeOnsetP95Ms": null,
+      "misses": 3000
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "malicious": false,
+      "model": "static_window",
+      "episodes": 3000,
+      "hits": 0,
+      "detectionRate": 0,
+      "wilson95": [
+        0,
+        0.0012788487454749536
+      ],
+      "detectedEpisodeOnsetMedianMs": null,
+      "detectedEpisodeOnsetP95Ms": null,
+      "misses": 3000
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "malicious": false,
+      "model": "token_bucket",
+      "episodes": 3000,
+      "hits": 0,
+      "detectionRate": 0,
+      "wilson95": [
+        0,
+        0.0012788487454749536
+      ],
+      "detectedEpisodeOnsetMedianMs": null,
+      "detectedEpisodeOnsetP95Ms": null,
+      "misses": 3000
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "malicious": false,
+      "model": "sentinel",
+      "episodes": 3000,
+      "hits": 0,
+      "detectionRate": 0,
+      "wilson95": [
+        0,
+        0.0012788487454749536
+      ],
+      "detectedEpisodeOnsetMedianMs": null,
+      "detectedEpisodeOnsetP95Ms": null,
+      "misses": 3000
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "malicious": false,
+      "model": "static_window",
+      "episodes": 3000,
+      "hits": 3000,
+      "detectionRate": 1,
+      "wilson95": [
+        0.9987211512545249,
+        0.9999999999999998
+      ],
+      "detectedEpisodeOnsetMedianMs": 449.5063620735891,
+      "detectedEpisodeOnsetP95Ms": 525.6775033543818,
+      "misses": 0
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "malicious": false,
+      "model": "token_bucket",
+      "episodes": 3000,
+      "hits": 3000,
+      "detectionRate": 1,
+      "wilson95": [
+        0.9987211512545249,
+        0.9999999999999998
+      ],
+      "detectedEpisodeOnsetMedianMs": 899.862998095341,
+      "detectedEpisodeOnsetP95Ms": 1046.2517982744612,
+      "misses": 0
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "malicious": false,
+      "model": "sentinel",
+      "episodes": 3000,
+      "hits": 3000,
+      "detectionRate": 1,
+      "wilson95": [
+        0.9987211512545249,
+        0.9999999999999998
+      ],
+      "detectedEpisodeOnsetMedianMs": 990.2523239585571,
+      "detectedEpisodeOnsetP95Ms": 1128.636712699663,
+      "misses": 0
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "malicious": true,
+      "model": "static_window",
+      "episodes": 3000,
+      "hits": 3000,
+      "detectionRate": 1,
+      "wilson95": [
+        0.9987211512545249,
+        0.9999999999999998
+      ],
+      "detectedEpisodeOnsetMedianMs": 451.0333908139728,
+      "detectedEpisodeOnsetP95Ms": 528.352368355263,
+      "misses": 0
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "malicious": true,
+      "model": "token_bucket",
+      "episodes": 3000,
+      "hits": 3000,
+      "detectionRate": 1,
+      "wilson95": [
+        0.9987211512545249,
+        0.9999999999999998
+      ],
+      "detectedEpisodeOnsetMedianMs": 902.318369387649,
+      "detectedEpisodeOnsetP95Ms": 1054.5742629258893,
+      "misses": 0
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "malicious": true,
+      "model": "sentinel",
+      "episodes": 3000,
+      "hits": 3000,
+      "detectionRate": 1,
+      "wilson95": [
+        0.9987211512545249,
+        0.9999999999999998
+      ],
+      "detectedEpisodeOnsetMedianMs": 993.4625809756108,
+      "detectedEpisodeOnsetP95Ms": 1137.2013449459337,
+      "misses": 0
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "malicious": true,
+      "model": "static_window",
+      "episodes": 3000,
+      "hits": 12,
+      "detectionRate": 0.004,
+      "wilson95": [
+        0.002289680802280084,
+        0.00697893715323107
+      ],
+      "detectedEpisodeOnsetMedianMs": 2028.139555780217,
+      "detectedEpisodeOnsetP95Ms": 3132.150326250121,
+      "misses": 2988
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "malicious": true,
+      "model": "token_bucket",
+      "episodes": 3000,
+      "hits": 3000,
+      "detectionRate": 1,
+      "wilson95": [
+        0.9987211512545249,
+        0.9999999999999998
+      ],
+      "detectedEpisodeOnsetMedianMs": 907.5998693238944,
+      "detectedEpisodeOnsetP95Ms": 1312.0078088250011,
+      "misses": 0
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "malicious": true,
+      "model": "sentinel",
+      "episodes": 3000,
+      "hits": 3000,
+      "detectionRate": 1,
+      "wilson95": [
+        0.9987211512545249,
+        0.9999999999999998
+      ],
+      "detectedEpisodeOnsetMedianMs": 1207.9434966668487,
+      "detectedEpisodeOnsetP95Ms": 1640.915962215513,
+      "misses": 0
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "malicious": true,
+      "model": "static_window",
+      "episodes": 3000,
+      "hits": 0,
+      "detectionRate": 0,
+      "wilson95": [
+        0,
+        0.0012788487454749536
+      ],
+      "detectedEpisodeOnsetMedianMs": null,
+      "detectedEpisodeOnsetP95Ms": null,
+      "misses": 3000
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "malicious": true,
+      "model": "token_bucket",
+      "episodes": 3000,
+      "hits": 0,
+      "detectionRate": 0,
+      "wilson95": [
+        0,
+        0.0012788487454749536
+      ],
+      "detectedEpisodeOnsetMedianMs": null,
+      "detectedEpisodeOnsetP95Ms": null,
+      "misses": 3000
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "malicious": true,
+      "model": "sentinel",
+      "episodes": 3000,
+      "hits": 0,
+      "detectionRate": 0,
+      "wilson95": [
+        0,
+        0.0012788487454749536
+      ],
+      "detectedEpisodeOnsetMedianMs": null,
+      "detectedEpisodeOnsetP95Ms": null,
+      "misses": 3000
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "malicious": true,
+      "model": "static_window",
+      "episodes": 3000,
+      "hits": 0,
+      "detectionRate": 0,
+      "wilson95": [
+        0,
+        0.0012788487454749536
+      ],
+      "detectedEpisodeOnsetMedianMs": null,
+      "detectedEpisodeOnsetP95Ms": null,
+      "misses": 3000
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "malicious": true,
+      "model": "token_bucket",
+      "episodes": 3000,
+      "hits": 0,
+      "detectionRate": 0,
+      "wilson95": [
+        0,
+        0.0012788487454749536
+      ],
+      "detectedEpisodeOnsetMedianMs": null,
+      "detectedEpisodeOnsetP95Ms": null,
+      "misses": 3000
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "malicious": true,
+      "model": "sentinel",
+      "episodes": 3000,
+      "hits": 0,
+      "detectionRate": 0,
+      "wilson95": [
+        0,
+        0.0012788487454749536
+      ],
+      "detectedEpisodeOnsetMedianMs": null,
+      "detectedEpisodeOnsetP95Ms": null,
+      "misses": 3000
+    }
+  ],
+  "trials": [
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 1,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 2,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 3,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 4,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 5,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 6,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 7,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 8,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 9,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 10,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 11,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 12,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 13,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 14,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 15,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 16,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 17,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 18,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 19,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 20,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 21,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 22,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 23,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 24,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 25,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 26,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 27,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 28,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 29,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "static_window",
+      "seed": 30,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 1,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 2,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 3,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 4,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 5,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 6,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 7,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 8,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 9,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 10,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 11,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 12,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 13,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 14,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 15,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 16,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 17,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 18,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 19,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 20,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 21,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 22,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 23,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 24,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 25,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 26,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 27,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 28,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 29,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "token_bucket",
+      "seed": 30,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 1,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 2,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 3,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 4,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 5,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 6,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 7,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 8,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 9,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 10,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 11,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 12,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 13,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 14,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 15,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 16,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 17,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 18,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 19,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 20,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 21,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 22,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 23,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 24,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 25,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 26,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 27,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 28,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 29,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "ordinary_messages",
+      "model": "sentinel",
+      "seed": 30,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 1,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 2,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 3,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 4,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 5,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 6,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 7,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 8,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 9,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 10,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 11,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 12,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 13,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 14,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 15,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 16,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 17,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 18,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 19,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 20,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 21,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 22,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 23,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 24,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 25,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 26,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 27,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 28,
+      "hits": 99,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 29,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "static_window",
+      "seed": 30,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 1,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 2,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 3,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 4,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 5,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 6,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 7,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 8,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 9,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 10,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 11,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 12,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 13,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 14,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 15,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 16,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 17,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 18,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 19,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 20,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 21,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 22,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 23,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 24,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 25,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 26,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 27,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 28,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 29,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "token_bucket",
+      "seed": 30,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 1,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 2,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 3,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 4,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 5,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 6,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 7,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 8,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 9,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 10,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 11,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 12,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 13,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 14,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 15,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 16,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 17,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 18,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 19,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 20,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 21,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 22,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 23,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 24,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 25,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 26,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 27,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 28,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 29,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_message_burst",
+      "model": "sentinel",
+      "seed": 30,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 1,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 2,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 3,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 4,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 5,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 6,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 7,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 8,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 9,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 10,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 11,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 12,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 13,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 14,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 15,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 16,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 17,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 18,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 19,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 20,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 21,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 22,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 23,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 24,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 25,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 26,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 27,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 28,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 29,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "static_window",
+      "seed": 30,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 1,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 2,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 3,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 4,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 5,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 6,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 7,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 8,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 9,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 10,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 11,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 12,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 13,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 14,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 15,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 16,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 17,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 18,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 19,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 20,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 21,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 22,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 23,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 24,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 25,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 26,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 27,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 28,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 29,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "token_bucket",
+      "seed": 30,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 1,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 2,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 3,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 4,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 5,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 6,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 7,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 8,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 9,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 10,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 11,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 12,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 13,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 14,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 15,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 16,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 17,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 18,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 19,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 20,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 21,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 22,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 23,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 24,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 25,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 26,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 27,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 28,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 29,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_vc_reconnect",
+      "model": "sentinel",
+      "seed": 30,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 1,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 2,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 3,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 4,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 5,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 6,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 7,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 8,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 9,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 10,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 11,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 12,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 13,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 14,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 15,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 16,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 17,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 18,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 19,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 20,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 21,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 22,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 23,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 24,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 25,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 26,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 27,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 28,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 29,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "static_window",
+      "seed": 30,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 1,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 2,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 3,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 4,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 5,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 6,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 7,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 8,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 9,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 10,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 11,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 12,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 13,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 14,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 15,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 16,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 17,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 18,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 19,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 20,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 21,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 22,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 23,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 24,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 25,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 26,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 27,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 28,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 29,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "token_bucket",
+      "seed": 30,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 1,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 2,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 3,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 4,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 5,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 6,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 7,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 8,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 9,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 10,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 11,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 12,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 13,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 14,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 15,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 16,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 17,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 18,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 19,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 20,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 21,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 22,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 23,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 24,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 25,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 26,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 27,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 28,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 29,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "legitimate_intensive_collaboration",
+      "model": "sentinel",
+      "seed": 30,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 1,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 2,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 3,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 4,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 5,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 6,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 7,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 8,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 9,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 10,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 11,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 12,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 13,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 14,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 15,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 16,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 17,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 18,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 19,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 20,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 21,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 22,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 23,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 24,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 25,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 26,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 27,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 28,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 29,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "static_window",
+      "seed": 30,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 1,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 2,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 3,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 4,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 5,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 6,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 7,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 8,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 9,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 10,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 11,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 12,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 13,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 14,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 15,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 16,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 17,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 18,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 19,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 20,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 21,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 22,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 23,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 24,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 25,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 26,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 27,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 28,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 29,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "token_bucket",
+      "seed": 30,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 1,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 2,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 3,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 4,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 5,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 6,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 7,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 8,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 9,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 10,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 11,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 12,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 13,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 14,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 15,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 16,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 17,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 18,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 19,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 20,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 21,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 22,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 23,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 24,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 25,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 26,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 27,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 28,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 29,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_message_abuse",
+      "model": "sentinel",
+      "seed": 30,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 1,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 2,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 3,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 4,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 5,
+      "hits": 1,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 6,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 7,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 8,
+      "hits": 1,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 9,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 10,
+      "hits": 1,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 11,
+      "hits": 1,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 12,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 13,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 14,
+      "hits": 1,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 15,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 16,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 17,
+      "hits": 4,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 18,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 19,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 20,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 21,
+      "hits": 1,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 22,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 23,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 24,
+      "hits": 1,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 25,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 26,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 27,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 28,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 29,
+      "hits": 1,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "static_window",
+      "seed": 30,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 1,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 2,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 3,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 4,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 5,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 6,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 7,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 8,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 9,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 10,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 11,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 12,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 13,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 14,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 15,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 16,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 17,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 18,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 19,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 20,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 21,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 22,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 23,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 24,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 25,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 26,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 27,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 28,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 29,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "token_bucket",
+      "seed": 30,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 1,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 2,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 3,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 4,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 5,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 6,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 7,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 8,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 9,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 10,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 11,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 12,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 13,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 14,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 15,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 16,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 17,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 18,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 19,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 20,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 21,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 22,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 23,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 24,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 25,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 26,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 27,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 28,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 29,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "rapid_vc_churn",
+      "model": "sentinel",
+      "seed": 30,
+      "hits": 100,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 1,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 2,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 3,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 4,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 5,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 6,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 7,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 8,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 9,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 10,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 11,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 12,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 13,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 14,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 15,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 16,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 17,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 18,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 19,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 20,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 21,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 22,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 23,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 24,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 25,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 26,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 27,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 28,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 29,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "static_window",
+      "seed": 30,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 1,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 2,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 3,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 4,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 5,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 6,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 7,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 8,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 9,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 10,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 11,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 12,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 13,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 14,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 15,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 16,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 17,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 18,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 19,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 20,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 21,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 22,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 23,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 24,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 25,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 26,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 27,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 28,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 29,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "token_bucket",
+      "seed": 30,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 1,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 2,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 3,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 4,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 5,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 6,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 7,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 8,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 9,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 10,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 11,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 12,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 13,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 14,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 15,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 16,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 17,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 18,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 19,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 20,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 21,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 22,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 23,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 24,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 25,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 26,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 27,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 28,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 29,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "slow_vc_churn",
+      "model": "sentinel",
+      "seed": 30,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 1,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 2,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 3,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 4,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 5,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 6,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 7,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 8,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 9,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 10,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 11,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 12,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 13,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 14,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 15,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 16,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 17,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 18,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 19,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 20,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 21,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 22,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 23,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 24,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 25,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 26,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 27,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 28,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 29,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "static_window",
+      "seed": 30,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 1,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 2,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 3,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 4,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 5,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 6,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 7,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 8,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 9,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 10,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 11,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 12,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 13,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 14,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 15,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 16,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 17,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 18,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 19,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 20,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 21,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 22,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 23,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 24,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 25,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 26,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 27,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 28,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 29,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "token_bucket",
+      "seed": 30,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 1,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 2,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 3,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 4,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 5,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 6,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 7,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 8,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 9,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 10,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 11,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 12,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 13,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 14,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 15,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 16,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 17,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 18,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 19,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 20,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 21,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 22,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 23,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 24,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 25,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 26,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 27,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 28,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 29,
+      "hits": 0,
+      "episodes": 100
+    },
+    {
+      "scenario": "unobservable_media_flood",
+      "model": "sentinel",
+      "seed": 30,
+      "hits": 0,
+      "episodes": 100
+    }
+  ],
+  "performance": {
+    "completeBenchmarkWallMs": 1159.0237,
+    "cpuUserMs": 1390,
+    "cpuSystemMs": 78,
+    "cpuPercentOfOneCore": 126.65832458818574,
+    "sampledPeakRssBytes": 85356544,
+    "scoringSampleCount": 500000,
+    "scoringP50Microseconds": 0.49999999998817657,
+    "scoringP95Microseconds": 1.1000000000080945
+  },
+  "limitations": [
+    "Episode-level synthetic labels; overlapping benign and malicious patterns are intentional.",
+    "No Bot API calls, SQLite writes, queueing, TLS, MTProto transport, or network media in scoring timing.",
+    "Onset latency uses a virtual trace clock and includes missed-episode counts separately.",
+    "Wilson intervals assume independent episodes; shared seeds can introduce dependence. Seed summaries are also exported.",
+    "RSS includes harness, stored samples, and baselines; it is not deployed-bot RAM."
+  ]
+}

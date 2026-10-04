@@ -13,38 +13,37 @@
 
 [@sentinelvcbot](https://t.me/sentinelvcbot) · [నవీకరణలు](https://t.me/sentinelvc)
 
-/start → /language → తెలుగు
+/start → /language → తెలుగు → /communities
 
-1. సభ్యులను పరిమితం చేసే అనుమతితో bot‌ను supergroup అడ్మిన్‌గా జోడించండి.
+బాట్‌ను గ్రూప్ లేదా ఛానల్ adminగా చేర్చండి; supergroupలో సభ్యులను పరిమితం చేసే అనుమతి ఇవ్వండి. ప్రైవేట్ చాట్‌లో /communities తెరిచి కమ్యూనిటీని ఎంచుకుని బటన్లతో సెటప్ చేయండి. ప్రైవేట్ కమ్యూనిటీలకు selector లేదా సంఖ్యా ID వాడవచ్చు. సభ్యులు తమ chat ధృవీకరణను /verifyతో తెరవవచ్చు.
 
-2. గ్రూప్‌లో /setup, తరువాత కొన్ని సెకన్ల విరామంతో /doctor మరియు /status పంపండి.
+## నా కమ్యూనిటీలు
 
-3. పరిశీలన మోడ్‌లో /incidents చూడండి; సిద్ధమైనప్పుడు /mode enforce వాడండి. /gate on కొత్త సభ్యుల ధృవీకరణను ప్రారంభిస్తుంది.
+**కమ్యూనిటీ ఎంచుకోండి → గ్రూప్ / ఛానల్ → సెటప్ → పరిశీలన**
 
-4. పరిమితి ఉంటే, ధృవీకరణలోని గ్రూప్ IDతో ప్రైవేట్ చాట్‌లో /verify GROUP_ID పంపండి.
+Private/public: use the selector, or /community NEGATIVE_ID (for example /community -1001234567890). Public usernames also work.
 
-వాయిస్ నియంత్రణకు ప్రత్యేక ఐచ్ఛిక adapter అవసరం. Raw UDP, ఖాతా సృష్టించిన తేదీ అందుబాటులో ఉండవు.
+Chat verification: /verify privately. Live-call mutes require administrator review. Bots cannot initiate private chats.
 
-## గ్రూప్‌కు జోడించండి
+**వాయిస్ ఖాతా కనెక్ట్ → లాగిన్ QR స్కాన్ → వాయిస్ నియంత్రణ → జాయిన్ బర్స్ట్ రక్షణ / ప్రతి కాల్ రక్షణ**
 
-[Telegram](https://t.me/sentinelvcbot?startgroup=setup)
+కొత్తవారి మైక్ మ్యూట్ చేయండి · స్పీకింగ్ ప్రవేశం తెరవండి · అందరికీ కాల్ ముగించండి
+
+Press Scan login QR to connect YOUR account directly here. Telegram Settings → Devices → Link Desktop Device scans and accepts the QR; show it on another screen. We automatically match the logged-in ID to your bot-chat ID and verify current admin/Manage Call rights. A user session grants account access to this VPS operator; use an account/operator you trust. OTP and passwords are never collected in this chat. If Telegram requires 2FA, use local VPS login instead; do not disable 2FA. Disconnect your QR account with /disconnectvoice. No account connection proves network protection.
+
+[Private dashboard guide (English)](../PRIVATE_CONTROL.md)
+
+## గ్రూప్‌కు జోడించండి / ఛానల్
+
+[గ్రూప్‌కు జోడించండి](https://t.me/sentinelvcbot?startgroup=setup) · [ఛానల్](https://t.me/sentinelvcbot?startchannel&admin=manage_chat)
 
 ## VPS / Docker
 
 [Self-hosting guide (English)](../SELF_HOSTING.md) · [Voice setup (English)](../VC_SETUP.md)
 
-```bash
-git clone https://github.com/thecmjhb/Sentinel-VC.git
-cd Sentinel-VC
-bash scripts/setup.sh
-```
+Use your own BotFather token for self-hosting. The public source does not require membership in @sentinelvc. Detailed diagnostics and operator documentation remain in English.
 
-HTTP_PORT: 18765 → `bash scripts/setup.sh --port 19234`
-
-```bash
-docker compose logs --tail=50 sentinel
-curl --fail "http://$(docker compose port sentinel 8080)/readyz"
-```
+Experimental: local tests only; live Telegram validation is pending. Voice controls require the optional user-admin adapter. No raw UDP filtering, account-age detection or proven crash prevention.
 
 [సోర్స్ కోడ్](https://github.com/thecmjhb/Sentinel-VC) · [MIT](../../LICENSE) · [Privacy (English)](../../PRIVACY.md)
 

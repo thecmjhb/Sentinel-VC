@@ -20,3 +20,5 @@ tmp/
 dist/
 __pycache__/
 *.py[cod]
+
+benchmarks/artifacts/**/source/benchmarks/results/
