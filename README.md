@@ -9,11 +9,12 @@
     <a href="https://t.me/sentinelvcbot"><img src="https://img.shields.io/badge/Telegram-Open_bot-229ED9?logo=telegram&logoColor=white" alt="Open @sentinelvcbot"></a>
     <a href="https://t.me/sentinelvc"><img src="https://img.shields.io/badge/Telegram-Join_updates-229ED9?logo=telegram&logoColor=white" alt="Join project updates"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/Code-MIT-22c55e" alt="Code license MIT"></a>
+    <a href="https://zenodo.org/records/23165817"><img src="https://img.shields.io/badge/Paper-Preprint-2563eb" alt="Read the research preprint on Zenodo"></a>
     <img src="https://img.shields.io/badge/Documentation-20_languages-2563eb" alt="Documentation in 20 languages">
     <img src="https://img.shields.io/badge/Node.js-22.13%2B-339933?logo=nodedotjs&logoColor=white" alt="Node.js 22.13 or newer">
     <img src="https://img.shields.io/badge/Status-Experimental-f59e0b" alt="Experimental implementation">
   </p>
-  <p><a href="#use-the-project-bot">Use the bot</a> · <a href="#host-your-own-bot">Self-host</a> · <a href="#commands">Commands</a> · <a href="#community-and-license">Community</a></p>
+  <p><a href="#use-the-project-bot">Use the bot</a> · <a href="#host-your-own-bot">Self-host</a> · <a href="#commands">Commands</a> · <a href="#research-preprint">Paper</a> · <a href="#community-and-license">Community</a></p>
 </div>
 
 ---
@@ -28,6 +29,14 @@ Choose a README language below. In Telegram, use `/language` for translated onbo
 <a href="docs/i18n/README.ru.md" title="Русский"><img src="assets/languages/ru.svg" width="64" height="28" alt="Русский"></a><a href="docs/i18n/README.ko.md" title="한국어"><img src="assets/languages/ko.svg" width="64" height="28" alt="한국어"></a><a href="docs/i18n/README.ja.md" title="日本語"><img src="assets/languages/ja.svg" width="64" height="28" alt="日本語"></a><a href="docs/i18n/README.de.md" title="Deutsch"><img src="assets/languages/de.svg" width="64" height="28" alt="Deutsch"></a><a href="docs/i18n/README.tr.md" title="Türkçe"><img src="assets/languages/tr.svg" width="64" height="28" alt="Türkçe"></a><a href="docs/i18n/README.it.md" title="Italiano"><img src="assets/languages/it.svg" width="64" height="28" alt="Italiano"></a><a href="docs/i18n/README.fa.md" title="فارسی"><img src="assets/languages/fa.svg" width="64" height="28" alt="فارسی"></a><a href="docs/i18n/README.vi.md" title="Tiếng Việt"><img src="assets/languages/vi.svg" width="64" height="28" alt="Tiếng Việt"></a><a href="docs/i18n/README.ta.md" title="தமிழ்"><img src="assets/languages/ta.svg" width="64" height="28" alt="தமிழ்"></a><a href="docs/i18n/README.te.md" title="తెలుగు"><img src="assets/languages/te.svg" width="64" height="28" alt="తెలుగు"></a>
 </p>
 <!-- languages:end -->
+
+## Research preprint
+
+**[Sentinel-VC: Capability-Aware Event-Driven Moderation for Telegram Communities and Voice-Call State](https://zenodo.org/records/23165817)**
+
+C. M. Jubayer Hossain Bappy · October 5, 2026 · [DOI: 10.5281/zenodo.23165817](https://doi.org/10.5281/zenodo.23165817) · [Paper license: CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+This research preprint has not undergone peer review. Its evaluation uses synthetic workloads; live Telegram audio recovery and crash prevention remain unproven. The Zenodo record contains the PDF and LaTeX source.
 
 ## Start here
 

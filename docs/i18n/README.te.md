@@ -9,6 +9,14 @@
 </p>
 <!-- languages:end -->
 
+## పరిశోధన ప్రీప్రింట్
+
+**[Sentinel-VC: Capability-Aware Event-Driven Moderation for Telegram Communities and Voice-Call State](https://zenodo.org/records/23165817)**
+
+C. M. Jubayer Hossain Bappy · 2026-10-05 · [DOI: 10.5281/zenodo.23165817](https://doi.org/10.5281/zenodo.23165817) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+ఈ పరిశోధనకు ఇంకా నిపుణుల సమీక్ష జరగలేదు. మూల్యాంకనంలో కృత్రిమ పనిభారాలు ఉపయోగించబడ్డాయి; నిజమైన Telegram కాల్‌లలో ఆడియో పునరుద్ధరణ లేదా క్రాష్ నివారణ ఇంకా నిరూపించబడలేదు. Zenodo రికార్డులో PDF మరియు LaTeX మూలం ఉన్నాయి.
+
 ## వినియోగ మార్గదర్శి
 
 [@sentinelvcbot](https://t.me/sentinelvcbot) · [నవీకరణలు](https://t.me/sentinelvc)
