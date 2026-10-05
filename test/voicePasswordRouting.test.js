@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { uiFixture } from '../test-support/uiFixture.js';
 import { VoiceAccounts } from '../voiceAccounts.js';
+import { waitFor } from '../test-support/waitFor.js';
 
 test('bound private password reply is consumed before commands or hosted access policies and public text is not consumed',async t=>{
   let access=0,consumed=0;
@@ -32,8 +33,8 @@ test('2FA reply and verified attachment share the real application queue without
     vault:{owners:async()=>[],save:async(id,session,chats)=>records.set(id,{session,chats:[...chats]}),remove:async id=>records.delete(id)}});
   f.engine.vc=manager;t.after(()=>manager.stop());
   await f.queue.run(()=>manager.connect(1,-100111));
-  for(let i=0;i<100&&!manager.pending.get('1')?.passwordRequest?.message;i++)await new Promise(resolve=>setImmediate(resolve));
-  const question=manager.pending.get('1').passwordRequest.message;assert.ok(question);
+  const question=await waitFor(()=>manager.pending.get('1')?.passwordRequest?.message,'private 2FA prompt');
+  assert.ok(question);
   await f.bot.handleUpdate({update_id:1,message:{message_id:50,date:Math.floor(Date.now()/1000),from:{id:1,is_bot:false,first_name:'User'},chat:{id:1,type:'private'},
     text:'OFFLINE_2FA_PASSWORD',reply_to_message:{message_id:question,from:{id:9,is_bot:true,first_name:'Bot'}}}});
   await Promise.allSettled([...manager.jobs]);assert.equal(manager.allows(-100111),true);

@@ -7,6 +7,8 @@ import { SessionVault, VoiceAccounts } from '../voiceAccounts.js';
 import { loadConfig } from '../config.js';
 import { Store } from '../store.js';
 import { SerialQueue } from '../runtime.js';
+import { setTimeout as delay } from 'node:timers/promises';
+import { waitFor } from '../test-support/waitFor.js';
 
 test('vault encrypts sessions and authenticates owner, ciphertext and key; deletion is durable',async t=>{
   const directory=await mkdtemp(path.join(os.tmpdir(),'sentinel-voice-'));t.after(()=>rm(directory,{recursive:true,force:true}));
@@ -24,7 +26,7 @@ function fixture(t) {
   const store=new Store(':memory:');t.after(()=>store.close());
   const config={...loadConfig({}, {requireToken:false}),mtQrEnabled:true,mtSessionKey:'a'.repeat(64),mtMaxAccounts:2};
   const state={owner:'1',admin:true,rights:true,password:false,qr:0,deleted:[],revoked:0,records:new Map(),ended:[],msgs:[],cancelWait:false,
-    nextMessage:100,promptOptions:[],received:[],expected:'  PRIVATE_TEST_PASSWORD/  '};
+    nextMessage:100,promptOptions:[],received:[],expected:'  PRIVATE_TEST_PASSWORD/  ',qrDelay:0};
   const clients=[];
   const clientFactory=session=> {
     const client={connected:true,session:{save:()=>session || 'SECRET_SESSION'},getMe:async()=>({id:state.owner,bot:false}),
@@ -43,7 +45,7 @@ function fixture(t) {
         if(state.cancelWait) await new Promise((resolve,reject)=>params.abortSignal.addEventListener('abort',()=>reject(new Error('aborted')),{once:true}));
       }};clients.push(client);return client;
   };
-  const api={sendPhoto:async(id,file,options)=>{assert.ok(id>0);assert.equal(options.protect_content,true);assert.ok(file);state.qr++;return{message_id:state.qr};},deleteMessage:async(id,m)=>state.deleted.push([id,m])};
+  const api={sendPhoto:async(id,file,options)=>{assert.ok(id>0);assert.equal(options.protect_content,true);assert.ok(file);if(state.qrDelay)await delay(state.qrDelay);state.qr++;return{message_id:state.qr};},deleteMessage:async(id,m)=>state.deleted.push([id,m])};
   const engine={administrator:async()=>state.admin,reply:async(id,msg,options)=>{
     state.msgs.push({id,msg});state.promptOptions.push(options);return {message_id:state.nextMessage++};
   },process:async()=>{}};
@@ -75,12 +77,10 @@ test('mismatched account, revoked admin and insufficient call rights never attac
 });
 
 async function prompt(f,owner=1,previous=null) {
-  for(let i=0;i<100;i++) {
+  return waitFor(()=>{
     const request=f.manager.pending.get(String(owner))?.passwordRequest;
-    if(request?.message && request.message!==previous)return request.message;
-    await new Promise(resolve=>setImmediate(resolve));
-  }
-  throw new Error('Password question not delivered');
+    return request?.message && request.message!==previous ? request.message : false;
+  },'a fresh private password question');
 }
 function passwordMessage(message,text,owner=1) {
   return {from:{id:owner},chat:{id:owner,type:'private'},message:{message_id:1000+message,text,
@@ -114,6 +114,13 @@ test('incorrect private passwords get fresh questions and are capped at three at
   await f.finish();assert.equal(f.manager.allows(-1001),false);assert.equal(f.state.received.length,3);assert.equal(f.state.records.size,0);
   assert.equal(f.manager.pending.size,0);assert.ok(f.clients.every(c=>!c.connected));
 });
+
+test('2FA account connection tolerates delayed QR delivery before requesting the password', {timeout:5000},async t=>{
+  const f=fixture(t);f.state.password=true;f.state.qrDelay=50;
+  await f.manager.connect(1,-1001);const question=await prompt(f);
+  assert.equal(f.state.qr,1);await f.manager.acceptPassword(passwordMessage(question,f.state.expected));
+  await f.finish();assert.equal(f.manager.allows(-1001),true);assert.equal(f.state.records.size,1);
+});
 test('2FA cancellation rejects its pending question and never accepts a late password',async t=>{
   const f=fixture(t);f.state.password=true;await f.manager.connect(1,-1001);const question=await prompt(f);
   const command=passwordMessage(question,'/cancelvoice');command.message.entities=[{type:'bot_command',offset:0,length:12}];
@@ -135,7 +142,7 @@ test('password deletion failure is contained and redacted, without blocking an o
 });
 test('cancellation and restored sessions preserve account isolation and reject changed identities',async t=>{
   const f=fixture(t);f.state.cancelWait=true;await f.manager.connect(1,-1001);
-  while(!f.state.qr)await new Promise(resolve=>setImmediate(resolve));
+  await waitFor(()=>f.state.qr,'QR delivery before cancellation');
   f.manager.cancel(1);await f.finish();assert.equal(f.manager.allows(-1001),false);assert.equal(f.state.records.size,0);
   const r=fixture(t);r.state.records.set('1',{owner:'1',session:'RESTORED',chats:['-1001']});await r.manager.start();assert.equal(r.manager.allows(-1001),true);
   const wrong=fixture(t);wrong.state.owner='2';wrong.state.records.set('1',{owner:'1',session:'RESTORED',chats:['-1001']});await wrong.manager.start();assert.equal(wrong.manager.allows(-1001),false);
