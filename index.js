@@ -75,8 +75,8 @@ export function createApplication(config, dependencies = {}) {
   });
   // No command response or access-gate prompt is ever posted in a community.
   bot.use((ctx, next) => ctx.chat?.type === 'private' && ctx.from && ctx.chat.id === ctx.from.id ? next() : undefined);
-  installRecovery({ bot, store, engine });
   installVoiceAccounts({ bot, engine });
+  installRecovery({ bot, store, engine });
   dependencies.installAccess?.({ bot, store, engine });
   const dashboard = installDashboard({ bot, store, engine, config });
   installOnboarding({ bot, store, engine, dashboard });
@@ -86,7 +86,7 @@ export function createApplication(config, dependencies = {}) {
   bot.command('privacy', ctx => reply(ctx, 'This operator stores community IDs/titles, administrator links, language preferences, temporary challenges and moderation audit events. ' +
     `Audit retention: ${config.retentionDays} days. Administrator links expire after one year without reconfirmation. ` +
     'No message content, audio or UDP packets are persisted. All bot messages are private.\n' +
-    'Optional QR user sessions and community bindings are encrypted on this VPS until disconnected. Sessions grant account access to this operator. /disconnectvoice detaches your QR account; check Telegram Devices for revocation. No OTP/password is collected in bot messages.\n' +
+    'Optional QR user sessions and community bindings are encrypted on this VPS until disconnected. Sessions grant account access to this operator. A requested 2FA password is consumed only from a reply to the active private question; deletion is attempted and password text is not persisted in database/logs. Telegram copies may remain. /disconnectvoice detaches your QR account; check Telegram Devices for revocation. OTP/login codes are never requested as chat messages.\n' +
     `${PROJECT.source}/blob/main/PRIVACY.md`, { link_preview_options: { is_disabled: true } }));
   bot.catch(error => logError('update_failed', error.error));
 

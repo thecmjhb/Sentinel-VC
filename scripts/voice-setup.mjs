@@ -31,7 +31,7 @@ async function main() {
       values={MT_API_ID:apiId,MT_API_HASH:apiHash,MT_QR_ENABLED:'true',MT_SESSION_KEY:existing.MT_SESSION_KEY || randomBytes(32).toString('hex')};
       loadConfig({...existing,...values},{requireToken:false});
       await saveVoiceEnvironment(filename,values,existing.MT_ENABLED === 'true');
-      console.log('QR connection enabled. Restart the bot, then /communities -> select -> Connect voice account -> Scan login QR. Each user connects their own account; no per-user terminal login is needed for supported QR accounts. Keep MT_SESSION_KEY private and back it up with encrypted sessions. Password-required accounts still use local login.');
+      console.log('QR connection enabled. Restart the bot, then /communities -> select -> Connect voice account -> Scan login QR. Each user connects their own account; 2FA is handled by replying to the active private bot question. Password-message deletion is attempted; password text is not persisted in database/logs. Telegram copies may remain. No website or per-user VPS access is needed. Keep MT_SESSION_KEY private and back it up with encrypted sessions.');
       return;
     }
     const chats = await ask('Allowed numeric group/channel IDs, comma-separated',existing.MT_ALLOWED_CHATS);

@@ -29,7 +29,7 @@ Chat verification: private-এ /verify। Live-call mute admin review করে 
 
 নতুনদের muted entry করুন · Speaking admission খুলুন · সবার জন্য call শেষ করুন
 
-Login QR scan করুন চাপলে এখান থেকেই নিজের account যুক্ত হবে। QR অন্য screen-এ দেখিয়ে Telegram → Settings → Devices → Link Desktop Device দিয়ে scan/accept করুন। Bot আপনার chat-এর ID-এর সঙ্গে login account ID ও বর্তমান admin/Manage Call permission মিলিয়ে যাচাই করবে। VPS operator এই user session দিয়ে account-access পেতে পারে; trusted operator/account ব্যবহার করুন। OTP/password chat-এ দেওয়া লাগে না। Telegram 2FA চাইলে নিজের VPS-এ local login লাগবে; 2FA বন্ধ করবেন না। QR account বিচ্ছিন্ন করতে /disconnectvoice। Account যুক্ত হলেই network attack বন্ধ হয় না।
+Login QR scan করুন থেকে নিজের account যুক্ত করুন। QR অন্য screen-এ দেখিয়ে Telegram → Settings → Devices → Link Desktop Device দিয়ে scan করুন। 2FA থাকলে bot-এর নির্দিষ্ট private password প্রশ্নে Reply দিন। Website বা user-এর VPS access লাগে না। OTP/login code চাওয়া হয় না। Password transientভাবে ব্যবহার হয়; message মুছতে চেষ্টা করা হয়, তবে Telegram কপি থেকে যেতে পারে। VPS operator password/session access পেতে পারে। Bot account ID ও বর্তমান admin/Manage Call permission মিলিয়ে যাচাই করবে। বাতিল: /cancelvoice। বিচ্ছিন্ন: /disconnectvoice। 2FA বন্ধ করবেন না; account যুক্ত হলেই network attack বন্ধ হয় না।
 
 [Private dashboard guide (English)](docs/PRIVATE_CONTROL.md)
 

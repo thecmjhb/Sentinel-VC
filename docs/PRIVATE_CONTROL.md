@@ -30,6 +30,6 @@ No raw UDP measurement or guaranteed crash prevention is provided. Sources: [Tel
 
 ## Connect your own voice account
 
-Choose **Connect voice account → Scan login QR** after the operator enables QR support. Scan with the same account chatting privately with the bot; current admin and call-management rights are checked. `/disconnectvoice` detaches YOUR QR account everywhere, before any hosted subscription gate. Password-required accounts use local login on their own VPS; do not send passwords or OTP here. See [VC setup](VC_SETUP.md).
+Choose **Connect voice account → Scan login QR** after the operator enables QR support. Scan with the same account chatting privately with the bot; current admin and call-management rights are checked. `/disconnectvoice` detaches YOUR QR account everywhere, before any hosted subscription gate. 2FA users reply only to the active private password question; no website or user VPS access is needed. Deletion is attempted and copies may remain. Do not send OTP/login codes, unsolicited passwords or sessions. Cancel: /cancelvoice. See [VC setup](VC_SETUP.md).
 
 **End call (everyone)** is an explicitly confirmed action disconnecting all participants. A join burst never triggers it automatically; replacement calls are protected by the captured call ID.

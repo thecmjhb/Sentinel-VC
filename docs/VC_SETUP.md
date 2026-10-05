@@ -2,7 +2,7 @@
 
 Ordinary deployment uses the bot token only. Direct voice-call state monitoring requires a separate consenting **user** admin account because Telegram's call-management methods are user-only. The optional adapter uses `teleproto`, a maintained GramJS-compatible MTProto client; the pinned `telegram` package was deprecated at the time of implementation. See [migration documentation](https://docs.teleproto.dev/migrating-from-gramjs).
 
-This account has normal user-session access. Account connection starts in the private bot panel when QR support is enabled. Telegram requires the account holder to scan and accept login; this is authentication, not a separate permission request to the project author. Phone-code/password login stays local to the account holder's VPS.
+This account has normal user-session access. Account connection starts in the private bot panel when QR support is enabled. Telegram requires the account holder to scan and accept login; this is authentication, not a separate permission request to the project author. Hosted community users complete QR and any requested 2FA in the private bot flow below. The optional operator terminal alternative keeps phone-code/password entry local to the operator's VPS.
 
 ## Connect your account from the bot
 
@@ -10,12 +10,14 @@ The hosted master and self-hosted bots use the same QR flow. Each administrator 
 
 1. Add the bot as community administrator, open `/communities` privately, select the public/private supergroup or channel, and press **Set up**.
 2. Grant your own user account **Manage Video Chats / Manage Live Streams**. Open the community in Telegram so it appears in account dialogs.
-3. Press **Connect voice account → Scan login QR**. Show the QR on a second screen; use Telegram **Settings → Devices → Link Desktop Device** to scan and accept it. Tokens refresh; the whole attempt expires after two minutes.
+3. Press **Connect voice account → Scan login QR**. Show the QR on a second screen; use Telegram **Settings → Devices → Link Desktop Device** to scan and accept it. Tokens refresh; scan within two minutes.
 4. The server automatically matches the resulting account ID to your bot-chat ID and checks current account/bot admin status and account call-management rights. Different scanned accounts are rejected; new rejected sessions are revoked where possible.
 5. The session is encrypted with AES-256-GCM under `DATA_DIR/voice-accounts/`, bound to this community, and **Voice controls ON** becomes available. Linking your account to another community reuses the verified session after fresh rights checks. Each community uses one account binding.
 6. `/disconnectvoice` privately detaches YOUR QR account from every bound community and attempts logout. In Telegram **Settings → Devices**, terminate the session if it remains. This recovery command works before the hosted channel-subscription gate.
 
-**2FA limitation:** Telegram can require a cloud password after QR approval. This version never collects OTP/password in bot messages. That attempt stops; use the local wizard on your own self-hosted VPS, keeping 2FA enabled. Universal automatic login is not claimed. The session grants broad account authority; encryption at rest cannot prevent the VPS operator accessing a loaded session. Trust the operator and use a dedicated admin account where practical.
+**2FA in private chat:** after QR approval, Telegram may request your two-step verification password. The bot sends a separate **Force Reply** question. Reply to that exact question with your own password; it is a persistent password, not an OTP/login code. It is passed transiently to the SDK's Telegram SRP authentication callback. Password text is not persisted in the database, session record or logs. Deletion of your reply and the question is attempted. Telegram copies, screenshots and operator access cannot be excluded: bot chats are not Secret Chats. Use an operator/account you trust. Never send passwords unsolicited or publicly, and keep 2FA enabled.
+
+Each question expires after at most two minutes; the entire attempt lasts at most five minutes. Three incorrect passwords end it. Stale/duplicate recognized replies are deleted where possible without being reused. `/cancelvoice` stops the pending attempt; `/disconnectvoice` removes your connected QR account. No website, domain or VPS access is needed by hosted community users. The local terminal wizard below remains an optional operator alternative, rather than a hosted-user requirement. Universal login success is not guaranteed; Telegram may reject authorization independently.
 
 ## Operator: enable QR once
 

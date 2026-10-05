@@ -23,19 +23,30 @@ test('vault encrypts sessions and authenticates owner, ciphertext and key; delet
 function fixture(t) {
   const store=new Store(':memory:');t.after(()=>store.close());
   const config={...loadConfig({}, {requireToken:false}),mtQrEnabled:true,mtSessionKey:'a'.repeat(64),mtMaxAccounts:2};
-  const state={owner:'1',admin:true,rights:true,password:false,qr:0,deleted:[],revoked:0,records:new Map(),ended:[],msgs:[],cancelWait:false};
+  const state={owner:'1',admin:true,rights:true,password:false,qr:0,deleted:[],revoked:0,records:new Map(),ended:[],msgs:[],cancelWait:false,
+    nextMessage:100,promptOptions:[],received:[],expected:'  PRIVATE_TEST_PASSWORD/  '};
   const clients=[];
   const clientFactory=session=> {
     const client={connected:true,session:{save:()=>session || 'SECRET_SESSION'},getMe:async()=>({id:state.owner,bot:false}),
       connect:async()=>{},disconnect:async()=>{client.connected=false;},checkAuthorization:async()=>true,getDialogs:async()=>{},
       invoke:async()=>{state.revoked++;},signInUserWithQrCode:async(_credentials,params)=>{
         await params.qrCode({token:Buffer.from('opaque_login_token'),expires:Math.floor(Date.now()/1000)+30});
-        if(state.password) {try {await params.password();} catch(error) {await params.onError(error);throw new Error('AUTH_USER_CANCEL');}}
+        if(state.password) {
+          for (;;) {
+            try {
+              const password=await params.password();state.received.push(password);
+              if(password!==state.expected) {const error=new Error('invalid');error.errorMessage='PASSWORD_HASH_INVALID';throw error;}
+              break;
+            } catch(error) {if(await params.onError(error))throw new Error('AUTH_USER_CANCEL');}
+          }
+        }
         if(state.cancelWait) await new Promise((resolve,reject)=>params.abortSignal.addEventListener('abort',()=>reject(new Error('aborted')),{once:true}));
       }};clients.push(client);return client;
   };
   const api={sendPhoto:async(id,file,options)=>{assert.ok(id>0);assert.equal(options.protect_content,true);assert.ok(file);state.qr++;return{message_id:state.qr};},deleteMessage:async(id,m)=>state.deleted.push([id,m])};
-  const engine={administrator:async()=>state.admin,reply:async(id,msg)=>state.msgs.push({id,msg}),process:async()=>{}};
+  const engine={administrator:async()=>state.admin,reply:async(id,msg,options)=>{
+    state.msgs.push({id,msg});state.promptOptions.push(options);return {message_id:state.nextMessage++};
+  },process:async()=>{}};
   const adapterFactory=options=>({ ...options, start:async()=>{},stop:async()=>options.client.disconnect(),
     rights:async()=>state.rights,requestRefresh(){},dropChat(){},capability:()=> 'monitoring',entry:()=>({}),
     setAdmission:async()=>true,endCall:async(...args)=>{state.ended.push(args);return true;},mitigate:async()=>true });
@@ -54,14 +65,73 @@ test('private QR auto-verifies the actor account and rights, scopes routing, sav
   assert.equal(f.state.ended.length,0);f.state.admin=true;
   await f.manager.disconnect(1);assert.equal(f.manager.allows(-1001),false);assert.equal(f.state.records.size,0);assert.equal(f.state.revoked,1);
 });
-test('mismatched account, revoked admin, insufficient call rights and 2FA never attach a session',async t=>{
-  for(const kind of ['mismatch','rights','2fa']) {
-    const f=fixture(t);if(kind==='mismatch')f.state.owner='2';if(kind==='rights')f.state.rights=false;if(kind==='2fa')f.state.password=true;
+test('mismatched account, revoked admin and insufficient call rights never attach a session',async t=>{
+  for(const kind of ['mismatch','rights']) {
+    const f=fixture(t);if(kind==='mismatch')f.state.owner='2';if(kind==='rights')f.state.rights=false;
     await f.manager.connect(1,-1001);await f.finish();assert.equal(f.manager.allows(-1001),false);assert.equal(f.state.records.size,0);
     assert.ok(f.clients.every(c=>!c.connected));assert.equal(f.state.deleted.length,1);
-    if(kind==='2fa')assert.match(f.state.msgs.at(-1).msg,/2FA password/);
   }
   const f=fixture(t);f.state.admin=false;await assert.rejects(f.manager.connect(1,-1001),/current community/);assert.equal(f.clients.length,0);
+});
+
+async function prompt(f,owner=1,previous=null) {
+  for(let i=0;i<100;i++) {
+    const request=f.manager.pending.get(String(owner))?.passwordRequest;
+    if(request?.message && request.message!==previous)return request.message;
+    await new Promise(resolve=>setImmediate(resolve));
+  }
+  throw new Error('Password question not delivered');
+}
+function passwordMessage(message,text,owner=1) {
+  return {from:{id:owner},chat:{id:owner,type:'private'},message:{message_id:1000+message,text,
+    reply_to_message:{message_id:message,from:{id:9}}}};
+}
+test('hosted user completes 2FA in a bound private reply; whitespace is preserved, deletion attempted and no password persisted',async t=>{
+  const f=fixture(t);f.state.password=true;await f.manager.connect(1,-1001);
+  const question=await prompt(f);const ctx=passwordMessage(question,f.state.expected);
+  const oversized=passwordMessage(question,'x'.repeat(513));assert.equal(await f.manager.acceptPassword(oversized),true);
+  assert.equal(f.state.received.length,0,'invalid size never enters SDK verification');
+  assert.equal(await f.manager.acceptPassword(passwordMessage(question,'foreign',2)),false);
+  const group=passwordMessage(question,'group');group.chat={id:-1001,type:'supergroup'};
+  assert.equal(await f.manager.acceptPassword(group),false);
+  assert.equal(await f.manager.acceptPassword(ctx),true);assert.equal(ctx.message.text,'');await f.finish();
+  assert.equal(f.manager.allows(-1001),true);assert.deepEqual(f.state.received,[f.state.expected]);
+  assert.ok(f.state.deleted.some(([id,msg])=>id===1&&msg===ctx.message.message_id));
+  assert.ok(f.state.deleted.some(([,msg])=>msg===question));
+  assert.ok(f.state.promptOptions.some(x=>x?.reply_markup?.force_reply===true&&x?.protect_content===true));
+  assert.doesNotMatch(JSON.stringify([...f.state.records.values()]),/PRIVATE_TEST_PASSWORD/);
+  assert.doesNotMatch(JSON.stringify(f.state.msgs),/PRIVATE_TEST_PASSWORD/);
+  assert.doesNotMatch(JSON.stringify(f.store.db.prepare('SELECT * FROM audit').all()),/PRIVATE_TEST_PASSWORD/);
+  const duplicate=passwordMessage(question,'duplicate');assert.equal(await f.manager.acceptPassword(duplicate),true);assert.equal(f.state.received.length,1);
+});
+test('incorrect private passwords get fresh questions and are capped at three attempts',async t=>{
+  const f=fixture(t);f.state.password=true;await f.manager.connect(1,-1001);let previous=null;
+  for(let i=0;i<3;i++) {
+    const question=await prompt(f,1,previous);assert.notEqual(question,previous);
+    if(previous)assert.equal(await f.manager.acceptPassword(passwordMessage(previous,'stale')),true);
+    await f.manager.acceptPassword(passwordMessage(question,'wrong'));previous=question;
+  }
+  await f.finish();assert.equal(f.manager.allows(-1001),false);assert.equal(f.state.received.length,3);assert.equal(f.state.records.size,0);
+  assert.equal(f.manager.pending.size,0);assert.ok(f.clients.every(c=>!c.connected));
+});
+test('2FA cancellation rejects its pending question and never accepts a late password',async t=>{
+  const f=fixture(t);f.state.password=true;await f.manager.connect(1,-1001);const question=await prompt(f);
+  const command=passwordMessage(question,'/cancelvoice');command.message.entities=[{type:'bot_command',offset:0,length:12}];
+  assert.equal(await f.manager.acceptPassword(command),false,'explicit cancellation reaches command handler');
+  f.manager.cancel(1);await f.finish();assert.equal(f.manager.allows(-1001),false);
+  assert.equal(await f.manager.acceptPassword(passwordMessage(question,f.state.expected)),true);assert.equal(f.state.received.length,0);
+});
+
+test('an expired 2FA deadline rejects a reply even if the timer callback has not run',async t=>{
+  const f=fixture(t);f.state.password=true;await f.manager.connect(1,-1001);const question=await prompt(f);
+  f.manager.pending.get('1').expiresAt=Date.now()-1;
+  assert.equal(await f.manager.acceptPassword(passwordMessage(question,f.state.expected)),true);
+  await f.finish();assert.equal(f.manager.allows(-1001),false);assert.equal(f.state.received.length,0);
+});
+test('password deletion failure is contained and redacted, without blocking an otherwise valid login',async t=>{
+  const f=fixture(t);f.state.password=true;f.manager.api.deleteMessage=async()=>{const error=new Error('transport body');error.name='GrammyError';throw error;};
+  await f.manager.connect(1,-1001);const question=await prompt(f);await f.manager.acceptPassword(passwordMessage(question,f.state.expected));await f.finish();
+  assert.equal(f.manager.allows(-1001),true);assert.doesNotMatch(JSON.stringify(f.state.msgs),/PRIVATE_TEST_PASSWORD/);
 });
 test('cancellation and restored sessions preserve account isolation and reject changed identities',async t=>{
   const f=fixture(t);f.state.cancelWait=true;await f.manager.connect(1,-1001);

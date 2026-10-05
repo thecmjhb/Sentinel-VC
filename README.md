@@ -51,7 +51,7 @@ Join **[t.me/sentinelvc](https://t.me/sentinelvc)** for updates. The self-hosted
 
 ## Why Sentinel-VC
 
-Connect your account privately with **Connect voice account → Scan login QR**, after the operator enables QR support. The account must match your bot-chat account and have current call-management rights. Password-required accounts use local VPS login. [Connection guide](docs/VC_SETUP.md).
+Connect your account privately with **Connect voice account → Scan login QR**, after the operator enables QR support. The account must match your bot-chat account and have current call-management rights. If 2FA is enabled, reply only to the bot's active private password question. No website or user VPS access is needed; password deletion is attempted and Telegram copies may remain. [Connection guide](docs/VC_SETUP.md).
 
 **Voice scope:** repeating join-muted when entry is already muted adds no new protection. These controls cannot be presented as a solution to connecting/audio failures caused by muted participants or hidden transport traffic. Admins can explicitly confirm **End call (everyone)** as disruptive containment. Real-world crash prevention remains unproven.
 
@@ -150,6 +150,7 @@ Normal non-RTMP channel calls and supergroup calls are supported for delivered u
 | `/community TARGET disable` | Disable protection; existing restrictions keep their expiry |
 | `/verify` or `/verify NEGATIVE_ID` | Recover your own active chat challenge |
 | `/disconnectvoice` | Detach your QR user account from all bound communities and attempt logout |
+| `/cancelvoice` | Cancel a pending QR/2FA login attempt |
 | `/updates`, `/privacy` | Project links and data handling |
 
 Buttons are the easiest path. `TARGET` accepts a negative numeric ID or public `@username`; invite links are not IDs. `/group TARGET ...` and `/channel TARGET ...` are type-checked aliases. Legacy action commands work privately with an explicit target, e.g. `/status -1001234567890`.

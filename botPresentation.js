@@ -27,6 +27,7 @@ export async function configureCommandMenus(api) {
       { command: 'help', description: t.help }, { command: 'language', description: t.language },
       { command: 'verify', description: t.dashboard.gate }, { command: 'updates', description: t.updates },
       { command: 'disconnectvoice', description: t.code === 'bn' ? 'নিজের QR voice account বিচ্ছিন্ন করুন' : 'Disconnect your QR voice account' },
+      { command: 'cancelvoice', description: t.code === 'bn' ? 'চলমান voice account login বাতিল করুন' : 'Cancel a pending voice-account login' },
       { command: 'privacy', description: t.code === 'bn' ? 'তথ্য ব্যবহারের নিয়ম' : 'Data handling' }
     ];
     for (const type of ['default', 'all_private_chats', 'all_chat_administrators'])

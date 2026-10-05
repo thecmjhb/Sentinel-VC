@@ -64,6 +64,7 @@ export class VoiceAccounts {
   constructor({ config, store, engine, queue, api, selfId, clientFactory, adapterFactory, vault }) {
     Object.assign(this, { config, store, engine, queue, api, selfId });
     this.adapters = new Map(); this.bindings = new Map(); this.pending = new Map(); this.jobs = new Set();
+    this.passwordPrompts = new Map();
     this.legacy = null; this.stopped = false;
     this.vault = vault || (config.mtQrEnabled ? new SessionVault(path.join(config.dataDir, 'voice-accounts'), config.mtSessionKey) : null);
     this.clientFactory = clientFactory || (session => {
@@ -173,9 +174,74 @@ export class VoiceAccounts {
     const message = pending.message; pending.message = null;
     if (message) await this.api.deleteMessage(Number(id), message).catch(() => {});
   }
+  async deletePrivateMessage(id, message) {
+    if (!message) return;
+    try { await this.api.deleteMessage(Number(id), message); }
+    catch (error) { logError('vc_secret_message_delete_failed', error); }
+  }
+  async askPassword(id, pending, bn) {
+    if (pending.controller.signal.aborted || this.stopped) throw new Error('Connection cancelled');
+    pending.needsPassword = true;
+    pending.passwordAttempts = (pending.passwordAttempts || 0) + 1;
+    if (pending.passwordAttempts > 3) throw new Error('Password attempts exhausted');
+    await this.removeQr(id, pending);
+    for (const [key, until] of this.passwordPrompts) if (until <= Date.now()) this.passwordPrompts.delete(key);
+    const request = { message: null, resolve: null, reject: null };
+    const promise = new Promise((resolve, reject) => { request.resolve = resolve; request.reject = reject; });
+    // An abort can arrive while the Telegram prompt RPC is still in flight.
+    void promise.catch(() => {});
+    const abort = () => request.reject(new Error('Connection cancelled'));
+    pending.passwordRequest = request;
+    pending.controller.signal.addEventListener('abort', abort, { once: true });
+    try {
+      const notice = bn ?
+        `${pending.passwordAttempts > 1 ? 'আগের 2FA password সঠিক হয়নি। ' : ''}Telegram 2FA password প্রয়োজন। এই message-এর Reply দিয়ে নিজের স্থায়ী 2FA password পাঠান। OTP/login code নয়। Password message পাওয়ার পর মুছতে চেষ্টা করা হবে; database/log-এ রাখা হবে না। Bot chat-এর Telegram কপি বা screenshot পুরোপুরি মুছে যাওয়ার নিশ্চয়তা নেই। VPS operator password/session access পেতে পারে। 2FA বন্ধ করবেন না। চেষ্টা ${pending.passwordAttempts}/3। বাতিল: /cancelvoice` :
+        `${pending.passwordAttempts > 1 ? 'The previous 2FA password was incorrect. ' : ''}Telegram requires your two-step verification PASSWORD. Reply to THIS message with your own password, not an OTP/login code. We attempt to delete your reply and do not persist it in database/logs. Telegram copies or screenshots may remain; the VPS operator can access password/session data. Keep 2FA enabled. Attempt ${pending.passwordAttempts}/3. Cancel: /cancelvoice`;
+      const prompt = await this.engine.reply(Number(id), notice, { protect_content: true,
+        reply_markup: { force_reply: true, selective: true, input_field_placeholder: bn ? 'নিজের Telegram 2FA password' : 'Your Telegram 2FA password' } });
+      if (!Number.isSafeInteger(prompt?.message_id) || prompt.message_id <= 0) throw new Error('Password prompt failed');
+      request.message = prompt.message_id;
+      this.passwordPrompts.set(`${id}:${request.message}`, Date.now() + 600000);
+      while (this.passwordPrompts.size > this.config.mtMaxAccounts * 4)
+        this.passwordPrompts.delete(this.passwordPrompts.keys().next().value);
+      if (pending.controller.signal.aborted || this.stopped) abort();
+      return await promise;
+    } finally {
+      pending.controller.signal.removeEventListener('abort', abort);
+      if (pending.passwordRequest === request) pending.passwordRequest = null;
+      await this.deletePrivateMessage(id, request.message);
+    }
+  }
+  async acceptPassword(ctx) {
+    if (ctx.chat?.type !== 'private' || ctx.chat.id !== ctx.from?.id || typeof ctx.message?.text !== 'string') return false;
+    const id = userId(ctx.from.id), reply = ctx.message.reply_to_message;
+    if (reply?.from?.id !== this.selfId || !this.passwordPrompts.has(`${id}:${reply.message_id}`)) return false;
+    if (ctx.message.entities?.some(entity => entity.type === 'bot_command' && entity.offset === 0) &&
+      /^\/(cancelvoice|disconnectvoice)(?:@[A-Za-z0-9_]+)?(?:\s|$)/.test(ctx.message.text)) return false;
+    const pending = this.pending.get(id), request = pending?.passwordRequest;
+    // Delete recognized replies even when stale, duplicate or cancelled, without reusing them.
+    const password = ctx.message.text; ctx.message.text = '';
+    await this.deletePrivateMessage(id, ctx.message.message_id);
+    if (pending && Date.now() >= pending.expiresAt) pending.controller.abort();
+    if (!request || request.message !== reply.message_id || pending.controller.signal.aborted || this.stopped) {
+      await this.engine.reply(Number(id), 'This login question has expired. Start a new voice-account connection or reply to the current 2FA question.');
+      return true;
+    }
+    if (!password.length || password.length > 512) {
+      await this.engine.reply(Number(id), 'Reply to the current 2FA question with a password of 1–512 characters.');
+      return true;
+    }
+    pending.passwordRequest = null;
+    // Only the awaiting SDK callback receives the secret. Never await login completion
+    // from the bot queue: verified attachment itself needs this queue afterwards.
+    request.resolve(password);
+    return true;
+  }
   async login(id, target, pending, bn) {
     const { client, controller } = pending;
-    const timeout = setTimeout(() => controller.abort(), 120000); timeout.unref();
+    const deadline = Date.now() + 300000;
+    pending.expiresAt = Date.now() + 120000;
+    let timeout = setTimeout(() => controller.abort(), 120000); timeout.unref();
     let attached = false;
     try {
       await client.connect();
@@ -188,15 +254,21 @@ export class VoiceAccounts {
           const png = await QRCode.toBuffer(`tg://login?token=${Buffer.from(token).toString('base64url')}`, { width: 384, margin: 4, errorCorrectionLevel: 'M' });
           const message = await this.api.sendPhoto(Number(id), new InputFile(png, 'voice-login.png'), {
             protect_content: true,
-            caption: bn ? 'নিজের account দিয়ে Telegram → Settings → Devices → Link Desktop Device থেকে scan করুন। QR অন্য screen-এ দেখান। এটি VPS-এ একটি user session খুলবে; operator account-access পেতে পারে। ২ মিনিটে শেষ করুন। OTP/password bot-এ পাঠাবেন না।' :
-              'Scan with your own Telegram account: Settings → Devices → Link Desktop Device. Display this QR on another screen. This opens a user session on the operator VPS; the operator can access that account. Finish within 2 minutes. Never send OTP/password to the bot.',
+            caption: bn ? 'নিজের account দিয়ে Telegram → Settings → Devices → Link Desktop Device থেকে scan করুন। QR অন্য screen-এ দেখান। এটি VPS-এ একটি user session খুলবে; operator account-access পেতে পারে। ২ মিনিটে scan করুন। 2FA থাকলে এরপর bot আলাদা password question দেবে। OTP/login code পাঠাবেন না।' :
+              'Scan with your own Telegram account: Settings → Devices → Link Desktop Device. Display this QR on another screen. This opens a user session on the operator VPS; the operator can access that account. Scan within 2 minutes. If 2FA is enabled, the bot asks a separate password question next. Do not send OTP/login codes.',
             reply_markup: { inline_keyboard: [[{ text: bn ? 'বাতিল করুন' : 'Cancel login', callback_data: `voicecancel:${id}` }]] }
           });
           pending.message = message.message_id;
           if (controller.signal.aborted || this.stopped) await this.removeQr(id, pending);
         },
-        password: async () => { pending.needsPassword = true; const error = new Error('Use local login for an account requiring a 2FA password'); error.name = 'LocalPasswordRequired'; throw error; },
-        onError: async () => true
+        password: async () => {
+          clearTimeout(timeout);
+          pending.expiresAt = Math.min(deadline, Date.now() + 120000);
+          timeout = setTimeout(() => controller.abort(), Math.max(1, pending.expiresAt - Date.now())); timeout.unref();
+          return this.askPassword(id, pending, bn);
+        },
+        onError: async error => !(error?.errorMessage === 'PASSWORD_HASH_INVALID' &&
+          !controller.signal.aborted && !this.stopped && pending.passwordAttempts < 3)
       });
       if (controller.signal.aborted || this.stopped) throw new Error('Connection cancelled');
       const me = await client.getMe();
@@ -221,7 +293,7 @@ export class VoiceAccounts {
     } catch (error) {
       logError('vc_account_login_failed', error);
       if (!this.stopped) await this.engine.reply(Number(id), pending.needsPassword ?
-        (bn ? 'Telegram এই account-এর 2FA password চেয়েছে। Bot password নেয় না। নিজের VPS-এ local login ব্যবহার করুন; 2FA বন্ধ করবেন না।' : 'Telegram requires this account’s 2FA password. The bot does not collect it. Use local login on your own VPS; keep 2FA enabled.') :
+        (bn ? '2FA login শেষ হয়নি—ভুল password, সময়সীমা, বাতিল বা Telegram error হতে পারে। আবার Voice account connection শুরু করুন। Website/VPS user-login লাগে না; 2FA বন্ধ করবেন না।' : '2FA login did not finish: incorrect password, timeout, cancellation or Telegram error. Start a new voice-account connection. No website or VPS access is required for community users; keep 2FA enabled.') :
         (bn ? 'Account যুক্ত হয়নি। একই account দিয়ে scan, বর্তমান admin/Manage Call permission ও সময়সীমা পরীক্ষা করুন।' : 'Account connection did not finish. Check the same-account scan, current admin/Manage Call rights and timeout.')).catch(() => {});
     } finally {
       clearTimeout(timeout); await this.removeQr(id, pending); this.pending.delete(id);
@@ -253,6 +325,14 @@ export class VoiceAccounts {
 }
 
 export function installVoiceAccounts({ bot, engine }) {
+  // Consume bound password replies before recovery commands/access-gate middleware,
+  // including a password beginning with a slash. Message text never enters persistence.
+  bot.use(async (ctx, next) => await engine.vc?.acceptPassword?.(ctx) ? undefined : next());
+  bot.command('cancelvoice', async ctx => {
+    if (ctx.chat?.type !== 'private' || ctx.chat.id !== ctx.from.id) return;
+    engine.vc?.cancel?.(ctx.from.id);
+    await engine.reply(ctx.from.id, 'Voice-account login cancelled. A connected account can be removed with /disconnectvoice.');
+  });
   bot.callbackQuery(/^voicecancel:(\d+)$/, async ctx => {
     if (ctx.chat?.type !== 'private' || ctx.chat.id !== ctx.from.id || String(ctx.from.id) !== ctx.match[1]) return;
     await engine.call('answerCallbackQuery', ctx.from.id, ctx.callbackQuery.id);
