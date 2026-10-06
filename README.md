@@ -12,9 +12,9 @@
     <a href="https://zenodo.org/records/23165817"><img src="https://img.shields.io/badge/Paper-Preprint-2563eb" alt="Read the research preprint on Zenodo"></a>
     <img src="https://img.shields.io/badge/Documentation-20_languages-2563eb" alt="Documentation in 20 languages">
     <img src="https://img.shields.io/badge/Node.js-22.13%2B-339933?logo=nodedotjs&logoColor=white" alt="Node.js 22.13 or newer">
-    <img src="https://img.shields.io/badge/Status-Experimental-f59e0b" alt="Experimental implementation">
+    <img src="https://img.shields.io/badge/Release-Available-008477" alt="Initial public release">
   </p>
-  <p><a href="#use-the-project-bot">Use the bot</a> · <a href="#host-your-own-bot">Self-host</a> · <a href="#commands">Commands</a> · <a href="#research-preprint">Paper</a> · <a href="#community-and-license">Community</a></p>
+  <p><a href="#use-the-project-bot">Use the bot</a> · <a href="#host-your-own-bot">Self-host</a> · <a href="#commands">Commands</a> · <a href="#research-paper">Paper</a> · <a href="#community-and-license">Community</a></p>
 </div>
 
 ---
@@ -30,21 +30,36 @@ Choose a README language below. In Telegram, use `/language` for translated onbo
 </p>
 <!-- languages:end -->
 
-## Research preprint
+<a id="research-paper"></a>
+
+## 📄 Research paper
+
+<p align="center">
+  <a href="https://zenodo.org/records/23165817"><img src="https://img.shields.io/badge/Read_the_paper-Zenodo-225e9e?logo=zenodo" alt="Read the paper"></a>
+  <a href="https://doi.org/10.5281/zenodo.23165817"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23165817-008477" alt="Published paper DOI"></a>
+</p>
 
 **[Sentinel-VC: Capability-Aware Event-Driven Moderation for Telegram Communities and Voice-Call State](https://zenodo.org/records/23165817)**
 
 C. M. Jubayer Hossain Bappy · October 5, 2026 · [DOI: 10.5281/zenodo.23165817](https://doi.org/10.5281/zenodo.23165817) · [Paper license: CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
-This research preprint has not undergone peer review. Its evaluation uses synthetic workloads; live Telegram audio recovery and crash prevention remain unproven. The Zenodo record contains the PDF and LaTeX source.
+| Read | Details |
+|---|---|
+| 📘 Published paper | PDF and LaTeX source on Zenodo |
+| 🔬 Evaluation | Seeded synthetic replay, matched baselines and modeled queue behavior |
+| 📌 Publication status | Research preprint; not yet peer reviewed |
 
-## Start here
+The link above points to published version 1. The revised manuscript adds functional deployment feedback and new figures; its new Zenodo link will be added after publication. Real-time response speed and crash prevention have not been measured.
+
+## 🚀 Start here
 
 Sentinel-VC watches supported group events, scores rapid activity, and applies temporary, recoverable moderation. The optional user-admin adapter adds delivered voice-call join/leave events and authorized call actions.
 
-**Status:** experimental release with local automated tests. Live Telegram behavior and Docker deployment still need validation. Start in observe mode and check your community before enabling enforcement.
+**Release:** initial public release. The author and an external tester report successful functional use; the tester followed this README on a VPS and used the bot in a channel. These reports do not include a timed benchmark or a feature-by-feature acceptance log. Start in **Observe**, review your community, then choose **Enforce**.
 
-## Use the project bot
+<a id="use-the-project-bot"></a>
+
+## 🤖 Use the project bot
 
 Open **[@sentinelvcbot](https://t.me/sentinelvcbot)**. In private chat, follow the access prompt and choose your language. For an available bot instance:
 
@@ -89,7 +104,9 @@ Connect your account privately with **Connect voice account → Scan login QR**,
 
 Voice notes, call invitations and live-call participation are different events. Missing usernames are weak context, never a reason to punish someone alone. The adapter skips channel-identity peers and does not attribute moderator-caused mute changes to participants. See [the capability model](docs/ARCHITECTURE.md).
 
-## Host your own bot
+<a id="host-your-own-bot"></a>
+
+## 🛠️ Host your own bot
 
 ### Docker on your Ubuntu VPS
 

@@ -17,6 +17,8 @@ C. M. Jubayer Hossain Bappy · 2026-10-05 · [DOI: 10.5281/zenodo.23165817](http
 
 Este trabalho ainda não passou por revisão por pares. A avaliação usa cargas sintéticas; a recuperação de áudio e a prevenção de falhas em chamadas reais do Telegram ainda não foram demonstradas. O registro no Zenodo inclui o PDF e o código-fonte LaTeX.
 
+Primeira versão pública. O autor e um testador externo relatam uso bem-sucedido; o testador seguiu o README em um VPS e usou o bot em seu canal. O tempo de resposta real não foi medido.
+
 ## Guia de uso
 
 [@sentinelvcbot](https://t.me/sentinelvcbot) · [Atualizações](https://t.me/sentinelvc)
@@ -51,7 +53,7 @@ Press Scan login QR to connect YOUR account directly here. Scan with Telegram Se
 
 Use your own BotFather token for self-hosting. The public source does not require membership in @sentinelvc. Detailed diagnostics and operator documentation remain in English.
 
-Experimental: local tests only; live Telegram validation is pending. Voice controls require the optional user-admin adapter. No raw UDP filtering, account-age detection or proven crash prevention.
+Voice controls require the optional user-admin adapter. The service moderates supported events and call state; raw UDP filtering and account creation dates are outside its API coverage.
 
 [Código-fonte](https://github.com/thecmjhb/Sentinel-VC) · [MIT](../../LICENSE) · [Privacy (English)](../../PRIVACY.md)
 

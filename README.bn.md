@@ -17,6 +17,8 @@ C. M. Jubayer Hossain Bappy · 2026-10-05 · [DOI: 10.5281/zenodo.23165817](http
 
 এটি peer review হয়নি। পরীক্ষায় synthetic workload ব্যবহার করা হয়েছে; বাস্তব Telegram কলে audio recovery বা crash প্রতিরোধ এখনও প্রমাণিত নয়। Zenodo-তে PDF ও LaTeX source আছে।
 
+প্রথম প্রকাশ্য রিলিজ। লেখক ও একজন বাইরের tester সফল ব্যবহার জানিয়েছেন; tester README অনুসরণ করে VPS-এ চালিয়ে নিজের channel-এ ব্যবহার করেছেন। বাস্তব response time মাপা হয়নি।
+
 ## ব্যবহারের গাইড
 
 [@sentinelvcbot](https://t.me/sentinelvcbot) · [আপডেট](https://t.me/sentinelvc)
@@ -51,7 +53,7 @@ Login QR scan করুন থেকে নিজের account যুক্ত 
 
 Use your own BotFather token for self-hosting. The public source does not require membership in @sentinelvc. Detailed diagnostics and operator documentation remain in English.
 
-Experimental: local tests only; live Telegram validation is pending. Voice controls require the optional user-admin adapter. No raw UDP filtering, account-age detection or proven crash prevention.
+Voice controls require the optional user-admin adapter. The service moderates supported events and call state; raw UDP filtering and account creation dates are outside its API coverage.
 
 [সোর্স কোড](https://github.com/thecmjhb/Sentinel-VC) · [MIT](LICENSE) · [Privacy (English)](PRIVACY.md)
 

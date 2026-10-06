@@ -17,6 +17,8 @@ C. M. Jubayer Hossain Bappy · 2026-10-05 · [DOI: 10.5281/zenodo.23165817](http
 
 Nghiên cứu này chưa được phản biện khoa học. Đánh giá sử dụng tải tổng hợp; khả năng khôi phục âm thanh và ngăn ứng dụng bị lỗi trong cuộc gọi Telegram thực tế chưa được chứng minh. Zenodo cung cấp PDF và mã nguồn LaTeX.
 
+Bản phát hành công khai đầu tiên. Tác giả và một người kiểm thử bên ngoài báo cáo sử dụng thành công; người kiểm thử làm theo README trên VPS và dùng bot trong kênh của mình. Chưa đo thời gian phản hồi thực tế.
+
 ## Hướng dẫn sử dụng
 
 [@sentinelvcbot](https://t.me/sentinelvcbot) · [Cập nhật](https://t.me/sentinelvc)
@@ -51,7 +53,7 @@ Press Scan login QR to connect YOUR account directly here. Scan with Telegram Se
 
 Use your own BotFather token for self-hosting. The public source does not require membership in @sentinelvc. Detailed diagnostics and operator documentation remain in English.
 
-Experimental: local tests only; live Telegram validation is pending. Voice controls require the optional user-admin adapter. No raw UDP filtering, account-age detection or proven crash prevention.
+Voice controls require the optional user-admin adapter. The service moderates supported events and call state; raw UDP filtering and account creation dates are outside its API coverage.
 
 [Mã nguồn](https://github.com/thecmjhb/Sentinel-VC) · [MIT](../../LICENSE) · [Privacy (English)](../../PRIVACY.md)
 
