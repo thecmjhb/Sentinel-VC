@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "big-integer": "1.6.52",
-    "dotenv": "18.0.5",
+    "dotenv": "18.0.8",
     "grammy": "1.46.0",
     "qrcode": "1.5.4",
     "teleproto": "1.229.1"
